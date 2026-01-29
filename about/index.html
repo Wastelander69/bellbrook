@@ -2,401 +2,161 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bellbrook Veterinary — Demo Site</title>
-  <meta name="description" content="A demo / showcase website produced by Veteos.com for portfolio and presentation purposes." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About — Bellbrook Veterinary Hospital (Demo)</title>
+  <meta name="description" content="About the clinic (demo / showcase site produced by Veteos.com)." />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Raleway:wght@200;300;400;600;700&display=swap" rel="stylesheet">
-
+  <!-- Base path helper: supports / and /bellbrook/ -->
   <script>
-    // Auto-detect base path so this works BOTH:
-    // - local server/custom domain root: ""
-    // - GitHub Pages project site: "/bellbrook"
     (function () {
-      var parts = window.location.pathname.split("/").filter(Boolean);
-      // If you are at /bellbrook/... then the first folder is "bellbrook"
+      var parts = location.pathname.split("/").filter(Boolean);
       window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
-    })();
-
-    // Inject CSS immediately (no waiting for DOMContentLoaded)
-    (function () {
-      var link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = window.BASE_PATH + "/assets/css/style.css";
-      document.head.appendChild(link);
+      window.href = function (p) { return window.BASE_PATH + p; };
     })();
   </script>
+
+  <!-- Load site CSS (auto-fix for /bellbrook/) -->
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script>
     (function () {
-    var parts = window.location.pathname.split("/").filter(Boolean);
-    window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
-  })();
-
-  (function () {
-    var main = document.createElement("link");
-    main.rel = "stylesheet";
-    main.href = window.BASE_PATH + "/assets/css/style.css";
-    document.head.appendChild(main);
-
-    var tweaks = document.createElement("link");
-    tweaks.rel = "stylesheet";
-    tweaks.href = window.BASE_PATH + "/assets/css/tweaks.css";
-    document.head.appendChild(tweaks);
-  })();
+      var links = document.querySelectorAll('link[rel="stylesheet"]');
+      links.forEach(function (l) {
+        var h = l.getAttribute("href") || "";
+        if (h.startsWith("/assets/")) l.href = window.href(h);
+      });
+    })();
+  </script>
 </head>
 
 <body>
-  <!-- Top Bar -->
+  <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" data-href="/">
-        <span class="brand-mark" aria-hidden="true">🐾</span>
+      <a class="brand" href="#" id="homeLink">
+        <img class="brand-logo" src="/assets/images/logo.png" alt="Bellbrook Veterinary Hospital" onerror="this.style.display='none'" />
         <span class="brand-text">
           <span class="brand-name">Bellbrook</span>
-          <span class="brand-sub">Veterinary Clinic (Demo)</span>
+          <span class="brand-sub">Veterinary Hospital</span>
         </span>
       </a>
 
-      <nav class="nav">
-        <a class="nav-link" data-href="/about/">About</a>
-        <a class="nav-link" data-href="/videos/">Videos</a>
-        <a class="nav-link" data-href="/resources/">Resources</a>
-        <a class="nav-link" data-href="/faqs/">FAQs</a>
-        <a class="nav-link" data-href="/recruiting/">Recruiting</a>
-        <a class="nav-link nav-cta" data-href="/contact/">Contact</a>
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link" href="#" id="aboutLink">About</a>
+
+        <div class="nav-dropdown">
+          <button class="nav-link nav-link--button" type="button" aria-haspopup="true" aria-expanded="false">
+            Services <span class="caret">▾</span>
+          </button>
+          <div class="nav-menu" role="menu">
+            <a role="menuitem" href="#" id="servicesPreventive">Preventive Care</a>
+            <a role="menuitem" href="#" id="servicesDental">Dental Health</a>
+            <a role="menuitem" href="#" id="servicesMeds">Giving Medications</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button class="nav-link nav-link--button" type="button" aria-haspopup="true" aria-expanded="false">
+            Resources <span class="caret">▾</span>
+          </button>
+          <div class="nav-menu" role="menu">
+            <a role="menuitem" href="#" id="resourcesLink">All Resources</a>
+            <a role="menuitem" href="#" id="resourcesPuppy">Puppy &amp; Kitten Tips</a>
+            <a role="menuitem" href="#" id="resourcesDental">Dental Health</a>
+            <a role="menuitem" href="#" id="resourcesMeds">Giving Medications</a>
+            <a role="menuitem" href="#" id="resourcesEdu">Educational Videos</a>
+          </div>
+        </div>
+
+        <a class="nav-link" href="#" id="videosLink">Videos</a>
+        <a class="nav-link" href="#" id="faqsLink">FAQs</a>
+        <a class="nav-link" href="#" id="contactLink">Contact</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-bg" aria-hidden="true"></div>
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Thoughtful care for the pets you love most</p>
-          <h1 class="hero-title">
-            We Love Your Pet<br />
-            <span class="hero-title-accent">Like Our Own</span>
-          </h1>
-
-          <p class="hero-lead">
-            Calm visits. Clear answers. Kind people.
-            A clinic experience designed to help you feel confident at every step.
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="https://dev-on-demand.veteos.com/videos/8196643567274865/SVpKUXEz0aYAFx">
-              <span class="btn-icon" aria-hidden="true">▶</span>
-              Watch Our Video
-            </a>
-            <a class="btn btn-ghost" data-href="/contact/">
-              Book / Ask a Question
-            </a>
-          </div>
-
-          <div class="hero-badges">
-            <div class="badge">Gentle handling</div>
-            <div class="badge">Transparent communication</div>
-            <div class="badge">Modern, pet-first care</div>
-          </div>
-        </div>
-
-        <div class="hero-art" aria-hidden="true">
-          <!-- If you download your image, put it in assets/images and change this to a local path -->
-          <img
-            src="https://bellbrookvet.com/wp-content/uploads/2026/01/Cute-Dog-vector-4.png"
-            alt=""
-            loading="lazy"
-          />
-        </div>
-      </div>
-
-      <div class="section-divider section-divider--mountains" aria-hidden="true"></div>
-    </section>
-
-    <!-- FEATURED VIDEO COLLECTION -->
-    <section class="section section-alt">
+    <!-- Page header (uses your existing palette nicely without needing new CSS) -->
+    <section class="hero" style="padding: 54px 0 40px;">
       <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Quick videos for real pet-life moments</h2>
-          <p class="section-sub">
-            Bite-sized guidance from the Veteos library—made for busy pet parents.
-          </p>
-        </div>
+        <h1 class="hero-title" style="font-size: clamp(38px, 4.2vw, 64px); margin-bottom: 10px;">About Bellbrook</h1>
+        <p class="hero-subtitle" style="font-size: clamp(18px, 2.4vw, 28px); margin-top: 0;">
+          A warm, modern clinic experience — built around calm visits and clear communication.
+        </p>
 
-        <!-- KEEP THIS EMBED EXACTLY AS-IS -->
-        <div class="card card-embed">
-          <div class="veteos-embed veteos-embed--wide">
-            <script type="text/javascript" src="https://on-demand.veteos.com/collections/s/8196643567274865/D3IsACy9dTJULt"></script>
-          </div>
-        </div>
-
-        <div class="center">
-          <a class="btn btn-dark" data-href="/videos/">
-            <span class="btn-icon" aria-hidden="true">▶</span>
-            Watch more videos
-          </a>
+        <div style="margin-top: 18px; display:flex; gap:12px; flex-wrap: wrap;">
+          <a class="btn btn-primary" href="#" id="aboutCtaResources">Explore Resources</a>
+          <a class="btn btn-secondary" href="#" id="aboutCtaContact">Contact Us</a>
         </div>
       </div>
 
-      <div class="section-divider section-divider--mountains section-divider--flip" aria-hidden="true"></div>
-    </section>
-
-    <!-- RESOURCES HERO STRIP -->
-    <section class="section section-blue">
-      <div class="container resources-strip">
-        <div class="resources-badge">
-          <img
-            src="https://bellbrookvet.com/wp-content/uploads/2022/04/8196643567274865_icon-1024x1024.png"
-            alt="Veteos"
-            loading="lazy"
-          />
-        </div>
-
-        <div class="resources-copy">
-          <h2>Helpful Tips &amp; Resources<br />for Pet Parents</h2>
-          <p>
-            Simple, trustworthy guides for the stuff you deal with all the time:
-            new pet basics, preventive care, dental health, and giving medications.
-          </p>
-          <a class="btn btn-primary" data-href="/resources/">Explore Resources</a>
-        </div>
+      <div class="wave wave--bottom" aria-hidden="true">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,60 C150,120 350,0 600,60 C850,120 1050,20 1200,60 L1200,120 L0,120 Z"></path>
+        </svg>
       </div>
     </section>
 
-    <!-- RESOURCE CARDS -->
-    <section class="section section-blue-soft">
+    <!-- About content -->
+    <section style="background:#fff; padding: 70px 0;">
       <div class="container">
-        <div class="grid-3">
-          <!-- Puppy & Kitten Tips -->
-          <article class="card card-feature">
-            <h3>Puppy &amp; Kitten Tips</h3>
+        <div style="max-width: 860px; margin: 0 auto;">
+          <h2 style="margin:0 0 10px; font-size: 28px; font-weight: 900; color: rgba(30,42,58,.92);">
+            What you can expect
+          </h2>
+          <p style="margin:0 0 22px; color: rgba(30,42,58,.72); font-weight: 700; line-height:1.7;">
+            We focus on the little things that make a big difference: gentle handling, simple explanations, and a team that
+            treats your pet like family. Whether you’re here for a first puppy visit or a dental check, we keep it calm,
+            clear, and kind.
+          </p>
 
-            <!-- KEEP THIS EMBED EXACTLY AS-IS -->
-            <div class="embed-frame">
-              <script type="text/javascript" src="https://on-demand.veteos.com/embed-video/50929768076919256/qHQgensh30cADn"></script>
+          <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:18px;">
+            <div class="card" style="padding:18px;">
+              <h3 style="margin:0 0 8px; font-weight: 900; letter-spacing:.3px;">Calm visits</h3>
+              <p style="margin:0; color: rgba(30,42,58,.72); font-weight:700; line-height:1.6;">
+                Fear-free vibes, patient pacing, and gentle guidance from check-in to checkout.
+              </p>
             </div>
+            <div class="card" style="padding:18px;">
+              <h3 style="margin:0 0 8px; font-weight: 900; letter-spacing:.3px;">Clear answers</h3>
+              <p style="margin:0; color: rgba(30,42,58,.72); font-weight:700; line-height:1.6;">
+                We explain the “why,” outline options, and help you choose the best plan for your pet.
+              </p>
+            </div>
+            <div class="card" style="padding:18px;">
+              <h3 style="margin:0 0 8px; font-weight: 900; letter-spacing:.3px;">Modern care</h3>
+              <p style="margin:0; color: rgba(30,42,58,.72); font-weight:700; line-height:1.6;">
+                Practical prevention, thoughtful diagnostics, and education you can actually use.
+              </p>
+            </div>
+          </div>
 
-            <p>
-              New puppy or kitten? Get an easy first-year roadmap for vaccines,
-              nutrition, and early habits.
+          <div style="margin-top: 26px;">
+            <h2 style="margin:0 0 10px; font-size: 28px; font-weight: 900; color: rgba(30,42,58,.92);">
+              Your pet, your questions
+            </h2>
+            <p style="margin:0 0 22px; color: rgba(30,42,58,.72); font-weight: 700; line-height:1.7;">
+              If something feels off, it’s worth talking about. Bring your questions — we’ll take the time to walk through
+              what you’re seeing and what the next best step is.
             </p>
 
-            <a class="btn btn-full btn-secondary" data-href="/resources/puppy-kitten-tips/">
-              More Details…
-            </a>
-          </article>
-
-          <!-- Preventive Care -->
-          <article class="card card-feature">
-            <h3>Preventive Care</h3>
-
-            <div class="img-frame">
-              <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/Cute-Cat-1.png" alt="Cute cat illustration" loading="lazy" />
+            <div style="display:flex; gap:12px; flex-wrap: wrap;">
+              <a class="btn btn-primary" href="#" id="aboutCtaFaqs">Read FAQs</a>
+              <a class="btn btn-primary" href="#" id="aboutCtaVideos">Watch Videos</a>
             </div>
-
-            <p>
-              Keep your pet protected year-round with personalized vaccine and
-              parasite-prevention plans.
-            </p>
-
-            <a class="btn btn-full btn-secondary" data-href="/resources/">
-              More Details…
-            </a>
-          </article>
-
-          <!-- Dental Health -->
-          <article class="card card-feature">
-            <h3>Dental Health</h3>
-
-            <div class="img-frame">
-              <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/puppy-dental-care-pic-1-1024x1024.png" alt="Puppy dental care" loading="lazy" />
-            </div>
-
-            <p>
-              Learn what to watch for, how cleanings work, and simple at-home steps
-              that support healthier teeth.
-            </p>
-
-            <a class="btn btn-full btn-secondary" data-href="/resources/dental-health/">
-              More Details…
-            </a>
-          </article>
-        </div>
-      </div>
-
-      <div class="section-divider section-divider--mountains" aria-hidden="true"></div>
-    </section>
-
-    <!-- A FEW MOMENTS WITH US -->
-    <section class="section">
-      <div class="container moments">
-        <div class="card card-embed">
-          <!-- KEEP THIS EMBED EXACTLY AS-IS -->
-          <script type="text/javascript" src="https://on-demand.veteos.com/embed-video/8196643567274865/e1YBgEUBhOF6TQ"></script>
-        </div>
-
-        <div class="moments-copy">
-          <h2>A few moments with us</h2>
-          <p>
-            Kind people, gentle handling, and clear communication.
-            All so you and your pet feel comfortable every step of the way.
-          </p>
-
-          <div class="moments-actions">
-            <a class="btn btn-primary" data-href="/resources/">Explore Resources</a>
-            <a class="btn btn-ghost" data-href="/stories/">
-              <span class="btn-icon" aria-hidden="true">▶</span>
-              Watch Our Story
-            </a>
-          </div>
-
-          <div class="moments-images">
-            <img class="round" src="https://bellbrookvet.com/wp-content/uploads/2026/01/Vet-and-Dog-pic-1-1024x1024.png" alt="Vet and dog" loading="lazy" />
-            <img class="round" src="https://bellbrookvet.com/wp-content/uploads/2026/01/bunny-and-vet-pic-1-1024x1024.png" alt="Vet and bunny" loading="lazy" />
           </div>
         </div>
       </div>
     </section>
 
-    <!-- TEAM -->
-    <section class="section section-mint">
+    <!-- Disclaimer -->
+    <section class="quotes" style="padding: 40px 0 24px;">
       <div class="container">
-        <div class="section-head center">
-          <h2 class="section-title">We love our staff and think you will too.</h2>
-          <p class="section-sub">
-            Friendly faces, calm visits, and clear answers. Our team is here to help
-            you feel confident about your pet’s care.
-          </p>
-        </div>
-
-        <div class="grid-team">
-          <article class="team-card">
-            <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-3-819x1024.png" alt="Dr. Jordan Bell" loading="lazy">
-            <h3>Dr. Jordan Bell</h3>
-            <p class="role">Veterinarian</p>
-          </article>
-
-          <article class="team-card">
-            <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/dog-vet-1-819x1024.png" alt='Sam "Good Boy" Rivera' loading="lazy">
-            <h3>Sam "Good Boy" Rivera</h3>
-            <p class="role">Office Manager</p>
-          </article>
-
-          <article class="team-card">
-            <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-5-819x1024.png" alt="Dr. Ryan Fredricks" loading="lazy">
-            <h3>Dr. Ryan Fredricks</h3>
-            <p class="role">Client Care</p>
-          </article>
-
-          <article class="team-card">
-            <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-tech-1-819x1024.png" alt="Alexis Grant" loading="lazy">
-            <h3>Alexis Grant</h3>
-            <p class="role">Veterinary Assistant</p>
-          </article>
-
-          <article class="team-card">
-            <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-tech-3-819x1024.png" alt="Taylor Brooks" loading="lazy">
-            <h3>Taylor Brooks</h3>
-            <p class="role">Veterinary Technician</p>
-          </article>
-
-          <article class="team-card">
-            <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-4-819x1024.png" alt="Dr. Priya Patel" loading="lazy">
-            <h3>Dr. Priya Patel</h3>
-            <p class="role">Veterinarian</p>
-          </article>
-
-          <article class="team-card">
-            <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-tech-2-819x1024.png" alt="Casey Myers" loading="lazy">
-            <h3>Casey Myers</h3>
-            <p class="role">Technician Assistant</p>
-          </article>
-
-          <article class="team-card">
-            <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-1-819x1024.png" alt="Riley Johnson" loading="lazy">
-            <h3>Riley Johnson</h3>
-            <p class="role">Client Care</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- QUOTES -->
-    <section class="section section-quotes">
-      <div class="container">
-        <div class="section-head center">
-          <h2 class="section-title">Comments from Our Clients and Staff ♡</h2>
-          <p class="section-sub">A few favorites—because the little moments matter.</p>
-        </div>
-
-        <div class="grid-3">
-          <figure class="quote-card">
-            <div class="quote-icon">🐾</div>
-            <blockquote>
-              “I’ll always explain the ‘why’—you deserve to feel confident about every decision.”
-            </blockquote>
-            <figcaption>Dr. Priya <span>— Staff</span></figcaption>
-          </figure>
-
-          <figure class="quote-card">
-            <div class="quote-icon">📸</div>
-            <blockquote>
-              “My dog’s breath was rough and I thought it was ‘normal.’ Turns out it wasn’t. So glad we came in.”
-            </blockquote>
-            <figcaption>Josh B. <span>— Client</span></figcaption>
-          </figure>
-
-          <figure class="quote-card">
-            <div class="quote-icon">✨</div>
-            <blockquote>
-              “The best part of my day is when a nervous pet walks out a little braver than they walked in.”
-            </blockquote>
-            <figcaption>Taylor B. <span>— Staff</span></figcaption>
-          </figure>
-
-          <figure class="quote-card">
-            <div class="quote-icon">🧡</div>
-            <blockquote>
-              “I never felt rushed, and neither did my pet.”
-            </blockquote>
-            <figcaption>Craig S. <span>— Client</span></figcaption>
-          </figure>
-
-          <figure class="quote-card">
-            <div class="quote-icon">🎤</div>
-            <blockquote>
-              “I’m basically a professional ‘good boy/girl’ announcer.”
-            </blockquote>
-            <figcaption>Casey M. <span>— Staff</span></figcaption>
-          </figure>
-
-          <figure class="quote-card">
-            <div class="quote-icon">🩺</div>
-            <blockquote>
-              “I’ll never rush your questions. If you’re worried, it matters.”
-            </blockquote>
-            <figcaption>Riley J. <span>— Staff</span></figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <div class="section-divider section-divider--waves" aria-hidden="true"></div>
-    </section>
-
-    <!-- DISCLAIMER -->
-    <section class="section disclaimer">
-      <div class="container">
-        <p>
-          ***<strong>Demo / Showcase Disclaimer:</strong> This page is a demonstration website produced by
-          <strong>Veteos.com</strong> for portfolio and presentation purposes. It is
-          <strong>not an official website for any veterinary practice</strong> and is not intended to represent an
-          actual clinic’s current services, pricing, staff, policies, or availability. Any names, testimonials, quotes,
-          or content displayed may be fictional or used as examples. Nothing on this site constitutes veterinary or
-          medical advice. If you believe your pet is sick or injured, contact a licensed veterinarian immediately.
+        <p class="disclaimer">
+          <strong>Demo / Showcase Disclaimer:</strong> This page is a demonstration website produced by <strong>Veteos.com</strong>
+          for portfolio and presentation purposes. It is <strong>not an official website for any veterinary practice</strong> and
+          is not intended to represent an actual clinic’s current services, pricing, staff, policies, or availability. Any names,
+          testimonials, quotes, or content displayed may be fictional or used as examples. Nothing on this site constitutes
+          veterinary or medical advice. If you believe your pet is sick or injured, contact a licensed veterinarian immediately.
         </p>
       </div>
     </section>
@@ -404,30 +164,69 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© <span id="year"></span> Bellbrook (Demo). Built for Veteos.com showcase.</p>
-      <div class="footer-links">
-        <a data-href="/privacy-policy/">Privacy Policy</a>
-        <a data-href="/contact/">Contact</a>
-      </div>
+      <p>© <span id="year"></span> Bellbrook Veterinary Hospital (Demo)</p>
+      <p class="footer-links">
+        <a href="#" id="privacyLink">Privacy Policy</a>
+      </p>
     </div>
   </footer>
 
   <script>
-    // Convert data-href into real href using BASE_PATH
-    document.querySelectorAll("[data-href]").forEach(a => {
-      a.href = `${window.BASE_PATH}${a.dataset.href}`;
+    // Internal links (work on / and /bellbrook/)
+    document.getElementById("homeLink").href = href("/index.html");
+    document.getElementById("aboutLink").href = href("/about/index.html");
+    document.getElementById("videosLink").href = href("/videos/index.html");
+    document.getElementById("faqsLink").href = href("/faqs/index.html");
+    document.getElementById("contactLink").href = href("/contact/index.html");
+    document.getElementById("privacyLink").href = href("/privacy-policy/index.html");
+
+    document.getElementById("resourcesLink").href = href("/resources/index.html");
+    document.getElementById("resourcesPuppy").href = href("/resources/puppy-kitten-tips/index.html");
+    document.getElementById("resourcesDental").href = href("/resources/dental-health/index.html");
+    document.getElementById("resourcesMeds").href = href("/resources/giving-medications/index.html");
+    document.getElementById("resourcesEdu").href = href("/resources/educational-videos/index.html");
+
+    document.getElementById("servicesPreventive").href = href("/resources/index.html");
+    document.getElementById("servicesDental").href = href("/resources/dental-health/index.html");
+    document.getElementById("servicesMeds").href = href("/resources/giving-medications/index.html");
+
+    document.getElementById("aboutCtaResources").href = href("/resources/index.html");
+    document.getElementById("aboutCtaContact").href = href("/contact/index.html");
+    document.getElementById("aboutCtaFaqs").href = href("/faqs/index.html");
+    document.getElementById("aboutCtaVideos").href = href("/videos/index.html");
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Dropdown toggles
+    document.querySelectorAll(".nav-dropdown").forEach(function (dd) {
+      var btn = dd.querySelector("button");
+      btn.addEventListener("click", function () {
+        var open = dd.classList.toggle("open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
     });
 
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-  <script>
-  document.querySelectorAll("[data-href]").forEach(a => {
-    a.href = `${window.BASE_PATH}${a.dataset.href}`;
-  });
+    // Close dropdowns on outside click
+    document.addEventListener("click", function (e) {
+      document.querySelectorAll(".nav-dropdown.open").forEach(function (dd) {
+        if (!dd.contains(e.target)) {
+          dd.classList.remove("open");
+          var btn = dd.querySelector("button");
+          if (btn) btn.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
 
-  const year = document.getElementById("year");
-  if (year) year.textContent = new Date().getFullYear();
-</script>
+    // Close on escape
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        document.querySelectorAll(".nav-dropdown.open").forEach(function (dd) {
+          dd.classList.remove("open");
+          var btn = dd.querySelector("button");
+          if (btn) btn.setAttribute("aria-expanded", "false");
+        });
+      }
+    });
+  </script>
 </body>
 </html>
