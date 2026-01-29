@@ -1,0 +1,52 @@
+/* tweaks.css — polish layer (keeps your existing design) */
+
+/* 1) Global cleanup */
+html { scroll-behavior: smooth; }
+body { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; height: auto; }
+
+/* 2) Container “professional” width if you’re using .container */
+.container {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 3) Header polish (only if these classes exist) */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+}
+
+/* 4) Buttons – only affects your .btn system from the HTML I gave you */
+.btn {
+  border-radius: 999px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(43,108,176,.25); }
+
+/* 5) Cards (only if you’re using .card / .quote-card / .team-card) */
+.card,
+.quote-card,
+.team-card {
+  box-shadow: 0 18px 45px rgba(16, 24, 40, .12);
+}
+
+/* 6) Embedded video blocks don’t smash into edges */
+.veteos-embed,
+.card-embed {
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+/* 7) Mobile: don’t let nav wrap into chaos */
+@media (max-width: 820px){
+  .nav { gap: 4px; }
+  .nav a { padding: 8px 10px; }
+}
