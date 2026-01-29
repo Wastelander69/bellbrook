@@ -29,6 +29,22 @@
       document.head.appendChild(link);
     })();
   </script>
+    (function () {
+    var parts = window.location.pathname.split("/").filter(Boolean);
+    window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
+  })();
+
+  (function () {
+    var main = document.createElement("link");
+    main.rel = "stylesheet";
+    main.href = window.BASE_PATH + "/assets/css/style.css";
+    document.head.appendChild(main);
+
+    var tweaks = document.createElement("link");
+    tweaks.rel = "stylesheet";
+    tweaks.href = window.BASE_PATH + "/assets/css/tweaks.css";
+    document.head.appendChild(tweaks);
+  })();
 </head>
 
 <body>
