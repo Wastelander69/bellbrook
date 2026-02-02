@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Contact — Bellbrook Veterinary Hospital (Demo)</title>
-  <meta name="description" content="Contact information (demo site by Veteos.com)." />
+  <meta name="description" content="Contact Bellbrook Veterinary Hospital (demo site by Veteos.com)." />
 
   <!-- Base path helper -->
   <script>
@@ -44,20 +44,20 @@
         <a class="nav-link" href="#" id="resourcesLink">Resources</a>
         <a class="nav-link" href="#" id="videosLink">Videos</a>
         <a class="nav-link" href="#" id="faqsLink">FAQs</a>
-        <a class="nav-link" href="#" id="contactLink">Contact</a>
+        <a class="nav-link is-active" href="#" id="contactLink">Contact</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- Page Hero -->
+    <!-- Hero -->
     <section class="hero" style="padding: 60px 0 50px;">
       <div class="container">
         <h1 class="hero-title" style="font-size: clamp(38px, 4.2vw, 64px); margin-bottom: 10px;">
-          Contact Us
+          Get in Touch
         </h1>
         <p class="hero-subtitle" style="font-size: clamp(18px, 2.4vw, 28px); margin-top: 0;">
-          Questions? We’re here to help — and we’ll never rush you.
+          Questions, concerns, or just want to say hi? We’re here to help.
         </p>
       </div>
 
@@ -68,111 +68,77 @@
       </div>
     </section>
 
-    <!-- Contact content -->
+    <!-- Content -->
     <section style="background:#fff; padding: 70px 0;">
       <div class="container">
 
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start;">
-          <!-- Left: Contact info -->
+        <div class="contact-grid">
+          <!-- Info -->
           <article class="card" style="padding: 26px;">
-            <h2 style="margin:0 0 10px; font-weight: 900;">Clinic Information</h2>
-            <p style="margin:0 0 18px; color: rgba(30,42,58,.72); font-weight: 700; line-height: 1.7;">
-              This is a demo site layout. Replace these details with your real clinic’s phone, hours, and address.
+            <h2 style="margin:0 0 10px; font-weight:900;">We’d love to hear from you</h2>
+            <p style="margin:0 0 14px; color: rgba(30,42,58,.72); font-weight:700; line-height:1.7;">
+              Whether you’re scheduling a visit, have a quick question, or just want more info,
+              our team is happy to help guide you.
             </p>
 
-            <div style="display:grid; gap: 14px;">
+            <div class="contact-info">
               <div>
-                <div style="font-weight: 900; color: rgba(30,42,58,.90);">Phone</div>
-                <div style="color: rgba(30,42,58,.72); font-weight: 700;">(555) 123-4567</div>
+                <strong>Phone</strong><br />
+                <span>(555) 123-4567</span>
               </div>
-
               <div>
-                <div style="font-weight: 900; color: rgba(30,42,58,.90);">Email</div>
-                <div style="color: rgba(30,42,58,.72); font-weight: 700;">hello@bellbrookvet.com</div>
+                <strong>Email</strong><br />
+                <span>hello@bellbrookvet.com</span>
               </div>
-
               <div>
-                <div style="font-weight: 900; color: rgba(30,42,58,.90);">Address</div>
-                <div style="color: rgba(30,42,58,.72); font-weight: 700;">
-                  123 Petcare Lane<br />
-                  Bellbrook, OH 45305
-                </div>
+                <strong>Hours</strong><br />
+                <span>Mon–Fri: 8am–5pm</span>
               </div>
+            </div>
 
-              <div>
-                <div style="font-weight: 900; color: rgba(30,42,58,.90);">Hours</div>
-                <div style="color: rgba(30,42,58,.72); font-weight: 700; line-height: 1.6;">
-                  Mon–Fri: 8:00am – 5:30pm<br />
-                  Sat: 9:00am – 1:00pm<br />
-                  Sun: Closed
-                </div>
-              </div>
-
-              <div style="margin-top: 6px; display:flex; gap: 12px; flex-wrap: wrap;">
-                <a class="btn btn-primary" href="#" id="contactResourcesBtn">Explore Resources</a>
-                <a class="btn btn-secondary" href="#" id="contactFaqsBtn">Read FAQs</a>
-              </div>
+            <div style="margin-top: 18px; display:flex; gap:12px; flex-wrap: wrap;">
+              <a class="btn btn-primary" href="#" id="faqsBtn">Read FAQs</a>
+              <a class="btn btn-secondary" href="#" id="resourcesBtn">Explore Resources</a>
             </div>
           </article>
 
-          <!-- Right: Form -->
+          <!-- Form (demo) -->
           <article class="card" style="padding: 26px;">
-            <h2 style="margin:0 0 10px; font-weight: 900;">Send a Message</h2>
-            <p style="margin:0 0 18px; color: rgba(30,42,58,.72); font-weight: 700; line-height: 1.7;">
-              This form is front-end only for the demo. We can wire it to email/service later.
+            <h2 style="margin:0 0 10px; font-weight:900;">Send a message</h2>
+            <p style="margin:0 0 16px; color: rgba(30,42,58,.72); font-weight:700;">
+              This form is for demonstration purposes only.
             </p>
 
-            <form id="contactForm" novalidate>
-              <div style="display:grid; gap: 12px;">
-                <label style="display:grid; gap:6px;">
-                  <span style="font-weight: 900; color: rgba(30,42,58,.86);">Your name</span>
-                  <input class="field" type="text" name="name" autocomplete="name" placeholder="Jane Doe" required />
-                </label>
+            <form class="contact-form" onsubmit="return false;">
+              <label>
+                Name
+                <input type="text" placeholder="Your name" disabled />
+              </label>
 
-                <label style="display:grid; gap:6px;">
-                  <span style="font-weight: 900; color: rgba(30,42,58,.86);">Email</span>
-                  <input class="field" type="email" name="email" autocomplete="email" placeholder="jane@email.com" required />
-                </label>
+              <label>
+                Email
+                <input type="email" placeholder="you@email.com" disabled />
+              </label>
 
-                <label style="display:grid; gap:6px;">
-                  <span style="font-weight: 900; color: rgba(30,42,58,.86);">Subject</span>
-                  <input class="field" type="text" name="subject" placeholder="Question about my pet" required />
-                </label>
+              <label>
+                Message
+                <textarea rows="4" placeholder="How can we help?" disabled></textarea>
+              </label>
 
-                <label style="display:grid; gap:6px;">
-                  <span style="font-weight: 900; color: rgba(30,42,58,.86);">Message</span>
-                  <textarea class="field" name="message" rows="6" placeholder="Tell us what’s going on…" required></textarea>
-                </label>
-
-                <button class="btn btn-primary" type="submit">
-                  Send Message
-                </button>
-
-                <div id="formNote" style="display:none; padding: 12px 14px; border-radius: 14px; background: rgba(61,111,178,.10); font-weight: 800; color: rgba(30,42,58,.82);">
-                  ✅ Demo form submitted (no email is actually sent).
-                </div>
-              </div>
+              <button class="btn btn-primary btn-block" disabled>
+                Send Message
+              </button>
             </form>
           </article>
         </div>
 
-        <!-- Map / location -->
-        <div class="card" style="padding: 22px; margin-top: 26px;">
-          <h2 style="margin:0 0 10px; font-weight: 900;">Location</h2>
-          <p style="margin:0 0 14px; color: rgba(30,42,58,.72); font-weight: 700; line-height: 1.7;">
-            Add your real Google Map embed here later. For now, this is a clean placeholder that matches the site.
+        <!-- Reassurance -->
+        <section class="card" style="padding: 32px; text-align:center; margin-top: 26px;">
+          <h3 style="margin:0 0 10px; font-weight:900;">Your pet’s comfort matters</h3>
+          <p style="margin:0; color: rgba(30,42,58,.72); font-weight:700;">
+            If something feels urgent, please contact a licensed veterinarian right away.
           </p>
-
-          <div style="width:100%; height: 320px; border-radius: 18px; overflow:hidden; border: 1px solid rgba(30,42,58,.10); background:
-            linear-gradient(135deg, rgba(182,220,254,.70), rgba(230,244,241,.80));
-            display:grid; place-items:center;">
-            <div style="text-align:center; padding: 18px;">
-              <div style="font-size: 38px; margin-bottom: 8px;">📍</div>
-              <div style="font-weight: 900; color: rgba(30,42,58,.86);">Map Placeholder</div>
-              <div style="color: rgba(30,42,58,.68); font-weight: 700;">Swap this box for an embed when ready.</div>
-            </div>
-          </div>
-        </div>
+        </section>
 
       </div>
     </section>
@@ -181,10 +147,9 @@
     <section class="quotes" style="padding: 40px 0 24px;">
       <div class="container">
         <p class="disclaimer">
-          <strong>Demo / Showcase Disclaimer:</strong> This page is a demonstration website produced by
-          <strong>Veteos.com</strong> for portfolio and presentation purposes. It is
-          <strong>not an official website for any veterinary practice</strong>.
-          Content shown may be fictional or for demonstration only and does not constitute medical advice.
+          <strong>Demo / Showcase Disclaimer:</strong> This page is part of a demonstration website
+          produced by <strong>Veteos.com</strong>. It does not represent an actual veterinary clinic
+          and is not intended for real medical inquiries.
         </p>
       </div>
     </section>
@@ -200,31 +165,42 @@
   </footer>
 
   <style>
-    /* Form fields (scoped to this page only) */
-    .field{
-      width: 100%;
+    /* Contact page styles (scoped) */
+    .contact-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+    .contact-info{
+      display:grid;
+      gap: 10px;
+      font-weight:700;
+      color: rgba(30,42,58,.82);
+    }
+    .contact-form{
+      display:grid;
+      gap: 12px;
+    }
+    .contact-form label{
+      display:grid;
+      gap: 6px;
+      font-weight: 800;
+      color: rgba(30,42,58,.82);
+    }
+    .contact-form input,
+    .contact-form textarea{
+      padding: 10px 12px;
+      border-radius: 12px;
       border: 1px solid rgba(30,42,58,.18);
-      border-radius: 14px;
-      padding: 12px 12px;
-      font-weight: 750;
-      color: rgba(30,42,58,.86);
-      outline: none;
-      background: #fff;
+      font-family: inherit;
     }
-    .field:focus{
-      border-color: rgba(61,111,178,.65);
-      box-shadow: 0 0 0 4px rgba(61,111,178,.18);
-    }
-    textarea.field{ resize: vertical; }
     @media (max-width: 980px){
-      main section > .container > div[style*="grid-template-columns"]{
-        grid-template-columns: 1fr !important;
-      }
+      .contact-grid{ grid-template-columns: 1fr; }
     }
   </style>
 
   <script>
-    // Internal links
     document.getElementById("homeLink").href = href("/index.html");
     document.getElementById("aboutLink").href = href("/about/index.html");
     document.getElementById("resourcesLink").href = href("/resources/index.html");
@@ -233,21 +209,10 @@
     document.getElementById("contactLink").href = href("/contact/index.html");
     document.getElementById("privacyLink").href = href("/privacy-policy/index.html");
 
-    document.getElementById("contactResourcesBtn").href = href("/resources/index.html");
-    document.getElementById("contactFaqsBtn").href = href("/faqs/index.html");
+    document.getElementById("faqsBtn").href = href("/faqs/index.html");
+    document.getElementById("resourcesBtn").href = href("/resources/index.html");
 
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Demo form submit
-    var form = document.getElementById("contactForm");
-    var note = document.getElementById("formNote");
-
-    form.addEventListener("submit", function(e){
-      e.preventDefault();
-      note.style.display = "block";
-      form.reset();
-      setTimeout(function(){ note.style.display = "none"; }, 3500);
-    });
   </script>
 </body>
 </html>
