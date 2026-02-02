@@ -1,56 +1,269 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <base href="/" />
-  <title>Dental Health — Resources</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dental Health — Bellbrook Veterinary Hospital (Demo)</title>
+  <meta name="description" content="Dental health tips for pets (demo site by Veteos.com)." />
+
+  <!-- Base path helper -->
+  <script>
+    (function () {
+      var parts = location.pathname.split("/").filter(Boolean);
+      window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
+      window.href = function (p) { return window.BASE_PATH + p; };
+    })();
+  </script>
+
+  <!-- Load site CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script>
+    (function () {
+      document.querySelectorAll('link[rel="stylesheet"]').forEach(function (l) {
+        var h = l.getAttribute("href") || "";
+        if (h.startsWith("/assets/")) l.href = window.href(h);
+      });
+    })();
+  </script>
 </head>
+
 <body>
+  <!-- Header -->
   <header class="site-header">
-    <div class="site-container">
-      <div>
-        <h1 class="site-title">Bellbrook Veterinary Hospital</h1>
-        <div style="font-size: 0.85rem; opacity: 0.85;">Demo by Veteos</div>
-      </div>
-      <nav class="site-nav">
-        <a href="/">Home</a>
-        <a href="/about/">About</a>
-        <a href="/videos/">Videos</a>
-        <a href="/resources/">Resources</a>
-        <a href="/faqs/">FAQs</a>
-        <a href="/stories/">Stories</a>
-        <a href="/contact/">Contact</a>
+    <div class="container header-inner">
+      <a class="brand" href="#" id="homeLink">
+        <img class="brand-logo" src="/assets/images/logo.png" alt="Bellbrook Veterinary Hospital" onerror="this.style.display='none'" />
+        <span class="brand-text">
+          <span class="brand-name">Bellbrook</span>
+          <span class="brand-sub">Veterinary Hospital</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link" href="#" id="aboutLink">About</a>
+        <a class="nav-link" href="#" id="resourcesLink">Resources</a>
+        <a class="nav-link" href="#" id="videosLink">Videos</a>
+        <a class="nav-link" href="#" id="faqsLink">FAQs</a>
+        <a class="nav-link" href="#" id="contactLink">Contact</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="simple-hero">
-      <div class="site-container">
-        <h1>Dental Health</h1>
-        <p>Keep smiles bright with dental care videos, brushing guides, and cleaning reminders.</p>
+    <!-- Hero -->
+    <section class="hero" style="padding: 60px 0 50px;">
+      <div class="container">
+        <h1 class="hero-title" style="font-size: clamp(38px, 4.2vw, 64px); margin-bottom: 10px;">
+          Dental Health
+        </h1>
+        <p class="hero-subtitle" style="font-size: clamp(18px, 2.4vw, 28px); margin-top: 0;">
+          Fresh breath isn’t just “nice” — it can be a sign of comfort, health, and fewer infections.
+        </p>
+
+        <div style="margin-top: 16px; display:flex; gap:12px; flex-wrap: wrap;">
+          <a class="btn btn-secondary" href="#" id="backToResourcesBtn">Back to Resources</a>
+          <a class="btn btn-primary" href="#" id="watchVideosBtn">Watch Dental Videos</a>
+        </div>
+      </div>
+
+      <div class="wave wave--bottom" aria-hidden="true">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,60 C150,120 350,0 600,60 C850,120 1050,20 1200,60 L1200,120 L0,120 Z"></path>
+        </svg>
       </div>
     </section>
 
-    <section class="section">
-      <div class="site-container">
-        <div class="veteos-embed">
-          <!-- Paste Veteos playlist embed script here. Do not edit the script contents. -->
+    <!-- Content -->
+    <section style="background:#fff; padding: 70px 0;">
+      <div class="container">
+
+        <!-- Intro -->
+        <div class="intro-wrap">
+          <article class="card" style="padding: 24px;">
+            <h2 style="margin:0 0 10px; font-weight: 900;">What dental disease looks like</h2>
+            <p style="margin:0; color: rgba(30,42,58,.72); font-weight: 700; line-height: 1.7;">
+              Dental issues are super common and often painless at first — which makes them easy to miss.
+              Early care can prevent discomfort, infections, and tooth loss. (Demo info — always follow your vet’s advice.)
+            </p>
+
+            <div class="flag-grid" style="margin-top: 14px;">
+              <div class="flag">Bad breath that doesn’t improve</div>
+              <div class="flag">Red or bleeding gums</div>
+              <div class="flag">Drooling or pawing at mouth</div>
+              <div class="flag">Trouble chewing / dropping food</div>
+              <div class="flag">Visible tartar buildup</div>
+              <div class="flag">Swelling near the jaw</div>
+            </div>
+          </article>
+
+          <aside class="card" style="padding: 18px;">
+            <div style="border-radius: 18px; overflow:hidden; border: 1px solid rgba(30,42,58,.10);">
+              <img
+                src="https://bellbrookvet.com/wp-content/uploads/2026/01/puppy-dental-care-pic-1-1024x1024.png"
+                alt="Pet dental care"
+                style="width:100%; height: 220px; object-fit: cover;"
+              />
+            </div>
+
+            <div style="margin-top: 12px;">
+              <div style="font-weight: 900; color: rgba(30,42,58,.92);">Quick tip</div>
+              <div style="color: rgba(30,42,58,.72); font-weight: 700; line-height: 1.6;">
+                If breath suddenly gets worse, don’t wait — it’s often the earliest sign something’s brewing.
+              </div>
+            </div>
+          </aside>
         </div>
+
+        <!-- Cleaning / Routine -->
+        <div class="two-col" style="margin-top: 18px;">
+          <article class="card" style="padding: 22px;">
+            <h2 style="margin:0 0 10px; font-weight: 900;">What a professional cleaning is like</h2>
+            <ol class="nice-ol">
+              <li><strong>Exam + planning:</strong> your vet checks teeth/gums and discusses options.</li>
+              <li><strong>Cleaning:</strong> tartar is removed above and below the gumline.</li>
+              <li><strong>Dental x-rays (when indicated):</strong> helps find hidden problems.</li>
+              <li><strong>Polish:</strong> smooths the tooth surface to slow plaque buildup.</li>
+              <li><strong>Home plan:</strong> easy steps to keep results longer.</li>
+            </ol>
+
+            <div style="margin-top: 14px; display:flex; gap:12px; flex-wrap: wrap;">
+              <a class="btn btn-primary" href="#" id="contactBtn">Ask a Question</a>
+              <a class="btn btn-secondary" href="#" id="faqsBtn">Read FAQs</a>
+            </div>
+          </article>
+
+          <article class="card" style="padding: 22px;">
+            <h2 style="margin:0 0 10px; font-weight: 900;">At-home dental routine (simple version)</h2>
+            <ul class="soft-list">
+              <li><strong>Brush 3–5x/week</strong> if possible (even 2x/week helps)</li>
+              <li>Use pet-safe toothpaste only</li>
+              <li>Start with a fingertip rub if brushing is too much</li>
+              <li>Dental chews can help (ask what’s safe for your pet)</li>
+              <li>Re-check at wellness visits</li>
+            </ul>
+
+            <div style="margin-top: 14px; padding: 14px; border-radius: 16px; background: rgba(30,42,58,.05);">
+              <div style="font-weight: 900; color: rgba(30,42,58,.82); margin-bottom: 6px;">Pro move</div>
+              <div style="color: rgba(30,42,58,.70); font-weight: 700; line-height: 1.6;">
+                Keep sessions short. Touch → treat. Brush → treat. Stop while it’s still “easy.”
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Helpful links -->
+        <section class="card" style="padding: 26px; margin-top: 18px;">
+          <h2 style="margin:0 0 10px; font-weight: 900;">Related resources</h2>
+          <p style="margin:0 0 14px; color: rgba(30,42,58,.72); font-weight: 700; line-height: 1.7;">
+            If your pet needs meds after a dental procedure or you’re starting fresh with a new puppy/kitten,
+            these pages can help.
+          </p>
+
+          <div style="display:flex; gap: 12px; flex-wrap: wrap;">
+            <a class="btn btn-primary" href="#" id="medsBtn">Giving Medications</a>
+            <a class="btn btn-primary" href="#" id="puppyBtn">Puppy &amp; Kitten Tips</a>
+            <a class="btn btn-secondary" href="#" id="surveyBtn">Wellness Survey</a>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="quotes" style="padding: 40px 0 24px;">
+      <div class="container">
+        <p class="disclaimer">
+          <strong>Demo / Showcase Disclaimer:</strong> This page is a demonstration website produced by
+          <strong>Veteos.com</strong> for portfolio and presentation purposes.
+          It is <strong>not an official veterinary clinic website</strong> and does not replace veterinary advice.
+        </p>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="site-container">
-      <p><strong>Bellbrook Veterinary Hospital — Demo</strong></p>
-      <p>This is a demonstration/showcase website created by Veteos.com. Not an official veterinary clinic website. Not medical advice.</p>
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Bellbrook Veterinary Hospital (Demo)</p>
+      <p class="footer-links">
+        <a href="#" id="privacyLink">Privacy Policy</a>
+      </p>
     </div>
   </footer>
+
+  <style>
+    /* Dental page styles (scoped) */
+    .intro-wrap{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      align-items: start;
+    }
+    .flag-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 10px;
+    }
+    .flag{
+      border: 1px solid rgba(30,42,58,.14);
+      background: rgba(30,42,58,.03);
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-weight: 900;
+      color: rgba(30,42,58,.76);
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .nice-ol{
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(30,42,58,.72);
+      font-weight: 750;
+      line-height: 1.85;
+    }
+    .nice-ol li{ margin-bottom: 8px; }
+
+    .soft-list{
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(30,42,58,.72);
+      font-weight: 750;
+      line-height: 1.85;
+    }
+
+    @media (max-width: 980px){
+      .intro-wrap{ grid-template-columns: 1fr; }
+      .two-col{ grid-template-columns: 1fr; }
+      .flag-grid{ grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <script>
+    // Internal links
+    document.getElementById("homeLink").href = href("/index.html");
+    document.getElementById("aboutLink").href = href("/about/index.html");
+    document.getElementById("resourcesLink").href = href("/resources/index.html");
+    document.getElementById("videosLink").href = href("/videos/index.html");
+    document.getElementById("faqsLink").href = href("/faqs/index.html");
+    document.getElementById("contactLink").href = href("/contact/index.html");
+    document.getElementById("privacyLink").href = href("/privacy-policy/index.html");
+
+    document.getElementById("backToResourcesBtn").href = href("/resources/index.html");
+    document.getElementById("watchVideosBtn").href = href("/resources/educational-videos/index.html");
+
+    document.getElementById("contactBtn").href = href("/contact/index.html");
+    document.getElementById("faqsBtn").href = href("/faqs/index.html");
+
+    document.getElementById("medsBtn").href = href("/resources/giving-medications/index.html");
+    document.getElementById("puppyBtn").href = href("/resources/puppy-kitten-tips/index.html");
+    document.getElementById("surveyBtn").href = href("/wellness-survey/index.html");
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
