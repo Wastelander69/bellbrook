@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Resources — Bellbrook Veterinary Hospital (Demo)</title>
-  <meta name="description" content="Helpful pet care resources and educational materials (demo site by Veteos.com)." />
+  <meta name="description" content="Helpful tips and resources for pet parents (demo site by Veteos.com)." />
 
   <!-- Base path helper -->
   <script>
@@ -41,7 +41,7 @@
 
       <nav class="nav" aria-label="Primary">
         <a class="nav-link" href="#" id="aboutLink">About</a>
-        <a class="nav-link" href="#" id="resourcesLink">Resources</a>
+        <a class="nav-link is-active" href="#" id="resourcesLink">Resources</a>
         <a class="nav-link" href="#" id="videosLink">Videos</a>
         <a class="nav-link" href="#" id="faqsLink">FAQs</a>
         <a class="nav-link" href="#" id="contactLink">Contact</a>
@@ -50,15 +50,20 @@
   </header>
 
   <main>
-    <!-- Page Hero -->
+    <!-- Hero -->
     <section class="hero" style="padding: 60px 0 50px;">
       <div class="container">
         <h1 class="hero-title" style="font-size: clamp(38px, 4.2vw, 64px); margin-bottom: 10px;">
-          Pet Care Resources
+          Resources for Pet Parents
         </h1>
         <p class="hero-subtitle" style="font-size: clamp(18px, 2.4vw, 28px); margin-top: 0;">
-          Practical tips, clear guidance, and tools to support your pet’s health.
+          Helpful guides, quick checklists, and educational videos — all in one place.
         </p>
+
+        <div style="margin-top: 16px; display:flex; gap:12px; flex-wrap: wrap;">
+          <a class="btn btn-primary" href="#" id="eduVideosBtnTop">Educational Videos</a>
+          <a class="btn btn-secondary" href="#" id="surveyBtnTop">Wellness Survey</a>
+        </div>
       </div>
 
       <div class="wave wave--bottom" aria-hidden="true">
@@ -68,84 +73,76 @@
       </div>
     </section>
 
-    <!-- Resource Cards -->
+    <!-- Cards -->
     <section style="background:#fff; padding: 70px 0;">
       <div class="container">
-        <div class="cards-grid">
 
-          <!-- Puppy & Kitten Tips -->
-          <article class="card">
-            <h3 class="card-title">PUPPY &amp; KITTEN TIPS</h3>
-
-            <div class="card-image">
-              <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/Cute-Dog-vector-4.png" alt="Puppy and Kitten Tips" />
-            </div>
-
-            <p class="card-text">
-              New pet at home? Get guidance on vaccines, nutrition, training basics,
-              and what to expect during the first year.
-            </p>
-
-            <a class="btn btn-primary btn-block" href="#" id="puppyLink">
-              Explore Puppy &amp; Kitten Tips
-            </a>
-          </article>
-
-          <!-- Dental Health -->
-          <article class="card">
-            <h3 class="card-title">DENTAL HEALTH</h3>
-
-            <div class="card-image">
-              <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/puppy-dental-care-pic-1-1024x1024.png" alt="Dental Health" />
-            </div>
-
-            <p class="card-text">
-              Learn how dental disease affects pets, what cleanings involve,
-              and simple at-home habits that protect your pet’s smile.
-            </p>
-
-            <a class="btn btn-primary btn-block" href="#" id="dentalLink">
-              Explore Dental Health
-            </a>
-          </article>
-
-          <!-- Giving Medications -->
-          <article class="card">
-            <h3 class="card-title">GIVING MEDICATIONS</h3>
-
-            <div class="card-image">
-              <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/Cute-Cat-1.png" alt="Giving Medications" />
-            </div>
-
-            <p class="card-text">
-              Tips and techniques to make giving pills, liquids, and treatments
-              less stressful for you and your pet.
-            </p>
-
-            <a class="btn btn-primary btn-block" href="#" id="medsLink">
-              Medication Tips
-            </a>
-          </article>
-
-          <!-- Educational Videos -->
-          <article class="card">
-            <h3 class="card-title">EDUCATIONAL VIDEOS</h3>
-
-            <div class="card-image">
-              <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/Home-Page-Happy-Dog-1.png" alt="Educational Videos" />
-            </div>
-
-            <p class="card-text">
-              Watch short, veterinarian-created videos that explain common
-              concerns and preventive care topics.
-            </p>
-
-            <a class="btn btn-primary btn-block" href="#" id="eduVideosLink">
-              Watch Videos
-            </a>
-          </article>
-
+        <div class="card" style="padding: 22px; margin-bottom: 22px;">
+          <h2 style="margin:0 0 10px; font-weight: 900;">Pick a topic</h2>
+          <p style="margin:0; color: rgba(30,42,58,.72); font-weight: 700; line-height: 1.7;">
+            Start with what you need right now — first-year tips, dental basics, medication help, or short video explainers.
+          </p>
         </div>
+
+        <div class="resource-grid">
+          <article class="resource-card">
+            <div class="resource-media">
+              <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/Vet-and-Dog-pic-1-1024x1024.png" alt="Educational videos" />
+              <span class="badge">Videos</span>
+            </div>
+            <div class="resource-body">
+              <h3>Educational Videos</h3>
+              <p>Short explainers on common questions — easy to watch, easy to understand.</p>
+              <a class="btn btn-primary btn-block" href="#" id="eduVideosBtn">Watch Videos</a>
+            </div>
+          </article>
+
+          <article class="resource-card">
+            <div class="resource-media">
+              <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/Cute-Cat-1.png" alt="Puppy and kitten tips" />
+              <span class="badge">Guide</span>
+            </div>
+            <div class="resource-body">
+              <h3>Puppy &amp; Kitten Tips</h3>
+              <p>First-year roadmap: vaccines, nutrition, routines, and confidence-building habits.</p>
+              <a class="btn btn-primary btn-block" href="#" id="puppyBtn">Read Guide</a>
+            </div>
+          </article>
+
+          <article class="resource-card">
+            <div class="resource-media">
+              <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/bunny-and-vet-pic-1-1024x1024.png" alt="Giving medications" />
+              <span class="badge">How-To</span>
+            </div>
+            <div class="resource-body">
+              <h3>Giving Medications</h3>
+              <p>Low-stress methods for pills, liquids, and topicals — plus when to call your vet.</p>
+              <a class="btn btn-primary btn-block" href="#" id="medsBtn">Get Tips</a>
+            </div>
+          </article>
+
+          <article class="resource-card">
+            <div class="resource-media">
+              <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/puppy-dental-care-pic-1-1024x1024.png" alt="Dental health" />
+              <span class="badge">Dental</span>
+            </div>
+            <div class="resource-body">
+              <h3>Dental Health</h3>
+              <p>Signs to watch for, how cleanings work, and simple at-home steps that help.</p>
+              <a class="btn btn-primary btn-block" href="#" id="dentalBtn">Learn More</a>
+            </div>
+          </article>
+        </div>
+
+        <!-- CTA -->
+        <section class="card" style="padding: 32px; text-align:center; margin-top: 26px;">
+          <h3 style="margin:0 0 10px; font-weight:900;">Not sure where to start?</h3>
+          <p style="margin:0 0 20px; color: rgba(30,42,58,.72); font-weight:700;">
+            Take the quick Wellness Survey for a simple “next steps” summary (demo example).
+          </p>
+          <a class="btn btn-primary" href="#" id="surveyBtnBottom">Take the Survey</a>
+        </section>
+
       </div>
     </section>
 
@@ -154,9 +151,8 @@
       <div class="container">
         <p class="disclaimer">
           <strong>Demo / Showcase Disclaimer:</strong> This page is a demonstration website produced by
-          <strong>Veteos.com</strong> for portfolio and presentation purposes. It is
-          <strong>not an official website for any veterinary practice</strong>.
-          Content shown may be fictional or for demonstration only and does not constitute medical advice.
+          <strong>Veteos.com</strong> for portfolio and presentation purposes.
+          It is <strong>not an official veterinary clinic website</strong> and does not replace veterinary advice.
         </p>
       </div>
     </section>
@@ -171,6 +167,68 @@
     </div>
   </footer>
 
+  <style>
+    /* Resources hub styles (scoped) */
+    .resource-grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+    .resource-card{
+      background:#fff;
+      border-radius: 26px;
+      overflow:hidden;
+      border: 1px solid rgba(30,42,58,.10);
+      box-shadow: 0 12px 28px rgba(18,32,52,.10);
+      display:flex;
+      flex-direction: column;
+    }
+    .resource-media{
+      position: relative;
+      height: 240px;
+      overflow:hidden;
+    }
+    .resource-media img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      transform: scale(1.02);
+    }
+    .badge{
+      position:absolute;
+      left: 14px;
+      bottom: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(30,42,58,.12);
+      font-weight: 900;
+      color: rgba(30,42,58,.86);
+    }
+    .resource-body{
+      padding: 18px;
+      display:grid;
+      gap: 10px;
+    }
+    .resource-body h3{
+      margin:0;
+      font-weight: 900;
+      font-size: 22px;
+      color: rgba(30,42,58,.92);
+    }
+    .resource-body p{
+      margin:0;
+      color: rgba(30,42,58,.72);
+      font-weight: 700;
+      line-height: 1.6;
+    }
+    @media (max-width: 980px){
+      .resource-grid{ grid-template-columns: 1fr; }
+      .resource-media{ height: 220px; }
+    }
+  </style>
+
   <script>
     // Internal links
     document.getElementById("homeLink").href = href("/index.html");
@@ -181,10 +239,15 @@
     document.getElementById("contactLink").href = href("/contact/index.html");
     document.getElementById("privacyLink").href = href("/privacy-policy/index.html");
 
-    document.getElementById("puppyLink").href = href("/resources/puppy-kitten-tips/index.html");
-    document.getElementById("dentalLink").href = href("/resources/dental-health/index.html");
-    document.getElementById("medsLink").href = href("/resources/giving-medications/index.html");
-    document.getElementById("eduVideosLink").href = href("/resources/educational-videos/index.html");
+    document.getElementById("eduVideosBtnTop").href = href("/resources/educational-videos/index.html");
+    document.getElementById("eduVideosBtn").href = href("/resources/educational-videos/index.html");
+
+    document.getElementById("puppyBtn").href = href("/resources/puppy-kitten-tips/index.html");
+    document.getElementById("medsBtn").href = href("/resources/giving-medications/index.html");
+    document.getElementById("dentalBtn").href = href("/resources/dental-health/index.html");
+
+    document.getElementById("surveyBtnTop").href = href("/wellness-survey/index.html");
+    document.getElementById("surveyBtnBottom").href = href("/wellness-survey/index.html");
 
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
