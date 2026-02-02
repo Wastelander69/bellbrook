@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Videos — Bellbrook Veterinary Hospital (Demo)</title>
-  <meta name="description" content="Educational and informational pet care videos (demo site by Veteos.com)." />
+  <meta name="description" content="Educational veterinary videos (demo site by Veteos.com)." />
 
   <!-- Base path helper -->
   <script>
@@ -42,7 +42,7 @@
       <nav class="nav" aria-label="Primary">
         <a class="nav-link" href="#" id="aboutLink">About</a>
         <a class="nav-link" href="#" id="resourcesLink">Resources</a>
-        <a class="nav-link" href="#" id="videosLink">Videos</a>
+        <a class="nav-link is-active" href="#" id="videosLink">Videos</a>
         <a class="nav-link" href="#" id="faqsLink">FAQs</a>
         <a class="nav-link" href="#" id="contactLink">Contact</a>
       </nav>
@@ -50,15 +50,20 @@
   </header>
 
   <main>
-    <!-- Page Hero -->
+    <!-- Hero -->
     <section class="hero" style="padding: 60px 0 50px;">
       <div class="container">
         <h1 class="hero-title" style="font-size: clamp(38px, 4.2vw, 64px); margin-bottom: 10px;">
-          Pet Care Videos
+          Educational Videos
         </h1>
         <p class="hero-subtitle" style="font-size: clamp(18px, 2.4vw, 28px); margin-top: 0;">
-          Clear, helpful guidance you can watch anytime.
+          Short, clear explanations to help you feel confident about your pet’s care.
         </p>
+
+        <div style="margin-top: 16px; display:flex; gap:12px; flex-wrap: wrap;">
+          <a class="btn btn-primary" href="#" id="resourceVideosBtn">Browse Video Topics</a>
+          <a class="btn btn-secondary" href="#" id="resourcesBtn">Explore Resources</a>
+        </div>
       </div>
 
       <div class="wave wave--bottom" aria-hidden="true">
@@ -68,52 +73,38 @@
       </div>
     </section>
 
-    <!-- Video Collections -->
+    <!-- Video Collection -->
     <section style="background:#fff; padding: 70px 0;">
       <div class="container">
 
-        <!-- Collection 1 -->
-        <section style="margin-bottom: 80px;">
-          <h2 style="margin:0 0 14px; font-weight: 900;">
-            Featured Pet Care Videos
-          </h2>
-          <p style="margin:0 0 24px; color: rgba(30,42,58,.72); font-weight:700; max-width: 720px;">
-            Short, easy-to-follow videos covering common questions, preventive care,
-            and what to expect during visits.
+        <div class="card" style="padding: 22px; margin-bottom: 22px;">
+          <h2 style="margin:0 0 10px; font-weight: 900;">Watch & Learn</h2>
+          <p style="margin:0; color: rgba(30,42,58,.72); font-weight: 700; line-height: 1.7;">
+            These videos cover common questions and preventive care topics.
+            They’re educational and not a substitute for veterinary advice.
           </p>
+        </div>
 
-          <!-- KEEP EMBED EXACTLY -->
-          <div class="veteos-embed veteos-embed--wide">
-            <script type="text/javascript" src="https://on-demand.veteos.com/collections/s/8196643567274865/D3IsACy9dTJULt"></script>
-          </div>
-        </section>
+        <!-- Veteos Collection Embed (KEEP AS-IS) -->
+        <div class="video-collection">
+          <script
+            type="text/javascript"
+            src="https://on-demand.veteos.com/collections/s/8196643567274865/D3IsACy9dTJULt">
+          </script>
+        </div>
 
-        <!-- Collection 2 -->
-        <section style="margin-bottom: 80px;">
-          <h2 style="margin:0 0 14px; font-weight: 900;">
-            Common Topics & At-Home Tips
-          </h2>
-          <p style="margin:0 0 24px; color: rgba(30,42,58,.72); font-weight:700; max-width: 720px;">
-            Learn what’s normal, what’s not, and when it’s time to check in with your veterinarian.
-          </p>
-
-          <!-- KEEP EMBED EXACTLY -->
-          <div class="veteos-embed veteos-embed--wide">
-            <script type="text/javascript" src="https://on-demand.veteos.com/collections/s/15543428946009760/WNThQisfsIVoGZ"></script>
-          </div>
-        </section>
-
-        <!-- CTA -->
-        <section class="card" style="padding: 32px; text-align:center;">
-          <h3 style="margin:0 0 10px; font-weight:900;">
-            Looking for something specific?
-          </h3>
+        <!-- Topic links -->
+        <section class="card" style="padding: 32px; text-align:center; margin-top: 26px;">
+          <h3 style="margin:0 0 10px; font-weight:900;">Want something more specific?</h3>
           <p style="margin:0 0 20px; color: rgba(30,42,58,.72); font-weight:700;">
-            Explore our full resource library for written guides, tips, and FAQs.
+            Check out our written guides for step-by-step tips and checklists.
           </p>
-          <a class="btn btn-primary" href="#" id="videosResourcesCta">
-            Explore Resources
-          </a>
+
+          <div style="display:flex; gap:12px; justify-content:center; flex-wrap: wrap;">
+            <a class="btn btn-primary" href="#" id="puppyBtn">Puppy &amp; Kitten Tips</a>
+            <a class="btn btn-primary" href="#" id="medsBtn">Giving Medications</a>
+            <a class="btn btn-primary" href="#" id="dentalBtn">Dental Health</a>
+          </div>
         </section>
 
       </div>
@@ -124,9 +115,8 @@
       <div class="container">
         <p class="disclaimer">
           <strong>Demo / Showcase Disclaimer:</strong> This page is a demonstration website produced by
-          <strong>Veteos.com</strong> for portfolio and presentation purposes. It is
-          <strong>not an official website for any veterinary practice</strong>.
-          Content shown may be fictional or for demonstration only and does not constitute medical advice.
+          <strong>Veteos.com</strong> for portfolio and presentation purposes.
+          It is <strong>not an official veterinary clinic website</strong> and does not replace veterinary advice.
         </p>
       </div>
     </section>
@@ -141,6 +131,18 @@
     </div>
   </footer>
 
+  <style>
+    /* Videos page styles (scoped) */
+    .video-collection{
+      border-radius: 26px;
+      overflow: hidden;
+      border: 1px solid rgba(30,42,58,.10);
+      box-shadow: 0 12px 28px rgba(18,32,52,.10);
+      padding: 12px;
+      background: #fff;
+    }
+  </style>
+
   <script>
     // Internal links
     document.getElementById("homeLink").href = href("/index.html");
@@ -150,7 +152,13 @@
     document.getElementById("faqsLink").href = href("/faqs/index.html");
     document.getElementById("contactLink").href = href("/contact/index.html");
     document.getElementById("privacyLink").href = href("/privacy-policy/index.html");
-    document.getElementById("videosResourcesCta").href = href("/resources/index.html");
+
+    document.getElementById("resourceVideosBtn").href = href("/resources/educational-videos/index.html");
+    document.getElementById("resourcesBtn").href = href("/resources/index.html");
+
+    document.getElementById("puppyBtn").href = href("/resources/puppy-kitten-tips/index.html");
+    document.getElementById("medsBtn").href = href("/resources/giving-medications/index.html");
+    document.getElementById("dentalBtn").href = href("/resources/dental-health/index.html");
 
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
