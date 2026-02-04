@@ -1,241 +1,131 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Wellness Survey Results — Bellbrook Veterinary Hospital (Demo)</title>
-  <meta name="description" content="Sample wellness survey results (demo site by Veteos.com)." />
-
-  <!-- Base path helper -->
-  <script>
-    (function () {
-      var parts = location.pathname.split("/").filter(Boolean);
-      window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
-      window.href = function (p) { return window.BASE_PATH + p; };
-    })();
-  </script>
-
-  <!-- Load site CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css" />
-  <script>
-    (function () {
-      document.querySelectorAll('link[rel="stylesheet"]').forEach(function (l) {
-        var h = l.getAttribute("href") || "";
-        if (h.startsWith("/assets/")) l.href = window.href(h);
-      });
-    })();
-  </script>
-</head>
-
-<body>
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#" id="homeLink">
-        <img class="brand-logo" src="/assets/images/logo.png" alt="Bellbrook Veterinary Hospital" onerror="this.style.display='none'" />
-        <span class="brand-text">
-          <span class="brand-name">Bellbrook</span>
-          <span class="brand-sub">Veterinary Hospital</span>
-        </span>
-      </a>
-
-      <nav class="nav" aria-label="Primary">
-        <a class="nav-link" href="#" id="aboutLink">About</a>
-        <a class="nav-link" href="#" id="resourcesLink">Resources</a>
-        <a class="nav-link" href="#" id="videosLink">Videos</a>
-        <a class="nav-link" href="#" id="faqsLink">FAQs</a>
-        <a class="nav-link" href="#" id="contactLink">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <!-- Hero -->
-    <section class="hero" style="padding: 60px 0 50px;">
-      <div class="container">
-        <h1 class="hero-title" style="font-size: clamp(36px, 4vw, 60px); margin-bottom: 10px;">
-          Your Sample Results
-        </h1>
-        <p class="hero-subtitle" style="font-size: clamp(16px, 2.2vw, 26px); margin-top: 0;">
-          Based on the example responses you selected.
-        </p>
-      </div>
-
-      <div class="wave wave--bottom" aria-hidden="true">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,60 C150,120 350,0 600,60 C850,120 1050,20 1200,60 L1200,120 L0,120 Z"></path>
-        </svg>
-      </div>
-    </section>
-
-    <!-- Results -->
-    <section style="background:#fff; padding: 70px 0;">
-      <div class="container">
-
-        <article class="card result-card">
-          <h2>What this could mean</h2>
-          <p>
-            Based on the sample inputs, a veterinarian might focus on preventive care,
-            dental health, and routine wellness screenings.
-          </p>
-        </article>
-
-        <div class="result-grid">
-          <article class="card result-item">
-            <h3>🦷 Dental health</h3>
-            <p>
-              Dental disease is common and often overlooked.
-              Routine exams and cleanings can significantly improve comfort and long-term health.
-            </p>
-          </article>
-
-          <article class="card result-item">
-            <h3>🛡️ Preventive care</h3>
-            <p>
-              Consistent wellness visits help catch issues early and support a longer,
-              healthier life for your pet.
-            </p>
-          </article>
-
-          <article class="card result-item">
-            <h3>🍽️ Nutrition & weight</h3>
-            <p>
-              Maintaining a healthy weight reduces strain on joints and organs
-              and supports overall wellbeing.
-            </p>
-          </article>
-        </div>
-
-        <section class="card result-next">
-          <h3>Recommended next steps</h3>
-          <ul>
-            <li>Schedule a routine wellness exam</li>
-            <li>Discuss dental cleaning options</li>
-            <li>Review nutrition and lifestyle needs</li>
-          </ul>
-
-          <div class="cta-actions">
-            <a class="btn btn-primary" href="#" id="contactBtn">Contact Us</a>
-            <a class="btn btn-secondary" href="#" id="resourcesBtn">Explore Resources</a>
-          </div>
-        </section>
-
-        <section class="card result-note">
-          <h4>This is not a diagnosis</h4>
-          <p>
-            These results are examples only and do not replace professional veterinary advice.
-            Always consult a licensed veterinarian for health concerns.
-          </p>
-        </section>
-
-      </div>
-    </section>
-
-    <!-- Disclaimer -->
-    <section class="quotes" style="padding: 40px 0 24px;">
-      <div class="container">
-        <p class="disclaimer">
-          <strong>Demo / Showcase Disclaimer:</strong> These results are part of a demonstration
-          website created by <strong>Veteos.com</strong>.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> Bellbrook Veterinary Hospital (Demo)</p>
-    </div>
-  </footer>
-
-  <style>
-    /* Results styles (scoped) */
-    .result-card{
-      padding: 26px;
-      margin-bottom: 18px;
-    }
-    .result-card h2{
-      margin:0 0 8px;
-      font-weight: 900;
-    }
-    .result-card p{
-      margin:0;
-      color: rgba(30,42,58,.72);
-      font-weight: 700;
-      line-height: 1.7;
-    }
-    .result-grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-bottom: 22px;
-    }
-    .result-item{
-      padding: 22px;
-    }
-    .result-item h3{
-      margin:0 0 8px;
-      font-weight: 900;
-    }
-    .result-item p{
-      margin:0;
-      color: rgba(30,42,58,.72);
-      font-weight: 700;
-      line-height: 1.6;
-    }
-    .result-next{
-      padding: 28px;
-      text-align: center;
-      margin-bottom: 22px;
-    }
-    .result-next ul{
-      list-style: none;
-      padding: 0;
-      margin: 12px 0 18px;
-      font-weight: 700;
-      color: rgba(30,42,58,.72);
-    }
-    .result-next li{
-      margin-bottom: 6px;
-    }
-    .cta-actions{
-      display:flex;
-      justify-content:center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .result-note{
-      padding: 22px;
-      background: rgba(30,42,58,.04);
-    }
-    .result-note h4{
-      margin:0 0 6px;
-      font-weight: 900;
-    }
-    .result-note p{
-      margin:0;
-      color: rgba(30,42,58,.72);
-      font-weight: 700;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 980px){
-      .result-grid{ grid-template-columns: 1fr; }
-    }
-  </style>
-
-  <script>
-    document.getElementById("homeLink").href = href("/index.html");
-    document.getElementById("aboutLink").href = href("/about/index.html");
-    document.getElementById("resourcesLink").href = href("/resources/index.html");
-    document.getElementById("videosLink").href = href("/videos/index.html");
-    document.getElementById("faqsLink").href = href("/faqs/index.html");
-    document.getElementById("contactLink").href = href("/contact/index.html");
-
-    document.getElementById("contactBtn").href = href("/contact/index.html");
-    document.getElementById("resourcesBtn").href = href("/resources/index.html");
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+diff --git a/wellness-survey/results/index.html b/wellness-survey/results/index.html
+index af055fa2d0a9195604e7b7cdced866ee60021b77..86219c25d625f0cab396db79aeb7d72d2274198d 100644
+--- a/wellness-survey/results/index.html
++++ b/wellness-survey/results/index.html
+@@ -1,60 +1,76 @@
+ <!doctype html>
+ <html lang="en">
+ <head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width,initial-scale=1" />
+   <title>Wellness Survey Results — Bellbrook Veterinary Hospital (Demo)</title>
+   <meta name="description" content="Sample wellness survey results (demo site by Veteos.com)." />
+ 
+   <!-- Base path helper -->
+   <script>
++
++    function setHref(id, path){
++      var el = document.getElementById(id);
++      if (el) el.href = href(path);
++    }
++
++    function setText(id, value){
++      var el = document.getElementById(id);
++      if (el) el.textContent = value;
++    }
++
++    function setOnClick(id, handler){
++      var el = document.getElementById(id);
++      if (el) el.onclick = handler;
++    }
++
+     (function () {
+       var parts = location.pathname.split("/").filter(Boolean);
+       window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
+       window.href = function (p) { return window.BASE_PATH + p; };
+     })();
+   </script>
+ 
+   <!-- Load site CSS -->
+   <link rel="stylesheet" href="/assets/css/style.css" />
+   <script>
+     (function () {
+       document.querySelectorAll('link[rel="stylesheet"]').forEach(function (l) {
+         var h = l.getAttribute("href") || "";
+         if (h.startsWith("/assets/")) l.href = window.href(h);
+       });
+     })();
+   </script>
+ </head>
+ 
+ <body>
+   <!-- Header -->
+   <header class="site-header">
+     <div class="container header-inner">
+       <a class="brand" href="#" id="homeLink">
+-        <img class="brand-logo" src="/assets/images/logo.png" alt="Bellbrook Veterinary Hospital" onerror="this.style.display='none'" />
++        <img class="brand-logo" src="/assets/images/logo.svg" alt="Bellbrook Veterinary Hospital" onerror="this.style.display='none'" />
+         <span class="brand-text">
+           <span class="brand-name">Bellbrook</span>
+           <span class="brand-sub">Veterinary Hospital</span>
+         </span>
+       </a>
+ 
+       <nav class="nav" aria-label="Primary">
+         <a class="nav-link" href="#" id="aboutLink">About</a>
+         <a class="nav-link" href="#" id="resourcesLink">Resources</a>
+         <a class="nav-link" href="#" id="videosLink">Videos</a>
+         <a class="nav-link" href="#" id="faqsLink">FAQs</a>
+         <a class="nav-link" href="#" id="contactLink">Contact</a>
+       </nav>
+     </div>
+   </header>
+ 
+   <main>
+     <!-- Hero -->
+     <section class="hero" style="padding: 60px 0 50px;">
+       <div class="container">
+         <h1 class="hero-title" style="font-size: clamp(36px, 4vw, 60px); margin-bottom: 10px;">
+           Your Sample Results
+         </h1>
+         <p class="hero-subtitle" style="font-size: clamp(16px, 2.2vw, 26px); margin-top: 0;">
+           Based on the example responses you selected.
+@@ -203,39 +219,39 @@
+       justify-content:center;
+       gap: 12px;
+       flex-wrap: wrap;
+     }
+     .result-note{
+       padding: 22px;
+       background: rgba(30,42,58,.04);
+     }
+     .result-note h4{
+       margin:0 0 6px;
+       font-weight: 900;
+     }
+     .result-note p{
+       margin:0;
+       color: rgba(30,42,58,.72);
+       font-weight: 700;
+       line-height: 1.6;
+     }
+ 
+     @media (max-width: 980px){
+       .result-grid{ grid-template-columns: 1fr; }
+     }
+   </style>
+ 
+   <script>
+-    document.getElementById("homeLink").href = href("/index.html");
+-    document.getElementById("aboutLink").href = href("/about/index.html");
+-    document.getElementById("resourcesLink").href = href("/resources/index.html");
+-    document.getElementById("videosLink").href = href("/videos/index.html");
+-    document.getElementById("faqsLink").href = href("/faqs/index.html");
+-    document.getElementById("contactLink").href = href("/contact/index.html");
++    setHref("homeLink", "/index.html");
++    setHref("aboutLink", "/about/index.html");
++    setHref("resourcesLink", "/resources/index.html");
++    setHref("videosLink", "/videos/index.html");
++    setHref("faqsLink", "/faqs/index.html");
++    setHref("contactLink", "/contact/index.html");
+ 
+-    document.getElementById("contactBtn").href = href("/contact/index.html");
+-    document.getElementById("resourcesBtn").href = href("/resources/index.html");
++    setHref("contactBtn", "/contact/index.html");
++    setHref("resourcesBtn", "/resources/index.html");
+ 
+-    document.getElementById("year").textContent = new Date().getFullYear();
++    setText("year", new Date().getFullYear());
+   </script>
+ </body>
+ </html>
