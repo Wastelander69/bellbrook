@@ -1,143 +1,476 @@
-diff --git a/videos/index.html b/videos/index.html
-index 92d209077b1654a361739e33df0828751324c5ce..2aa2edf96aeb0bc7eee0e823e961c1c47b9d1685 100644
---- a/videos/index.html
-+++ b/videos/index.html
-@@ -1,60 +1,76 @@
- <!doctype html>
- <html lang="en">
- <head>
-   <meta charset="utf-8" />
-   <meta name="viewport" content="width=device-width,initial-scale=1" />
-   <title>Videos — Bellbrook Veterinary Hospital (Demo)</title>
-   <meta name="description" content="Educational veterinary videos (demo site by Veteos.com)." />
- 
-   <!-- Base path helper -->
-   <script>
-+
-+    function setHref(id, path){
-+      var el = document.getElementById(id);
-+      if (el) el.href = href(path);
-+    }
-+
-+    function setText(id, value){
-+      var el = document.getElementById(id);
-+      if (el) el.textContent = value;
-+    }
-+
-+    function setOnClick(id, handler){
-+      var el = document.getElementById(id);
-+      if (el) el.onclick = handler;
-+    }
-+
-     (function () {
-       var parts = location.pathname.split("/").filter(Boolean);
-       window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
-       window.href = function (p) { return window.BASE_PATH + p; };
-     })();
-   </script>
- 
-   <!-- Load site CSS -->
-   <link rel="stylesheet" href="/assets/css/style.css" />
-   <script>
-     (function () {
-       document.querySelectorAll('link[rel="stylesheet"]').forEach(function (l) {
-         var h = l.getAttribute("href") || "";
-         if (h.startsWith("/assets/")) l.href = window.href(h);
-       });
-     })();
-   </script>
- </head>
- 
- <body>
-   <!-- Header -->
-   <header class="site-header">
-     <div class="container header-inner">
-       <a class="brand" href="#" id="homeLink">
--        <img class="brand-logo" src="/assets/images/logo.png" alt="Bellbrook Veterinary Hospital" onerror="this.style.display='none'" />
-+        <img class="brand-logo" src="/assets/images/logo.svg" alt="Bellbrook Veterinary Hospital" onerror="this.style.display='none'" />
-         <span class="brand-text">
-           <span class="brand-name">Bellbrook</span>
-           <span class="brand-sub">Veterinary Hospital</span>
-         </span>
-       </a>
- 
-       <nav class="nav" aria-label="Primary">
-         <a class="nav-link" href="#" id="aboutLink">About</a>
-         <a class="nav-link" href="#" id="resourcesLink">Resources</a>
-         <a class="nav-link is-active" href="#" id="videosLink">Videos</a>
-         <a class="nav-link" href="#" id="faqsLink">FAQs</a>
-         <a class="nav-link" href="#" id="contactLink">Contact</a>
-       </nav>
-     </div>
-   </header>
- 
-   <main>
-     <!-- Hero -->
-     <section class="hero" style="padding: 60px 0 50px;">
-       <div class="container">
-         <h1 class="hero-title" style="font-size: clamp(38px, 4.2vw, 64px); margin-bottom: 10px;">
-           Educational Videos
-         </h1>
-         <p class="hero-subtitle" style="font-size: clamp(18px, 2.4vw, 28px); margin-top: 0;">
-           Short, clear explanations to help you feel confident about your pet’s care.
-@@ -123,44 +139,44 @@
-   </main>
- 
-   <footer class="site-footer">
-     <div class="container footer-inner">
-       <p>© <span id="year"></span> Bellbrook Veterinary Hospital (Demo)</p>
-       <p class="footer-links">
-         <a href="#" id="privacyLink">Privacy Policy</a>
-       </p>
-     </div>
-   </footer>
- 
-   <style>
-     /* Videos page styles (scoped) */
-     .video-collection{
-       border-radius: 26px;
-       overflow: hidden;
-       border: 1px solid rgba(30,42,58,.10);
-       box-shadow: 0 12px 28px rgba(18,32,52,.10);
-       padding: 12px;
-       background: #fff;
-     }
-   </style>
- 
-   <script>
-     // Internal links
--    document.getElementById("homeLink").href = href("/index.html");
--    document.getElementById("aboutLink").href = href("/about/index.html");
--    document.getElementById("resourcesLink").href = href("/resources/index.html");
--    document.getElementById("videosLink").href = href("/videos/index.html");
--    document.getElementById("faqsLink").href = href("/faqs/index.html");
--    document.getElementById("contactLink").href = href("/contact/index.html");
--    document.getElementById("privacyLink").href = href("/privacy-policy/index.html");
--
--    document.getElementById("resourceVideosBtn").href = href("/resources/educational-videos/index.html");
--    document.getElementById("resourcesBtn").href = href("/resources/index.html");
--
--    document.getElementById("puppyBtn").href = href("/resources/puppy-kitten-tips/index.html");
--    document.getElementById("medsBtn").href = href("/resources/giving-medications/index.html");
--    document.getElementById("dentalBtn").href = href("/resources/dental-health/index.html");
--
--    document.getElementById("year").textContent = new Date().getFullYear();
-+    setHref("homeLink", "/index.html");
-+    setHref("aboutLink", "/about/index.html");
-+    setHref("resourcesLink", "/resources/index.html");
-+    setHref("videosLink", "/videos/index.html");
-+    setHref("faqsLink", "/faqs/index.html");
-+    setHref("contactLink", "/contact/index.html");
-+    setHref("privacyLink", "/privacy-policy/index.html");
-+
-+    setHref("resourceVideosBtn", "/resources/educational-videos/index.html");
-+    setHref("resourcesBtn", "/resources/index.html");
-+
-+    setHref("puppyBtn", "/resources/puppy-kitten-tips/index.html");
-+    setHref("medsBtn", "/resources/giving-medications/index.html");
-+    setHref("dentalBtn", "/resources/dental-health/index.html");
-+
-+    setText("year", new Date().getFullYear());
-   </script>
- </body>
- </html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Videos — Bellbrook Veterinary Hospital (Demo)</title>
+  <meta name="description" content="Educational and clinic videos (demo site by Veteos.com)." />
+
+  <!-- Base path helper: supports / and /bellbrook/ -->
+  <script>
+    (function () {
+      var parts = location.pathname.split("/").filter(Boolean);
+      window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
+      window.href = function (p) { return window.BASE_PATH + p; };
+
+      window.setHref = function (id, path) {
+        var el = document.getElementById(id);
+        if (el) el.href = href(path);
+      };
+      window.setText = function (id, value) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = value;
+      };
+      window.setSrc = function (id, path) {
+        var el = document.getElementById(id);
+        if (el) el.src = href(path);
+      };
+    })();
+  </script>
+
+  <!-- Load site CSS (order matters: tweaks AFTER base) -->
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/tweaks.css" />
+  <script>
+    (function () {
+      document.querySelectorAll('link[rel="stylesheet"]').forEach(function (l) {
+        var h = l.getAttribute("href") || "";
+        if (h.startsWith("/assets/")) l.href = window.href(h);
+      });
+    })();
+  </script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#" id="homeLink">
+        <img class="brand-logo" id="brandLogo" src="" alt="Bellbrook Veterinary Hospital" />
+        <span class="brand-text">
+          <span class="brand-name">Bellbrook</span>
+          <span class="brand-sub">Veterinary Hospital</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link" href="#" id="aboutLink">About</a>
+        <a class="nav-link" href="#" id="resourcesLink">Resources</a>
+        <a class="nav-link is-active" href="#" id="videosLink">Videos</a>
+        <a class="nav-link" href="#" id="storiesLink">Stories</a>
+        <a class="nav-link" href="#" id="faqsLink">FAQs</a>
+        <a class="nav-link" href="#" id="contactLink">Contact</a>
+        <a class="nav-link" href="#" id="recruitingLink">Recruiting</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" style="padding: 60px 0 50px;">
+      <div class="container">
+        <h1 class="hero-title" style="font-size: clamp(38px, 4.2vw, 64px); margin-bottom: 10px;">
+          Watch &amp; Learn
+        </h1>
+        <p class="hero-subtitle" style="font-size: clamp(18px, 2.4vw, 28px); margin-top: 0;">
+          Bite-sized videos that explain common pet topics clearly — without the overwhelm.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#library">Browse videos</a>
+          <a class="btn btn-secondary" href="#" id="resourcesBtnTop">Explore Resources</a>
+        </div>
+      </div>
+
+      <div class="wave wave--bottom" aria-hidden="true">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,60 C150,120 350,0 600,60 C850,120 1050,20 1200,60 L1200,120 L0,120 Z"></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Featured -->
+    <section style="background:#fff; padding: 70px 0 40px;">
+      <div class="container">
+        <section class="card featured">
+          <div class="featured-left">
+            <p class="kicker">Featured</p>
+            <h2>A few moments with us</h2>
+            <p>
+              Kind people, gentle handling, and clear communication —
+              so you and your pet feel comfortable every step of the way.
+            </p>
+            <div class="cta-actions">
+              <a class="btn btn-primary" href="#library">Watch more</a>
+              <a class="btn btn-secondary" href="#" id="contactBtnTop">Ask a question</a>
+            </div>
+          </div>
+
+          <div class="featured-right">
+            <!-- OPTION A: Veteos embed (recommended if you have it) -->
+            <div class="card-embed">
+              <script type="text/javascript" src="https://on-demand.veteos.com/embed-video/8196643567274865/e1YBgEUBhOF6TQ"></script>
+            </div>
+
+            <!-- OPTION B: If you want a YouTube/Vimeo iframe instead, replace the div above with an iframe. -->
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Library -->
+    <section id="library" style="background:#fff; padding: 30px 0 70px;">
+      <div class="container">
+        <div class="library-head">
+          <div>
+            <h2 class="section-title">Video Library</h2>
+            <p class="section-sub">
+              Start anywhere. These are quick, practical, and built for real life.
+            </p>
+          </div>
+
+          <!-- Simple filter UI (optional, cosmetic) -->
+          <div class="filters" aria-label="Video filters">
+            <button class="chip is-active" type="button" data-filter="all">All</button>
+            <button class="chip" type="button" data-filter="puppy">Puppy/Kitten</button>
+            <button class="chip" type="button" data-filter="dental">Dental</button>
+            <button class="chip" type="button" data-filter="care">Preventive Care</button>
+          </div>
+        </div>
+
+        <div class="video-grid">
+          <!-- Card 1 -->
+          <article class="card video-card" data-tags="puppy care">
+            <div class="video-top">
+              <div class="thumb">
+                <span class="play">▶</span>
+              </div>
+              <span class="tag">Puppy/Kitten</span>
+            </div>
+            <h3>New Puppy/Kitten: First Steps</h3>
+            <p>What to prioritize in the first few weeks: routines, prevention, and habits.</p>
+            <div class="video-actions">
+              <a class="btn btn-primary" href="#" id="puppyTipsBtn">Related tips</a>
+              <a class="btn btn-secondary" href="#" id="resourcesAllBtn">All resources</a>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="card video-card" data-tags="dental">
+            <div class="video-top">
+              <div class="thumb">
+                <span class="play">▶</span>
+              </div>
+              <span class="tag">Dental</span>
+            </div>
+            <h3>Dental Health Basics</h3>
+            <p>How dental disease starts, what cleanings involve, and at-home routines.</p>
+            <div class="video-actions">
+              <a class="btn btn-primary" href="#" id="dentalBtn">Dental resource</a>
+              <a class="btn btn-secondary" href="#" id="contactBtnDental">Questions?</a>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="card video-card" data-tags="care">
+            <div class="video-top">
+              <div class="thumb">
+                <span class="play">▶</span>
+              </div>
+              <span class="tag">Preventive Care</span>
+            </div>
+            <h3>Preventive Care, Explained</h3>
+            <p>Vaccines, parasite prevention, and why “preventive” saves stress later.</p>
+            <div class="video-actions">
+              <a class="btn btn-primary" href="#" id="resourcesBtnCare">Explore resources</a>
+              <a class="btn btn-secondary" href="#" id="faqsBtnCare">FAQs</a>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="card video-card" data-tags="care">
+            <div class="video-top">
+              <div class="thumb">
+                <span class="play">▶</span>
+              </div>
+              <span class="tag">How-to</span>
+            </div>
+            <h3>Giving Medications (No Drama)</h3>
+            <p>Simple techniques for pills and liquids—plus what to do when it’s a hard “no.”</p>
+            <div class="video-actions">
+              <a class="btn btn-primary" href="#" id="medsBtn">Giving meds</a>
+              <a class="btn btn-secondary" href="#" id="contactBtnMeds">Help</a>
+            </div>
+          </article>
+        </div>
+
+        <section class="card videos-cta">
+          <h3>Want even more?</h3>
+          <p>Check out our Educational Videos collection inside Resources.</p>
+          <div class="cta-actions">
+            <a class="btn btn-primary" href="#" id="eduVideosBtn">Educational Videos</a>
+            <a class="btn btn-secondary" href="#" id="contactBtn">Contact Us</a>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="quotes" style="padding: 40px 0 24px;">
+      <div class="container">
+        <p class="disclaimer">
+          <strong>Demo / Showcase Disclaimer:</strong> This page is part of a demonstration website
+          produced by <strong>Veteos.com</strong>. It does not represent a real veterinary practice.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Bellbrook Veterinary Hospital (Demo)</p>
+      <p class="footer-links">
+        <a href="#" id="privacyLink">Privacy Policy</a>
+      </p>
+    </div>
+  </footer>
+
+  <style>
+    /* Videos page styles (scoped) */
+    .hero-actions{
+      display:flex;
+      gap: 12px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .featured{
+      padding: 26px;
+      display:grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 18px;
+      align-items: center;
+    }
+    .kicker{
+      margin: 0 0 8px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(30,42,58,.62);
+      font-size: 12px;
+    }
+    .featured h2{
+      margin: 0 0 8px;
+      font-weight: 950;
+    }
+    .featured p{
+      margin: 0 0 14px;
+      color: rgba(30,42,58,.72);
+      font-weight: 750;
+      line-height: 1.7;
+    }
+    .card-embed{
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(30,42,58,.10);
+      background: rgba(30,42,58,.02);
+      min-height: 280px;
+    }
+
+    .library-head{
+      display:flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .section-title{
+      margin: 0 0 6px;
+      font-weight: 950;
+    }
+    .section-sub{
+      margin: 0;
+      color: rgba(30,42,58,.72);
+      font-weight: 750;
+      line-height: 1.7;
+    }
+
+    .filters{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .chip{
+      border-radius: 999px;
+      border: 1px solid rgba(30,42,58,.14);
+      background: rgba(255,255,255,.9);
+      padding: 8px 12px;
+      font-weight: 900;
+      cursor: pointer;
+      color: rgba(30,42,58,.82);
+    }
+    .chip.is-active{
+      border-color: rgba(43,108,176,.35);
+      background: rgba(43,108,176,.10);
+    }
+
+    .video-grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .video-card{
+      padding: 22px;
+    }
+    .video-card h3{
+      margin: 12px 0 6px;
+      font-weight: 950;
+    }
+    .video-card p{
+      margin: 0 0 14px;
+      color: rgba(30,42,58,.72);
+      font-weight: 750;
+      line-height: 1.7;
+    }
+
+    .video-top{
+      display:flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .thumb{
+      flex: 1;
+      min-height: 120px;
+      border-radius: 16px;
+      border: 1px solid rgba(30,42,58,.10);
+      background: linear-gradient(135deg, rgba(43,108,176,.12), rgba(223,86,64,.10));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position: relative;
+      overflow: hidden;
+    }
+    .play{
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      border: 1px solid rgba(30,42,58,.14);
+      background: rgba(255,255,255,.9);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 950;
+    }
+    .tag{
+      font-weight: 900;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(43,108,176,.10);
+      border: 1px solid rgba(43,108,176,.20);
+      color: rgba(30,42,58,.84);
+      white-space: nowrap;
+    }
+
+    .video-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .videos-cta{
+      text-align:center;
+      padding: 28px;
+    }
+    .videos-cta h3{
+      margin: 0 0 6px;
+      font-weight: 950;
+    }
+    .videos-cta p{
+      margin: 0 0 14px;
+      color: rgba(30,42,58,.72);
+      font-weight: 750;
+      line-height: 1.7;
+    }
+    .cta-actions{
+      display:flex;
+      gap: 12px;
+      justify-content:center;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px){
+      .featured{ grid-template-columns: 1fr; }
+      .video-grid{ grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <script>
+    // Logo (try svg, fall back to png) + GitHub Pages-safe
+    var logoEl = document.getElementById("brandLogo");
+    if (logoEl) {
+      logoEl.src = href("/assets/images/logo.svg");
+      logoEl.onerror = function () {
+        this.onerror = null;
+        this.src = href("/assets/images/logo.png");
+      };
+    }
+
+    // Nav
+    setHref("homeLink", "/index.html");
+    setHref("aboutLink", "/about/index.html");
+    setHref("resourcesLink", "/resources/index.html");
+    setHref("videosLink", "/videos/index.html");
+    setHref("storiesLink", "/stories/index.html");
+    setHref("faqsLink", "/faqs/index.html");
+    setHref("contactLink", "/contact/index.html");
+    setHref("recruitingLink", "/recruiting/index.html");
+    setHref("privacyLink", "/privacy-policy/index.html");
+
+    // Top CTAs
+    setHref("resourcesBtnTop", "/resources/index.html");
+    setHref("contactBtnTop", "/contact/index.html");
+
+    // Cards
+    setHref("puppyTipsBtn", "/resources/puppy-kitten-tips/index.html");
+    setHref("resourcesAllBtn", "/resources/index.html");
+
+    setHref("dentalBtn", "/resources/dental-health/index.html");
+    setHref("contactBtnDental", "/contact/index.html");
+
+    setHref("resourcesBtnCare", "/resources/index.html");
+    setHref("faqsBtnCare", "/faqs/index.html");
+
+    setHref("medsBtn", "/resources/giving-medications/index.html");
+    setHref("contactBtnMeds", "/contact/index.html");
+
+    // Bottom CTA
+    setHref("eduVideosBtn", "/resources/educational-videos/index.html");
+    setHref("contactBtn", "/contact/index.html");
+
+    setText("year", new Date().getFullYear());
+
+    // Simple client-side filter (chips)
+    var chips = Array.from(document.querySelectorAll(".chip"));
+    var cards = Array.from(document.querySelectorAll(".video-card"));
+    function setActiveChip(target){
+      chips.forEach(function(c){ c.classList.toggle("is-active", c === target); });
+    }
+    chips.forEach(function(chip){
+      chip.addEventListener("click", function(){
+        var f = chip.getAttribute("data-filter") || "all";
+        setActiveChip(chip);
+        cards.forEach(function(card){
+          var tags = (card.getAttribute("data-tags") || "").toLowerCase();
+          var show = (f === "all") ? true : tags.includes(f);
+          card.style.display = show ? "" : "none";
+        });
+      });
+    });
+  </script>
+</body>
+</html>
