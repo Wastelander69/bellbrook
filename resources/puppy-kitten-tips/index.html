@@ -1,254 +1,146 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Puppy &amp; Kitten Tips — Bellbrook Veterinary Hospital (Demo)</title>
-  <meta name="description" content="Puppy and kitten care tips (demo site by Veteos.com)." />
-
-  <!-- Base path helper -->
-  <script>
-    (function () {
-      var parts = location.pathname.split("/").filter(Boolean);
-      window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
-      window.href = function (p) { return window.BASE_PATH + p; };
-    })();
-  </script>
-
-  <!-- Load site CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css" />
-  <script>
-    (function () {
-      document.querySelectorAll('link[rel="stylesheet"]').forEach(function (l) {
-        var h = l.getAttribute("href") || "";
-        if (h.startsWith("/assets/")) l.href = window.href(h);
-      });
-    })();
-  </script>
-</head>
-
-<body>
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#" id="homeLink">
-        <img class="brand-logo" src="/assets/images/logo.png" alt="Bellbrook Veterinary Hospital" onerror="this.style.display='none'" />
-        <span class="brand-text">
-          <span class="brand-name">Bellbrook</span>
-          <span class="brand-sub">Veterinary Hospital</span>
-        </span>
-      </a>
-
-      <nav class="nav" aria-label="Primary">
-        <a class="nav-link" href="#" id="aboutLink">About</a>
-        <a class="nav-link" href="#" id="resourcesLink">Resources</a>
-        <a class="nav-link" href="#" id="videosLink">Videos</a>
-        <a class="nav-link" href="#" id="faqsLink">FAQs</a>
-        <a class="nav-link" href="#" id="contactLink">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <!-- Hero -->
-    <section class="hero" style="padding: 60px 0 50px;">
-      <div class="container">
-        <h1 class="hero-title" style="font-size: clamp(38px, 4.2vw, 64px); margin-bottom: 10px;">
-          Puppy &amp; Kitten Tips
-        </h1>
-        <p class="hero-subtitle" style="font-size: clamp(18px, 2.4vw, 28px); margin-top: 0;">
-          Your first-year roadmap: wellness visits, vaccines, nutrition, and confidence-building habits.
-        </p>
-
-        <div style="margin-top: 16px; display:flex; gap:12px; flex-wrap: wrap;">
-          <a class="btn btn-secondary" href="#" id="backToResourcesBtn">Back to Resources</a>
-          <a class="btn btn-primary" href="#" id="watchVideosBtn">Watch Videos</a>
-        </div>
-      </div>
-
-      <div class="wave wave--bottom" aria-hidden="true">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,60 C150,120 350,0 600,60 C850,120 1050,20 1200,60 L1200,120 L0,120 Z"></path>
-        </svg>
-      </div>
-    </section>
-
-    <!-- Content -->
-    <section style="background:#fff; padding: 70px 0;">
-      <div class="container">
-
-        <!-- Intro card -->
-        <article class="card" style="padding: 26px; max-width: 980px; margin: 0 auto;">
-          <h2 style="margin:0 0 10px; font-weight: 900;">Start strong (and keep it simple)</h2>
-          <p style="margin:0; color: rgba(30,42,58,.72); font-weight: 700; line-height: 1.7;">
-            New pets learn fast — and so do humans. This guide is built around small, repeatable steps:
-            gentle routines, early prevention, and visits that feel calm. (Demo content — swap with real clinic guidance any time.)
-          </p>
-        </article>
-
-        <!-- Checklist cards -->
-        <div class="check-grid" style="margin-top: 22px;">
-          <article class="check-card">
-            <div class="check-title">First Week Must-Dos</div>
-            <ul class="check-list">
-              <li>Schedule your first wellness visit</li>
-              <li>Choose a food and keep it consistent</li>
-              <li>Start crate/carrier “happy time”</li>
-              <li>Pick a parasite prevention plan</li>
-            </ul>
-          </article>
-
-          <article class="check-card">
-            <div class="check-title">Habit Builders</div>
-            <ul class="check-list">
-              <li>Touch paws/ears gently every day</li>
-              <li>Short sessions: brush, inspect teeth</li>
-              <li>Reward calm behavior</li>
-              <li>Practice leash/carrier routines</li>
-            </ul>
-          </article>
-
-          <article class="check-card">
-            <div class="check-title">Red Flags to Call About</div>
-            <ul class="check-list">
-              <li>Not eating for a full day</li>
-              <li>Repeated vomiting/diarrhea</li>
-              <li>Extreme lethargy</li>
-              <li>Trouble breathing or collapse</li>
-            </ul>
-          </article>
-        </div>
-
-        <!-- Sections -->
-        <div class="section-grid" style="margin-top: 22px;">
-          <article class="card" style="padding: 22px;">
-            <h2 style="margin:0 0 10px; font-weight: 900;">Vaccines &amp; prevention</h2>
-            <p style="margin:0; color: rgba(30,42,58,.72); font-weight: 700; line-height: 1.7;">
-              Puppies and kittens need a series of vaccines as their immune system develops. Your vet will tailor timing
-              based on age, lifestyle, and local risk. Parasite prevention is often year-round — ask what’s right for your pet.
-            </p>
-            <div style="margin-top: 14px; display:flex; gap:12px; flex-wrap: wrap;">
-              <a class="btn btn-primary" href="#" id="preventiveVideosBtn">Watch Preventive Video</a>
-              <a class="btn btn-secondary" href="#" id="surveyBtn">Take Wellness Survey</a>
-            </div>
-          </article>
-
-          <article class="card" style="padding: 22px;">
-            <h2 style="margin:0 0 10px; font-weight: 900;">Nutrition made easy</h2>
-            <p style="margin:0; color: rgba(30,42,58,.72); font-weight: 700; line-height: 1.7;">
-              Pick a complete, age-appropriate diet and stick with it for a couple weeks before making changes.
-              If you switch foods, do it slowly over 7–10 days. Treats are great — keep them small and consistent.
-            </p>
-          </article>
-
-          <article class="card" style="padding: 22px;">
-            <h2 style="margin:0 0 10px; font-weight: 900;">Comfort at the vet</h2>
-            <p style="margin:0; color: rgba(30,42,58,.72); font-weight: 700; line-height: 1.7;">
-              The goal is a “this place is safe” vibe. Bring a favorite treat, use a secure carrier/leash,
-              and ask about happy visits. Calm reps = confident pets.
-            </p>
-            <div style="margin-top: 14px; display:flex; gap:12px; flex-wrap: wrap;">
-              <a class="btn btn-primary" href="#" id="contactBtn">Contact</a>
-              <a class="btn btn-secondary" href="#" id="faqsBtn">Read FAQs</a>
-            </div>
-          </article>
-        </div>
-
-        <!-- Bottom CTA -->
-        <section class="card" style="padding: 32px; text-align:center; margin-top: 22px;">
-          <h3 style="margin:0 0 10px; font-weight:900;">Want a quick video playlist?</h3>
-          <p style="margin:0 0 20px; color: rgba(30,42,58,.72); font-weight:700;">
-            Check the Educational Videos page for short explainers you can watch in minutes.
-          </p>
-          <a class="btn btn-primary" href="#" id="eduVideosBtn">Educational Videos</a>
-        </section>
-
-      </div>
-    </section>
-
-    <!-- Disclaimer -->
-    <section class="quotes" style="padding: 40px 0 24px;">
-      <div class="container">
-        <p class="disclaimer">
-          <strong>Demo / Showcase Disclaimer:</strong> This page is a demonstration website produced by
-          <strong>Veteos.com</strong> for portfolio and presentation purposes. It is
-          <strong>not an official website for any veterinary practice</strong>.
-          Content may be fictional or used as examples and does not constitute medical advice.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> Bellbrook Veterinary Hospital (Demo)</p>
-      <p class="footer-links">
-        <a href="#" id="privacyLink">Privacy Policy</a>
-      </p>
-    </div>
-  </footer>
-
-  <style>
-    /* Puppy/Kitten page styles (scoped) */
-    .check-grid{
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      align-items: stretch;
-    }
-    .check-card{
-      background: #fff;
-      border-radius: 26px;
-      border: 1px solid rgba(30,42,58,.10);
-      box-shadow: 0 12px 28px rgba(18,32,52,.10);
-      padding: 18px;
-    }
-    .check-title{
-      font-weight: 900;
-      font-size: 18px;
-      color: rgba(30,42,58,.92);
-      margin-bottom: 10px;
-    }
-    .check-list{
-      margin: 0;
-      padding-left: 18px;
-      color: rgba(30,42,58,.72);
-      font-weight: 750;
-      line-height: 1.8;
-    }
-    .section-grid{
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      align-items: start;
-    }
-    @media (max-width: 980px){
-      .check-grid{ grid-template-columns: 1fr; }
-      .section-grid{ grid-template-columns: 1fr; }
-    }
-  </style>
-
-  <script>
-    // Internal links
-    document.getElementById("homeLink").href = href("/index.html");
-    document.getElementById("aboutLink").href = href("/about/index.html");
-    document.getElementById("resourcesLink").href = href("/resources/index.html");
-    document.getElementById("videosLink").href = href("/videos/index.html");
-    document.getElementById("faqsLink").href = href("/faqs/index.html");
-    document.getElementById("contactLink").href = href("/contact/index.html");
-    document.getElementById("privacyLink").href = href("/privacy-policy/index.html");
-
-    document.getElementById("backToResourcesBtn").href = href("/resources/index.html");
-    document.getElementById("watchVideosBtn").href = href("/resources/educational-videos/index.html");
-    document.getElementById("eduVideosBtn").href = href("/resources/educational-videos/index.html");
-
-    // Buttons inside sections
-    document.getElementById("preventiveVideosBtn").href = href("/resources/educational-videos/index.html");
-    document.getElementById("surveyBtn").href = href("/wellness-survey/index.html");
-    document.getElementById("contactBtn").href = href("/contact/index.html");
-    document.getElementById("faqsBtn").href = href("/faqs/index.html");
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+diff --git a/resources/puppy-kitten-tips/index.html b/resources/puppy-kitten-tips/index.html
+index 1641b86cb757d306f6d00478684b71432fa4bff3..d12243b05c58606088c5a57c227fbcd2f8f0ba29 100644
+--- a/resources/puppy-kitten-tips/index.html
++++ b/resources/puppy-kitten-tips/index.html
+@@ -1,60 +1,76 @@
+ <!doctype html>
+ <html lang="en">
+ <head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width,initial-scale=1" />
+   <title>Puppy &amp; Kitten Tips — Bellbrook Veterinary Hospital (Demo)</title>
+   <meta name="description" content="Puppy and kitten care tips (demo site by Veteos.com)." />
+ 
+   <!-- Base path helper -->
+   <script>
++
++    function setHref(id, path){
++      var el = document.getElementById(id);
++      if (el) el.href = href(path);
++    }
++
++    function setText(id, value){
++      var el = document.getElementById(id);
++      if (el) el.textContent = value;
++    }
++
++    function setOnClick(id, handler){
++      var el = document.getElementById(id);
++      if (el) el.onclick = handler;
++    }
++
+     (function () {
+       var parts = location.pathname.split("/").filter(Boolean);
+       window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
+       window.href = function (p) { return window.BASE_PATH + p; };
+     })();
+   </script>
+ 
+   <!-- Load site CSS -->
+   <link rel="stylesheet" href="/assets/css/style.css" />
+   <script>
+     (function () {
+       document.querySelectorAll('link[rel="stylesheet"]').forEach(function (l) {
+         var h = l.getAttribute("href") || "";
+         if (h.startsWith("/assets/")) l.href = window.href(h);
+       });
+     })();
+   </script>
+ </head>
+ 
+ <body>
+   <!-- Header -->
+   <header class="site-header">
+     <div class="container header-inner">
+       <a class="brand" href="#" id="homeLink">
+-        <img class="brand-logo" src="/assets/images/logo.png" alt="Bellbrook Veterinary Hospital" onerror="this.style.display='none'" />
++        <img class="brand-logo" src="/assets/images/logo.svg" alt="Bellbrook Veterinary Hospital" onerror="this.style.display='none'" />
+         <span class="brand-text">
+           <span class="brand-name">Bellbrook</span>
+           <span class="brand-sub">Veterinary Hospital</span>
+         </span>
+       </a>
+ 
+       <nav class="nav" aria-label="Primary">
+         <a class="nav-link" href="#" id="aboutLink">About</a>
+         <a class="nav-link" href="#" id="resourcesLink">Resources</a>
+         <a class="nav-link" href="#" id="videosLink">Videos</a>
+         <a class="nav-link" href="#" id="faqsLink">FAQs</a>
+         <a class="nav-link" href="#" id="contactLink">Contact</a>
+       </nav>
+     </div>
+   </header>
+ 
+   <main>
+     <!-- Hero -->
+     <section class="hero" style="padding: 60px 0 50px;">
+       <div class="container">
+         <h1 class="hero-title" style="font-size: clamp(38px, 4.2vw, 64px); margin-bottom: 10px;">
+           Puppy &amp; Kitten Tips
+         </h1>
+         <p class="hero-subtitle" style="font-size: clamp(18px, 2.4vw, 28px); margin-top: 0;">
+           Your first-year roadmap: wellness visits, vaccines, nutrition, and confidence-building habits.
+@@ -208,47 +224,47 @@
+       font-size: 18px;
+       color: rgba(30,42,58,.92);
+       margin-bottom: 10px;
+     }
+     .check-list{
+       margin: 0;
+       padding-left: 18px;
+       color: rgba(30,42,58,.72);
+       font-weight: 750;
+       line-height: 1.8;
+     }
+     .section-grid{
+       display: grid;
+       grid-template-columns: repeat(3, 1fr);
+       gap: 18px;
+       align-items: start;
+     }
+     @media (max-width: 980px){
+       .check-grid{ grid-template-columns: 1fr; }
+       .section-grid{ grid-template-columns: 1fr; }
+     }
+   </style>
+ 
+   <script>
+     // Internal links
+-    document.getElementById("homeLink").href = href("/index.html");
+-    document.getElementById("aboutLink").href = href("/about/index.html");
+-    document.getElementById("resourcesLink").href = href("/resources/index.html");
+-    document.getElementById("videosLink").href = href("/videos/index.html");
+-    document.getElementById("faqsLink").href = href("/faqs/index.html");
+-    document.getElementById("contactLink").href = href("/contact/index.html");
+-    document.getElementById("privacyLink").href = href("/privacy-policy/index.html");
+-
+-    document.getElementById("backToResourcesBtn").href = href("/resources/index.html");
+-    document.getElementById("watchVideosBtn").href = href("/resources/educational-videos/index.html");
+-    document.getElementById("eduVideosBtn").href = href("/resources/educational-videos/index.html");
++    setHref("homeLink", "/index.html");
++    setHref("aboutLink", "/about/index.html");
++    setHref("resourcesLink", "/resources/index.html");
++    setHref("videosLink", "/videos/index.html");
++    setHref("faqsLink", "/faqs/index.html");
++    setHref("contactLink", "/contact/index.html");
++    setHref("privacyLink", "/privacy-policy/index.html");
++
++    setHref("backToResourcesBtn", "/resources/index.html");
++    setHref("watchVideosBtn", "/resources/educational-videos/index.html");
++    setHref("eduVideosBtn", "/resources/educational-videos/index.html");
+ 
+     // Buttons inside sections
+-    document.getElementById("preventiveVideosBtn").href = href("/resources/educational-videos/index.html");
+-    document.getElementById("surveyBtn").href = href("/wellness-survey/index.html");
+-    document.getElementById("contactBtn").href = href("/contact/index.html");
+-    document.getElementById("faqsBtn").href = href("/faqs/index.html");
++    setHref("preventiveVideosBtn", "/resources/educational-videos/index.html");
++    setHref("surveyBtn", "/wellness-survey/index.html");
++    setHref("contactBtn", "/contact/index.html");
++    setHref("faqsBtn", "/faqs/index.html");
+ 
+-    document.getElementById("year").textContent = new Date().getFullYear();
++    setText("year", new Date().getFullYear());
+   </script>
+ </body>
+ </html>
