@@ -1,204 +1,131 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FAQs — Bellbrook Veterinary Hospital (Demo)</title>
-  <meta name="description" content="Frequently asked questions for pet parents (demo site by Veteos.com)." />
-
-  <!-- Base path helper -->
-  <script>
-    (function () {
-      var parts = location.pathname.split("/").filter(Boolean);
-      window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
-      window.href = function (p) { return window.BASE_PATH + p; };
-    })();
-  </script>
-
-  <!-- Load site CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css" />
-  <script>
-    (function () {
-      document.querySelectorAll('link[rel="stylesheet"]').forEach(function (l) {
-        var h = l.getAttribute("href") || "";
-        if (h.startsWith("/assets/")) l.href = window.href(h);
-      });
-    })();
-  </script>
-</head>
-
-<body>
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#" id="homeLink">
-        <img class="brand-logo" src="/assets/images/logo.png" alt="Bellbrook Veterinary Hospital" onerror="this.style.display='none'" />
-        <span class="brand-text">
-          <span class="brand-name">Bellbrook</span>
-          <span class="brand-sub">Veterinary Hospital</span>
-        </span>
-      </a>
-
-      <nav class="nav" aria-label="Primary">
-        <a class="nav-link" href="#" id="aboutLink">About</a>
-        <a class="nav-link" href="#" id="resourcesLink">Resources</a>
-        <a class="nav-link" href="#" id="videosLink">Videos</a>
-        <a class="nav-link is-active" href="#" id="faqsLink">FAQs</a>
-        <a class="nav-link" href="#" id="contactLink">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <!-- Hero -->
-    <section class="hero" style="padding: 60px 0 50px;">
-      <div class="container">
-        <h1 class="hero-title" style="font-size: clamp(38px, 4.2vw, 64px); margin-bottom: 10px;">
-          Frequently Asked Questions
-        </h1>
-        <p class="hero-subtitle" style="font-size: clamp(18px, 2.4vw, 28px); margin-top: 0;">
-          Clear answers to common questions — no stress, no guessing.
-        </p>
-      </div>
-
-      <div class="wave wave--bottom" aria-hidden="true">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,60 C150,120 350,0 600,60 C850,120 1050,20 1200,60 L1200,120 L0,120 Z"></path>
-        </svg>
-      </div>
-    </section>
-
-    <!-- FAQs -->
-    <section style="background:#fff; padding: 70px 0;">
-      <div class="container">
-
-        <div class="faq-wrap">
-          <details class="faq-item">
-            <summary>Do I need an appointment?</summary>
-            <p>
-              Yes — appointments help us give each pet the time and attention they deserve.
-              If you’re unsure how urgent something is, give us a call and we’ll guide you.
-            </p>
-          </details>
-
-          <details class="faq-item">
-            <summary>What should I bring to my first visit?</summary>
-            <p>
-              Bring any prior medical records, a list of medications or supplements,
-              and lots of treats if your pet has favorites.
-            </p>
-          </details>
-
-          <details class="faq-item">
-            <summary>My pet is nervous — what can I do?</summary>
-            <p>
-              You’re not alone. Let us know ahead of time and we can plan a calmer visit,
-              offer happy visits, or adjust handling to keep things low-stress.
-            </p>
-          </details>
-
-          <details class="faq-item">
-            <summary>Do you offer preventive care plans?</summary>
-            <p>
-              Preventive care is tailored to each pet based on age, lifestyle, and health.
-              Your veterinarian will recommend vaccines, parasite prevention, and wellness schedules.
-            </p>
-          </details>
-
-          <details class="faq-item">
-            <summary>How do I refill medications?</summary>
-            <p>
-              Contact us directly to request refills. Some medications require rechecks
-              before continuing, so we’ll let you know what’s needed.
-            </p>
-          </details>
-
-          <details class="faq-item">
-            <summary>Is this a real veterinary clinic?</summary>
-            <p>
-              No — this website is a demonstration project created by Veteos.com
-              to showcase design and educational video integrations.
-            </p>
-          </details>
-        </div>
-
-        <!-- CTA -->
-        <section class="card" style="padding: 32px; text-align:center; margin-top: 26px;">
-          <h3 style="margin:0 0 10px; font-weight:900;">Still have questions?</h3>
-          <p style="margin:0 0 20px; color: rgba(30,42,58,.72); font-weight:700;">
-            We’re happy to help — reach out anytime.
-          </p>
-          <a class="btn btn-primary" href="#" id="contactBtn">Contact Us</a>
-        </section>
-
-      </div>
-    </section>
-
-    <!-- Disclaimer -->
-    <section class="quotes" style="padding: 40px 0 24px;">
-      <div class="container">
-        <p class="disclaimer">
-          <strong>Demo / Showcase Disclaimer:</strong> This page is a demonstration website produced by
-          <strong>Veteos.com</strong> for portfolio and presentation purposes.
-          It is <strong>not an official veterinary clinic website</strong>.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> Bellbrook Veterinary Hospital (Demo)</p>
-      <p class="footer-links">
-        <a href="#" id="privacyLink">Privacy Policy</a>
-      </p>
-    </div>
-  </footer>
-
-  <style>
-    /* FAQ styles (scoped) */
-    .faq-wrap{
-      max-width: 900px;
-      margin: 0 auto;
-      display: grid;
-      gap: 14px;
-    }
-    .faq-item{
-      border-radius: 22px;
-      border: 1px solid rgba(30,42,58,.12);
-      padding: 18px 22px;
-      background: #fff;
-      box-shadow: 0 10px 24px rgba(18,32,52,.08);
-    }
-    .faq-item summary{
-      cursor: pointer;
-      font-weight: 900;
-      font-size: 18px;
-      color: rgba(30,42,58,.92);
-      list-style: none;
-    }
-    .faq-item summary::-webkit-details-marker{
-      display:none;
-    }
-    .faq-item p{
-      margin: 12px 0 0;
-      color: rgba(30,42,58,.72);
-      font-weight: 700;
-      line-height: 1.7;
-    }
-  </style>
-
-  <script>
-    document.getElementById("homeLink").href = href("/index.html");
-    document.getElementById("aboutLink").href = href("/about/index.html");
-    document.getElementById("resourcesLink").href = href("/resources/index.html");
-    document.getElementById("videosLink").href = href("/videos/index.html");
-    document.getElementById("faqsLink").href = href("/faqs/index.html");
-    document.getElementById("contactLink").href = href("/contact/index.html");
-    document.getElementById("contactBtn").href = href("/contact/index.html");
-    document.getElementById("privacyLink").href = href("/privacy-policy/index.html");
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+diff --git a/faqs/index.html b/faqs/index.html
+index 4d76eedcff224eeb22cf558f164345d1ad6ff689..7a58893924bc08b26ceed65cc4090fa5ebc4cb3e 100644
+--- a/faqs/index.html
++++ b/faqs/index.html
+@@ -1,60 +1,76 @@
+ <!doctype html>
+ <html lang="en">
+ <head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width,initial-scale=1" />
+   <title>FAQs — Bellbrook Veterinary Hospital (Demo)</title>
+   <meta name="description" content="Frequently asked questions for pet parents (demo site by Veteos.com)." />
+ 
+   <!-- Base path helper -->
+   <script>
++
++    function setHref(id, path){
++      var el = document.getElementById(id);
++      if (el) el.href = href(path);
++    }
++
++    function setText(id, value){
++      var el = document.getElementById(id);
++      if (el) el.textContent = value;
++    }
++
++    function setOnClick(id, handler){
++      var el = document.getElementById(id);
++      if (el) el.onclick = handler;
++    }
++
+     (function () {
+       var parts = location.pathname.split("/").filter(Boolean);
+       window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
+       window.href = function (p) { return window.BASE_PATH + p; };
+     })();
+   </script>
+ 
+   <!-- Load site CSS -->
+   <link rel="stylesheet" href="/assets/css/style.css" />
+   <script>
+     (function () {
+       document.querySelectorAll('link[rel="stylesheet"]').forEach(function (l) {
+         var h = l.getAttribute("href") || "";
+         if (h.startsWith("/assets/")) l.href = window.href(h);
+       });
+     })();
+   </script>
+ </head>
+ 
+ <body>
+   <!-- Header -->
+   <header class="site-header">
+     <div class="container header-inner">
+       <a class="brand" href="#" id="homeLink">
+-        <img class="brand-logo" src="/assets/images/logo.png" alt="Bellbrook Veterinary Hospital" onerror="this.style.display='none'" />
++        <img class="brand-logo" src="/assets/images/logo.svg" alt="Bellbrook Veterinary Hospital" onerror="this.style.display='none'" />
+         <span class="brand-text">
+           <span class="brand-name">Bellbrook</span>
+           <span class="brand-sub">Veterinary Hospital</span>
+         </span>
+       </a>
+ 
+       <nav class="nav" aria-label="Primary">
+         <a class="nav-link" href="#" id="aboutLink">About</a>
+         <a class="nav-link" href="#" id="resourcesLink">Resources</a>
+         <a class="nav-link" href="#" id="videosLink">Videos</a>
+         <a class="nav-link is-active" href="#" id="faqsLink">FAQs</a>
+         <a class="nav-link" href="#" id="contactLink">Contact</a>
+       </nav>
+     </div>
+   </header>
+ 
+   <main>
+     <!-- Hero -->
+     <section class="hero" style="padding: 60px 0 50px;">
+       <div class="container">
+         <h1 class="hero-title" style="font-size: clamp(38px, 4.2vw, 64px); margin-bottom: 10px;">
+           Frequently Asked Questions
+         </h1>
+         <p class="hero-subtitle" style="font-size: clamp(18px, 2.4vw, 28px); margin-top: 0;">
+           Clear answers to common questions — no stress, no guessing.
+@@ -167,38 +183,38 @@
+       border-radius: 22px;
+       border: 1px solid rgba(30,42,58,.12);
+       padding: 18px 22px;
+       background: #fff;
+       box-shadow: 0 10px 24px rgba(18,32,52,.08);
+     }
+     .faq-item summary{
+       cursor: pointer;
+       font-weight: 900;
+       font-size: 18px;
+       color: rgba(30,42,58,.92);
+       list-style: none;
+     }
+     .faq-item summary::-webkit-details-marker{
+       display:none;
+     }
+     .faq-item p{
+       margin: 12px 0 0;
+       color: rgba(30,42,58,.72);
+       font-weight: 700;
+       line-height: 1.7;
+     }
+   </style>
+ 
+   <script>
+-    document.getElementById("homeLink").href = href("/index.html");
+-    document.getElementById("aboutLink").href = href("/about/index.html");
+-    document.getElementById("resourcesLink").href = href("/resources/index.html");
+-    document.getElementById("videosLink").href = href("/videos/index.html");
+-    document.getElementById("faqsLink").href = href("/faqs/index.html");
+-    document.getElementById("contactLink").href = href("/contact/index.html");
+-    document.getElementById("contactBtn").href = href("/contact/index.html");
+-    document.getElementById("privacyLink").href = href("/privacy-policy/index.html");
+-
+-    document.getElementById("year").textContent = new Date().getFullYear();
++    setHref("homeLink", "/index.html");
++    setHref("aboutLink", "/about/index.html");
++    setHref("resourcesLink", "/resources/index.html");
++    setHref("videosLink", "/videos/index.html");
++    setHref("faqsLink", "/faqs/index.html");
++    setHref("contactLink", "/contact/index.html");
++    setHref("contactBtn", "/contact/index.html");
++    setHref("privacyLink", "/privacy-policy/index.html");
++
++    setText("year", new Date().getFullYear());
+   </script>
+ </body>
+ </html>
