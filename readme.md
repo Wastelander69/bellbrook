@@ -1,40 +1,37 @@
-# Bellbrook Vet Demo (GitHub Pages)
+# Bellbrook (Demo Website)
 
-This project is now a **static site** designed for GitHub Pages. It recreates the Bellbrook Veterinary Hospital demo site layout without WordPress/Gutenberg, while keeping the Veteos embed scripts intact.
+Hey — I’m **wastelander69**.  
+This repo is a clean, static, GitHub Pages–friendly rebuild of a veterinary clinic demo site called **Bellbrook**.
 
-## Site Map
+No WordPress. No themes. Just straight-up HTML + CSS with a simple folder structure.
 
-- Home: `/index.html`
-- About: `/about/`
-- Videos: `/videos/`
-- FAQs: `/faqs/`
-- Stories: `/stories/`
-- Contact: `/contact/`
-- Resources hub: `/resources/`
-- Resources subpages:
-  - `/resources/educational-videos/`
-  - `/resources/puppy-kitten-tips/`
-  - `/resources/giving-medications/`
-  - `/resources/dental-health/`
-- Wellness survey: `/wellness-survey/`
-- Wellness survey results: `/wellness-survey/results/`
-- Privacy policy: `/privacy-policy/`
+---
 
-## Veteos Embeds (Do Not Edit)
+## 📁 Project Structure
 
-- Keep the embed scripts **exactly** as provided.
-- You may only wrap them in a container like:
-
-```html
-<div class="veteos-embed">
-  <!-- Paste Veteos embed script here exactly as provided -->
-</div>
-```
-
-## Disclaimer Requirement
-
-This demo site must display:
-
-> “This is a demonstration/showcase website created by Veteos.com. Not an official veterinary clinic website. Not medical advice.”
-
-The disclaimer is included on the Home page and in the footer across all pages.
+```text
+bellbrook/
+  index.html
+  about/index.html
+  about-us/index.html
+  videos/index.html
+  faqs/index.html
+  stories/index.html
+  contact/index.html
+  recruiting/index.html
+  resources/index.html
+  resources/educational-videos/index.html
+  resources/puppy-kitten-tips/index.html
+  resources/giving-medications/index.html
+  resources/dental-health/index.html
+  wellness-survey/index.html
+  wellness-survey/results/index.html
+  privacy-policy/index.html
+  assets/
+    css/
+      style.css
+      tweaks.css
+    images/
+      .gitkeep
+  .nojekyll
+  README.md
