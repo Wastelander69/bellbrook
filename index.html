@@ -1,15 +1,15 @@
-diff --git a/index.html b/index.html
-index b681b904cf3fd3582371e75d8076cba6b6d53977..a29ae1fb486041322af32dfaf66c71fdefa6a0c6 100644
---- a/index.html
-+++ b/index.html
+diff --git a/wellness-survey/index.html b/wellness-survey/index.html
+index 7a8686abc6b35f0ce2a918c71721b6ec9f2156bd..e1abe9965010eb72adb3c589c1360b7c31dc1e60 100644
+--- a/wellness-survey/index.html
++++ b/wellness-survey/index.html
 @@ -1,60 +1,76 @@
  <!doctype html>
  <html lang="en">
  <head>
    <meta charset="utf-8" />
    <meta name="viewport" content="width=device-width,initial-scale=1" />
-   <title>Wellness Survey — Bellbrook Veterinary Hospital (Demo)</title>
-   <meta name="description" content="Pet wellness survey (demo site by Veteos.com)." />
+   <title>Wellness Survey Results — Bellbrook Veterinary Hospital (Demo)</title>
+   <meta name="description" content="Wellness survey results (demo site by Veteos.com)." />
  
    <!-- Base path helper -->
    <script>
@@ -72,61 +72,75 @@ index b681b904cf3fd3582371e75d8076cba6b6d53977..a29ae1fb486041322af32dfaf66c71fd
    </header>
  
    <main>
-     <!-- Hero -->
+     <!-- Page Hero -->
      <section class="hero" style="padding: 60px 0 50px;">
        <div class="container">
          <h1 class="hero-title" style="font-size: clamp(38px, 4.2vw, 64px); margin-bottom: 10px;">
-           Wellness Survey
+           Survey Results
          </h1>
          <p class="hero-subtitle" style="font-size: clamp(18px, 2.4vw, 28px); margin-top: 0;">
-           A quick check-in to help identify helpful next steps for your pet.
-@@ -154,40 +170,40 @@
-       font-weight: 700;
-     }
-     .survey-form{
-       display:grid;
-       gap: 18px;
-     }
-     fieldset{
-       border: 1px solid rgba(30,42,58,.14);
-       border-radius: 18px;
-       padding: 14px;
-     }
-     legend{
-       font-weight: 900;
-       padding: 0 6px;
-       color: rgba(30,42,58,.92);
-     }
-     fieldset label{
-       display:block;
-       margin-top: 6px;
-       font-weight: 700;
+           A simple summary + helpful next steps (demo example).
+@@ -199,46 +215,46 @@
+ 
+   <style>
+     /* Results page micro-style (scoped) */
+     .kicker{
+       display:inline-block;
+       padding: 6px 10px;
+       border-radius: 999px;
+       background: rgba(30,42,58,.06);
        color: rgba(30,42,58,.72);
+       font-weight: 900;
+       letter-spacing: .2px;
+       font-size: 12px;
+     }
+     @media (max-width: 980px){
+       main section > .container > div[style*="grid-template-columns: repeat(3"]{
+         grid-template-columns: 1fr !important;
+       }
+       main section > .container > div[style*="grid-template-columns: 1.2fr"]{
+         grid-template-columns: 1fr !important;
+       }
      }
    </style>
  
    <script>
+     // Internal links
 -    document.getElementById("homeLink").href = href("/index.html");
 -    document.getElementById("aboutLink").href = href("/about/index.html");
 -    document.getElementById("resourcesLink").href = href("/resources/index.html");
 -    document.getElementById("videosLink").href = href("/videos/index.html");
 -    document.getElementById("faqsLink").href = href("/faqs/index.html");
 -    document.getElementById("contactLink").href = href("/contact/index.html");
+-    document.getElementById("privacyLink").href = href("/privacy-policy/index.html");
 -
--    document.getElementById("seeResultsBtn").onclick = function(){
+-    document.getElementById("backToSurveyBtn").href = href("/wellness-survey/index.html");
+-    document.getElementById("resultsResourcesBtnTop").href = href("/resources/index.html");
+-    document.getElementById("resultsResourcesBtnBottom").href = href("/resources/index.html");
+-
+-    document.getElementById("resultsDentalBtn").href = href("/resources/dental-health/index.html");
+-    document.getElementById("resultsPuppyBtn").href = href("/resources/puppy-kitten-tips/index.html");
+-    document.getElementById("resultsContactBtn").href = href("/contact/index.html");
+-    document.getElementById("resultsVideosBtn").href = href("/videos/index.html");
+-
+-    document.getElementById("year").textContent = new Date().getFullYear();
 +    setHref("homeLink", "/index.html");
 +    setHref("aboutLink", "/about/index.html");
 +    setHref("resourcesLink", "/resources/index.html");
 +    setHref("videosLink", "/videos/index.html");
 +    setHref("faqsLink", "/faqs/index.html");
 +    setHref("contactLink", "/contact/index.html");
++    setHref("privacyLink", "/privacy-policy/index.html");
 +
-+    setOnClick("seeResultsBtn", function(){
-       window.location.href = href("/wellness-survey/results/index.html");
--    };
-+    });
- 
--    document.getElementById("year").textContent = new Date().getFullYear();
++    setHref("backToSurveyBtn", "/wellness-survey/index.html");
++    setHref("resultsResourcesBtnTop", "/resources/index.html");
++    setHref("resultsResourcesBtnBottom", "/resources/index.html");
++
++    setHref("resultsDentalBtn", "/resources/dental-health/index.html");
++    setHref("resultsPuppyBtn", "/resources/puppy-kitten-tips/index.html");
++    setHref("resultsContactBtn", "/contact/index.html");
++    setHref("resultsVideosBtn", "/videos/index.html");
++
 +    setText("year", new Date().getFullYear());
    </script>
  </body>
