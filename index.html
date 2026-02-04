@@ -1,133 +1,673 @@
-diff --git a/index.html b/index.html
-index b681b904cf3fd3582371e75d8076cba6b6d53977..a29ae1fb486041322af32dfaf66c71fdefa6a0c6 100644
---- a/index.html
-+++ b/index.html
-@@ -1,60 +1,76 @@
- <!doctype html>
- <html lang="en">
- <head>
-   <meta charset="utf-8" />
-   <meta name="viewport" content="width=device-width,initial-scale=1" />
-   <title>Wellness Survey — Bellbrook Veterinary Hospital (Demo)</title>
-   <meta name="description" content="Pet wellness survey (demo site by Veteos.com)." />
- 
-   <!-- Base path helper -->
-   <script>
-+
-+    function setHref(id, path){
-+      var el = document.getElementById(id);
-+      if (el) el.href = href(path);
-+    }
-+
-+    function setText(id, value){
-+      var el = document.getElementById(id);
-+      if (el) el.textContent = value;
-+    }
-+
-+    function setOnClick(id, handler){
-+      var el = document.getElementById(id);
-+      if (el) el.onclick = handler;
-+    }
-+
-     (function () {
-       var parts = location.pathname.split("/").filter(Boolean);
-       window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
-       window.href = function (p) { return window.BASE_PATH + p; };
-     })();
-   </script>
- 
-   <!-- Load site CSS -->
-   <link rel="stylesheet" href="/assets/css/style.css" />
-   <script>
-     (function () {
-       document.querySelectorAll('link[rel="stylesheet"]').forEach(function (l) {
-         var h = l.getAttribute("href") || "";
-         if (h.startsWith("/assets/")) l.href = window.href(h);
-       });
-     })();
-   </script>
- </head>
- 
- <body>
-   <!-- Header -->
-   <header class="site-header">
-     <div class="container header-inner">
-       <a class="brand" href="#" id="homeLink">
--        <img class="brand-logo" src="/assets/images/logo.png" alt="Bellbrook Veterinary Hospital" onerror="this.style.display='none'" />
-+        <img class="brand-logo" src="/assets/images/logo.svg" alt="Bellbrook Veterinary Hospital" onerror="this.style.display='none'" />
-         <span class="brand-text">
-           <span class="brand-name">Bellbrook</span>
-           <span class="brand-sub">Veterinary Hospital</span>
-         </span>
-       </a>
- 
-       <nav class="nav" aria-label="Primary">
-         <a class="nav-link" href="#" id="aboutLink">About</a>
-         <a class="nav-link" href="#" id="resourcesLink">Resources</a>
-         <a class="nav-link" href="#" id="videosLink">Videos</a>
-         <a class="nav-link" href="#" id="faqsLink">FAQs</a>
-         <a class="nav-link" href="#" id="contactLink">Contact</a>
-       </nav>
-     </div>
-   </header>
- 
-   <main>
-     <!-- Hero -->
-     <section class="hero" style="padding: 60px 0 50px;">
-       <div class="container">
-         <h1 class="hero-title" style="font-size: clamp(38px, 4.2vw, 64px); margin-bottom: 10px;">
-           Wellness Survey
-         </h1>
-         <p class="hero-subtitle" style="font-size: clamp(18px, 2.4vw, 28px); margin-top: 0;">
-           A quick check-in to help identify helpful next steps for your pet.
-@@ -154,40 +170,40 @@
-       font-weight: 700;
-     }
-     .survey-form{
-       display:grid;
-       gap: 18px;
-     }
-     fieldset{
-       border: 1px solid rgba(30,42,58,.14);
-       border-radius: 18px;
-       padding: 14px;
-     }
-     legend{
-       font-weight: 900;
-       padding: 0 6px;
-       color: rgba(30,42,58,.92);
-     }
-     fieldset label{
-       display:block;
-       margin-top: 6px;
-       font-weight: 700;
-       color: rgba(30,42,58,.72);
-     }
-   </style>
- 
-   <script>
--    document.getElementById("homeLink").href = href("/index.html");
--    document.getElementById("aboutLink").href = href("/about/index.html");
--    document.getElementById("resourcesLink").href = href("/resources/index.html");
--    document.getElementById("videosLink").href = href("/videos/index.html");
--    document.getElementById("faqsLink").href = href("/faqs/index.html");
--    document.getElementById("contactLink").href = href("/contact/index.html");
--
--    document.getElementById("seeResultsBtn").onclick = function(){
-+    setHref("homeLink", "/index.html");
-+    setHref("aboutLink", "/about/index.html");
-+    setHref("resourcesLink", "/resources/index.html");
-+    setHref("videosLink", "/videos/index.html");
-+    setHref("faqsLink", "/faqs/index.html");
-+    setHref("contactLink", "/contact/index.html");
-+
-+    setOnClick("seeResultsBtn", function(){
-       window.location.href = href("/wellness-survey/results/index.html");
--    };
-+    });
- 
--    document.getElementById("year").textContent = new Date().getFullYear();
-+    setText("year", new Date().getFullYear());
-   </script>
- </body>
- </html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bellbrook Veterinary Hospital (Demo)</title>
+  <meta name="description" content="A clean, modern demo site for a veterinary clinic — produced by Veteos.com." />
+
+  <!-- Base path helper: supports / and /bellbrook/ -->
+  <script>
+    (function () {
+      var parts = location.pathname.split("/").filter(Boolean);
+      window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
+      window.href = function (p) { return window.BASE_PATH + p; };
+
+      window.setHref = function (id, path) {
+        var el = document.getElementById(id);
+        if (el) el.href = href(path);
+      };
+      window.setText = function (id, value) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = value;
+      };
+      window.setSrc = function (id, path) {
+        var el = document.getElementById(id);
+        if (el) el.src = href(path);
+      };
+    })();
+  </script>
+
+  <!-- Load site CSS (order matters: tweaks AFTER base) -->
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/tweaks.css" />
+  <script>
+    (function () {
+      document.querySelectorAll('link[rel="stylesheet"]').forEach(function (l) {
+        var h = l.getAttribute("href") || "";
+        if (h.startsWith("/assets/")) l.href = window.href(h);
+      });
+    })();
+  </script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#" id="homeLink" aria-label="Bellbrook home">
+        <img class="brand-logo" id="brandLogo" src="" alt="Bellbrook Veterinary Hospital" />
+        <span class="brand-text">
+          <span class="brand-name">Bellbrook</span>
+          <span class="brand-sub">Veterinary Hospital</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link is-active" href="#" id="homeNavLink">Home</a>
+        <a class="nav-link" href="#" id="aboutLink">About</a>
+        <a class="nav-link" href="#" id="resourcesLink">Resources</a>
+        <a class="nav-link" href="#" id="videosLink">Videos</a>
+        <a class="nav-link" href="#" id="storiesLink">Stories</a>
+        <a class="nav-link" href="#" id="faqsLink">FAQs</a>
+        <a class="nav-link" href="#" id="contactLink">Contact</a>
+        <a class="nav-link" href="#" id="recruitingLink">Recruiting</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero hero-home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="hero-kicker">Gentle care. Clear answers.</p>
+          <h1 class="hero-title">
+            We love your pet <span class="hero-highlight">like our own</span>.
+          </h1>
+          <p class="hero-subtitle">
+            Kind people, low-stress handling, and thoughtful medicine — so you feel confident at every visit.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#" id="watchVideoBtn">
+              ▶ Watch our video
+            </a>
+            <a class="btn btn-secondary" href="#" id="exploreResourcesBtn">
+              Explore resources
+            </a>
+          </div>
+
+          <div class="trust-row">
+            <div class="trust-pill">🐾 Low-stress handling</div>
+            <div class="trust-pill">🩺 Preventive-first care</div>
+            <div class="trust-pill">💬 No rushed questions</div>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <!-- Use your own image later; this is a clean “shape + image” holder -->
+          <div class="hero-card">
+            <div class="hero-card-top">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+            <div class="hero-card-body">
+              <div class="hero-photo" id="heroPhoto">
+                <div class="hero-photo-fallback">
+                  <div class="paw">🐾</div>
+                  <div>
+                    <div class="hero-photo-title">Calm visits</div>
+                    <div class="hero-photo-sub">for pets + people</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hero-mini">
+                <div class="mini-metric">
+                  <div class="mini-num">5★</div>
+                  <div class="mini-label">Care & clarity</div>
+                </div>
+                <div class="mini-metric">
+                  <div class="mini-num">Easy</div>
+                  <div class="mini-label">Next steps</div>
+                </div>
+                <div class="mini-metric">
+                  <div class="mini-num">Safe</div>
+                  <div class="mini-label">Handling</div>
+                </div>
+              </div>
+
+              <a class="btn btn-ghost" href="#" id="aboutUsBtn">Meet the team vibe →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wave wave--bottom" aria-hidden="true">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,60 C150,120 350,0 600,60 C850,120 1050,20 1200,60 L1200,120 L0,120 Z"></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- FEATURED VIDEO SECTION -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Start here</h2>
+          <p>Short, practical videos made for pet parents.</p>
+        </div>
+
+        <div class="card embed-card">
+          <!-- Replace with your Veteos embed whenever you want -->
+          <div class="embed-note">
+            <div class="embed-icon">▶</div>
+            <div>
+              <div class="embed-title">Featured video placeholder</div>
+              <div class="embed-sub">
+                Want the real embed here? Paste your Veteos script tag into this card and it will inherit styling.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="center-actions">
+          <a class="btn btn-primary" href="#" id="watchMoreVideosBtn">Watch more videos</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESOURCES CTA -->
+    <section class="section section-resources">
+      <div class="container">
+        <div class="card resources-cta">
+          <div class="resources-cta-left">
+            <h2>Helpful tips & resources<br><span class="muted">for pet parents</span></h2>
+            <p>
+              Puppy & kitten guides, dental health, giving medications, and other simple ways to support your pet.
+            </p>
+          </div>
+          <div class="resources-cta-right">
+            <a class="btn btn-primary" href="#" id="resourcesMainBtn">Explore resources</a>
+          </div>
+        </div>
+
+        <div class="cards-3">
+          <a class="card topic-card" href="#" id="topicPuppy">
+            <div class="topic-icon">🍼</div>
+            <h3>Puppy & kitten tips</h3>
+            <p>First-year roadmap for vaccines, nutrition, and early habits.</p>
+            <span class="topic-cta">More details →</span>
+          </a>
+
+          <a class="card topic-card" href="#" id="topicDental">
+            <div class="topic-icon">🦷</div>
+            <h3>Dental health</h3>
+            <p>What to watch for, how cleanings work, and easy at-home steps.</p>
+            <span class="topic-cta">More details →</span>
+          </a>
+
+          <a class="card topic-card" href="#" id="topicMeds">
+            <div class="topic-icon">💊</div>
+            <h3>Giving medications</h3>
+            <p>Tricks for pills, liquids, and stress-free dosing routines.</p>
+            <span class="topic-cta">More details →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOMENTS / VIBE -->
+    <section class="section section-moments">
+      <div class="container moments-grid">
+        <div class="card moments-media">
+          <div class="moments-placeholder">
+            <div class="moments-emoji">🐶</div>
+            <div class="moments-emoji">🐱</div>
+            <div class="moments-emoji">🐰</div>
+          </div>
+          <p class="moments-caption">A few moments with us — calm visits, kind voices, gentle hands.</p>
+        </div>
+
+        <div class="moments-copy">
+          <h2>A few moments with us</h2>
+          <p>
+            Kind people, gentle handling, and clear communication — all so you and your pet feel comfortable
+            every step of the way.
+          </p>
+          <div class="moments-actions">
+            <a class="btn btn-primary" href="#" id="momentsResourcesBtn">Explore resources</a>
+            <a class="btn btn-secondary" href="#" id="momentsStoriesBtn">Read stories</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAFF TEASER -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head center">
+          <h2>We love our staff and think<br>you will too.</h2>
+          <p>Friendly faces, calm visits, and clear answers.</p>
+        </div>
+
+        <div class="team-grid">
+          <div class="card team-card">
+            <div class="avatar">👩‍⚕️</div>
+            <div class="team-name">Dr. Jordan Bell</div>
+            <div class="team-role">Veterinarian</div>
+          </div>
+          <div class="card team-card">
+            <div class="avatar">🐕</div>
+            <div class="team-name">Sam “Good Boy” Rivera</div>
+            <div class="team-role">Office Manager</div>
+          </div>
+          <div class="card team-card">
+            <div class="avatar">🧑‍⚕️</div>
+            <div class="team-name">Dr. Ryan Fredricks</div>
+            <div class="team-role">Client Care</div>
+          </div>
+          <div class="card team-card">
+            <div class="avatar">👩‍🔬</div>
+            <div class="team-name">Alexis Grant</div>
+            <div class="team-role">Veterinary Assistant</div>
+          </div>
+        </div>
+
+        <div class="center-actions">
+          <a class="btn btn-primary" href="#" id="aboutTeamBtn">Meet the full team vibe</a>
+          <a class="btn btn-secondary" href="#" id="recruitingBtn">We’re hiring</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUOTES -->
+    <section class="section section-quotes">
+      <div class="container">
+        <div class="section-head center">
+          <h2>Comments from our clients and staff ♡</h2>
+          <p>Real talk, gentle energy.</p>
+        </div>
+
+        <div class="quotes-grid">
+          <div class="card quote-card">
+            <div class="quote-mark">“</div>
+            <p>I’ll always explain the ‘why’—you deserve to feel confident about every decision.</p>
+            <div class="quote-by">— Dr. Priya (Staff)</div>
+          </div>
+          <div class="card quote-card">
+            <div class="quote-mark">“</div>
+            <p>My dog’s breath was rough and I thought it was ‘normal.’ Turns out it wasn’t. So glad we came in.</p>
+            <div class="quote-by">— Josh B. (Client)</div>
+          </div>
+          <div class="card quote-card">
+            <div class="quote-mark">“</div>
+            <p>I’ll never rush your questions. If you’re worried, it matters.</p>
+            <div class="quote-by">— Riley J. (Staff)</div>
+          </div>
+        </div>
+
+        <div class="center-actions">
+          <a class="btn btn-primary" href="#" id="contactCtaBtn">Contact us</a>
+          <a class="btn btn-secondary" href="#" id="faqsCtaBtn">Read FAQs</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- DISCLAIMER -->
+    <section class="quotes" style="padding: 40px 0 24px;">
+      <div class="container">
+        <p class="disclaimer">
+          <strong>Demo / Showcase Disclaimer:</strong> This page is a demonstration website produced by <strong>Veteos.com</strong>
+          for portfolio and presentation purposes. It is <strong>not an official website for any veterinary practice</strong> and
+          is not intended to represent an actual clinic’s current services, pricing, staff, policies, or availability. Any names,
+          testimonials, quotes, or content displayed may be fictional or used as examples. Nothing on this site constitutes
+          veterinary or medical advice. If you believe your pet is sick or injured, contact a licensed veterinarian immediately.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Bellbrook Veterinary Hospital (Demo)</p>
+      <p class="footer-links">
+        <a href="#" id="privacyLink">Privacy Policy</a>
+      </p>
+    </div>
+  </footer>
+
+  <style>
+    /* Home styles (scoped) */
+    .hero-home{
+      padding: 78px 0 46px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .hero-kicker{
+      margin: 0 0 10px;
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 950;
+      letter-spacing: .04em;
+      color: rgba(30,42,58,.78);
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(255,255,255,.6);
+      backdrop-filter: blur(10px);
+    }
+    .hero-title{
+      margin: 0 0 10px;
+      font-weight: 950;
+      font-size: clamp(40px, 5vw, 74px);
+      line-height: 1.02;
+      letter-spacing: -.02em;
+    }
+    .hero-highlight{
+      background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(43,108,176,1) 110%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-subtitle{
+      margin: 0;
+      font-size: clamp(16px, 2.2vw, 22px);
+      color: rgba(30,42,58,.78);
+      font-weight: 750;
+      line-height: 1.7;
+      max-width: 52ch;
+    }
+    .hero-actions{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .trust-row{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .trust-pill{
+      display:inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 900;
+      border: 1px solid rgba(30,42,58,.12);
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(10px);
+      color: rgba(30,42,58,.82);
+    }
+
+    .hero-art{ display:grid; place-items:center; }
+    .hero-card{
+      width: min(440px, 100%);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.55);
+      background: rgba(255,255,255,.55);
+      box-shadow: 0 22px 60px rgba(16, 24, 40, .16);
+      overflow: hidden;
+      backdrop-filter: blur(14px);
+    }
+    .hero-card-top{
+      display:flex;
+      gap: 8px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(30,42,58,.08);
+      background: rgba(255,255,255,.55);
+    }
+    .dot{
+      width: 10px; height: 10px; border-radius: 999px;
+      background: rgba(30,42,58,.18);
+    }
+    .hero-card-body{ padding: 16px; display:grid; gap: 12px; }
+    .hero-photo{
+      height: 210px;
+      border-radius: 18px;
+      border: 1px solid rgba(30,42,58,.10);
+      background: linear-gradient(135deg, rgba(43,108,176,.12), rgba(223,86,64,.12));
+      overflow: hidden;
+      display:grid;
+      place-items:center;
+      position: relative;
+    }
+    .hero-photo-fallback{
+      display:flex;
+      gap: 12px;
+      align-items:center;
+      padding: 12px 14px;
+    }
+    .paw{ font-size: 34px; }
+    .hero-photo-title{ font-weight: 950; font-size: 18px; }
+    .hero-photo-sub{ font-weight: 800; color: rgba(30,42,58,.70); }
+
+    .hero-mini{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .mini-metric{
+      border-radius: 16px;
+      border: 1px solid rgba(30,42,58,.10);
+      background: rgba(255,255,255,.70);
+      padding: 10px;
+      text-align:center;
+    }
+    .mini-num{ font-weight: 950; }
+    .mini-label{ font-weight: 850; font-size: 12px; color: rgba(30,42,58,.70); }
+
+    .btn-ghost{
+      display:inline-flex;
+      justify-content:center;
+      padding: 12px 14px;
+      border-radius: 999px;
+      font-weight: 950;
+      text-decoration:none;
+      border: 1px solid rgba(30,42,58,.14);
+      background: rgba(255,255,255,.65);
+      color: rgba(30,42,58,.88);
+    }
+
+    .section{ padding: 70px 0; }
+    .section-alt{ background: rgba(30,42,58,.03); }
+    .section-head{
+      display:flex;
+      justify-content: space-between;
+      align-items:flex-end;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .section-head h2{ margin: 0; font-weight: 950; }
+    .section-head p{ margin: 0; font-weight: 800; color: rgba(30,42,58,.72); line-height: 1.6; max-width: 62ch; }
+    .section-head.center{ text-align:center; justify-content:center; }
+    .section-head.center p{ max-width: 70ch; }
+
+    .embed-card{ padding: 18px; }
+    .embed-note{
+      display:flex;
+      gap: 14px;
+      align-items:center;
+      padding: 20px;
+      border-radius: 18px;
+      border: 1px dashed rgba(30,42,58,.18);
+      background: rgba(255,255,255,.6);
+    }
+    .embed-icon{
+      width: 44px; height: 44px; border-radius: 14px;
+      display:grid; place-items:center;
+      background: rgba(43,108,176,.14);
+      border: 1px solid rgba(43,108,176,.22);
+      font-weight: 950;
+      color: rgba(30,42,58,.85);
+    }
+    .embed-title{ font-weight: 950; }
+    .embed-sub{ font-weight: 800; color: rgba(30,42,58,.70); line-height: 1.6; }
+
+    .center-actions{
+      display:flex;
+      justify-content:center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .resources-cta{
+      padding: 22px;
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .resources-cta h2{
+      margin: 0 0 6px;
+      font-weight: 950;
+    }
+    .resources-cta p{
+      margin: 0;
+      font-weight: 800;
+      color: rgba(30,42,58,.72);
+      line-height: 1.7;
+      max-width: 66ch;
+    }
+    .muted{ color: rgba(30,42,58,.62); }
+
+    .cards-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .topic-card{
+      padding: 18px;
+      text-decoration:none;
+      color: inherit;
+      display:grid;
+      gap: 8px;
+      transition: transform .12s ease;
+    }
+    .topic-card:hover{ transform: translateY(-2px); }
+    .topic-icon{ font-size: 26px; }
+    .topic-card h3{ margin: 0; font-weight: 950; }
+    .topic-card p{ margin: 0; font-weight: 800; color: rgba(30,42,58,.72); line-height: 1.6; }
+    .topic-cta{ margin-top: 4px; font-weight: 950; color: rgba(43,108,176,.95); }
+
+    .moments-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items:center;
+    }
+    .moments-media{ padding: 18px; }
+    .moments-placeholder{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap: 18px;
+      height: 220px;
+      border-radius: 18px;
+      border: 1px solid rgba(30,42,58,.10);
+      background: linear-gradient(135deg, rgba(54,161,211,.14), rgba(142,202,230,.14));
+    }
+    .moments-emoji{ font-size: 44px; }
+    .moments-caption{
+      margin: 12px 0 0;
+      font-weight: 800;
+      color: rgba(30,42,58,.72);
+      text-align:center;
+    }
+    .moments-copy h2{ margin: 0 0 8px; font-weight: 950; }
+    .moments-copy p{ margin: 0; font-weight: 800; color: rgba(30,42,58,.72); line-height: 1.7; }
+    .moments-actions{ display:flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+
+    .team-grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .team-card{ padding: 18px; text-align:center; }
+    .avatar{
+      width: 56px; height: 56px; border-radius: 18px;
+      display:grid; place-items:center;
+      margin: 0 auto 10px;
+      background: rgba(43,108,176,.12);
+      border: 1px solid rgba(43,108,176,.22);
+      font-size: 26px;
+    }
+    .team-name{ font-weight: 950; }
+    .team-role{ font-weight: 850; color: rgba(30,42,58,.68); }
+
+    .quotes-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .quote-card{ padding: 18px; }
+    .quote-mark{ font-size: 34px; font-weight: 950; color: rgba(43,108,176,.85); line-height: 1; }
+    .quote-card p{ margin: 8px 0 10px; font-weight: 800; color: rgba(30,42,58,.74); line-height: 1.7; }
+    .quote-by{ font-weight: 950; color: rgba(30,42,58,.82); }
+
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .cards-3{ grid-template-columns: 1fr; }
+      .moments-grid{ grid-template-columns: 1fr; }
+      .team-grid{ grid-template-columns: 1fr 1fr; }
+      .quotes-grid{ grid-template-columns: 1fr; }
+      .resources-cta{ flex-direction: column; align-items:flex-start; }
+    }
+  </style>
+
+  <script>
+    // Logo (try svg, fall back to png) + GitHub Pages-safe
+    var logoEl = document.getElementById("brandLogo");
+    if (logoEl) {
+      logoEl.src = href("/assets/images/logo.svg");
+      logoEl.onerror = function () {
+        this.onerror = null;
+        this.src = href("/assets/images/logo.png");
+      };
+    }
+
+    // Nav links
+    setHref("homeLink", "/index.html");
+    setHref("homeNavLink", "/index.html");
+    setHref("aboutLink", "/about/index.html");
+    setHref("resourcesLink", "/resources/index.html");
+    setHref("videosLink", "/videos/index.html");
+    setHref("storiesLink", "/stories/index.html");
+    setHref("faqsLink", "/faqs/index.html");
+    setHref("contactLink", "/contact/index.html");
+    setHref("recruitingLink", "/recruiting/index.html");
+    setHref("privacyLink", "/privacy-policy/index.html");
+
+    // Hero CTAs
+    setHref("watchVideoBtn", "/videos/index.html");
+    setHref("exploreResourcesBtn", "/resources/index.html");
+    setHref("aboutUsBtn", "/about-us/index.html");
+
+    // Section CTAs
+    setHref("watchMoreVideosBtn", "/videos/index.html");
+    setHref("resourcesMainBtn", "/resources/index.html");
+
+    setHref("topicPuppy", "/resources/puppy-kitten-tips/index.html");
+    setHref("topicDental", "/resources/dental-health/index.html");
+    setHref("topicMeds", "/resources/giving-medications/index.html");
+
+    setHref("momentsResourcesBtn", "/resources/index.html");
+    setHref("momentsStoriesBtn", "/stories/index.html");
+
+    setHref("aboutTeamBtn", "/about-us/index.html");
+    setHref("recruitingBtn", "/recruiting/index.html");
+
+    setHref("contactCtaBtn", "/contact/index.html");
+    setHref("faqsCtaBtn", "/faqs/index.html");
+
+    setText("year", new Date().getFullYear());
+
+    // OPTIONAL: If you later add a real hero image to assets/images/hero.jpg:
+    // document.getElementById("heroPhoto").style.background =
+    //   "url('" + href("/assets/images/hero.jpg") + "') center/cover no-repeat";
+  </script>
+</body>
+</html>
