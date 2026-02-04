@@ -3,36 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>About Us — Bellbrook Veterinary Hospital (Demo)</title>
-  <meta name="description" content="Learn about Bellbrook Veterinary Hospital (demo site by Veteos.com)." />
+  <title>PAGE TITLE</title>
+  <meta name="description" content="PAGE DESCRIPTION" />
 
-  <!-- Base path helper -->
   <script>
     (function () {
       var parts = location.pathname.split("/").filter(Boolean);
       window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
       window.href = function (p) { return window.BASE_PATH + p; };
-
-      window.setHref = function (id, path) {
-        var el = document.getElementById(id);
-        if (el) el.href = href(path);
-      };
-      window.setText = function (id, value) {
-        var el = document.getElementById(id);
-        if (el) el.textContent = value;
-      };
-      window.setSrc = function (id, path) {
-        var el = document.getElementById(id);
-        if (el) el.src = href(path);
-      };
     })();
   </script>
 
-  <!-- Load site CSS -->
-<link rel="stylesheet" href="/assets/css/style.css" />
-<link rel="stylesheet" href="/assets/css/tweaks.css" />
+  <!-- CSS (order matters: tweaks loads AFTER base) -->
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/tweaks.css" />
+
+  <!-- Rewrite CSS hrefs for GitHub Pages subpath (/bellbrook/) -->
   <script>
-    // Rewrite CSS href for GitHub Pages subpath deployments
     (function () {
       document.querySelectorAll('link[rel="stylesheet"]').forEach(function (l) {
         var h = l.getAttribute("href") || "";
@@ -256,4 +243,5 @@
   </script>
 </body>
 </html>
+
 
