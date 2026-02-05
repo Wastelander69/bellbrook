@@ -1,216 +1,136 @@
-/* =========================================================
-   GLOBAL RESET (safe for GitHub Pages)
-   ========================================================= */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* Basic reset */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+
+/* ===========================
+   TOP HEADER / NAV BAR
+   =========================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
 }
 
-img,
-svg,
-video,
-canvas {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-figure {
-  margin: 0;
-}
-
-.wp-block-image,
-.wp-block-kadence-image {
+.header-inner {
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-/* If any theme CSS ever set img height/width weirdly, this restores it */
-.wp-block-image img,
-.wp-block-kadence-image img,
-.kb-img {
-  width: 100%;
-  height: auto;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #1a202c;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.brand-logo {
+  width: 44px;
+  height: 44px;
   object-fit: contain;
+  border-radius: 12px;
 }
 
-/* =========================================================
-   IMAGE DIMENSIONS / CONSISTENT CROPPING
-   (Fixes “broken” looking stretched/squished images)
-   ========================================================= */
-
-/* Rounded card images (staff + gallery) */
-.rounded-corners img,
-.is-style-rounded img,
-.event-img img {
-  width: 100%;
-  height: auto;
-  border-radius: 70px;
+.brand-name {
+  font-size: 18px;
+  line-height: 1;
 }
 
-/* Staff grid portraits: make them consistent */
-.kadence-column812_3ce0c2-b2 img,
-.kadence-column812_104b73-46 img,
-.kadence-column812_7109d8-9e img,
-.kadence-column812_9eda68-77 img,
-.kadence-column812_149ee9-31 img,
-.kadence-column812_aba07c-62 img,
-.kadence-column812_357a92-af img,
-.kadence-column812_1cd85b-74 img {
-  /* consistent card image behavior */
-  width: 100%;
-  max-width: 320px;   /* keeps them from getting gigantic on desktop */
-  aspect-ratio: 4 / 5; /* consistent portrait ratio */
-  height: auto;
-  object-fit: cover;   /* fills the portrait box nicely */
+.site-nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.site-nav a {
+  text-decoration: none;
+  color: #234d69;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 12px;
+}
+
+.site-nav a:hover {
+  background: rgba(35, 77, 105, 0.08);
+}
+
+.header-cta {
+  text-decoration: none;
+  background: #ff9d00;
+  color: #1a202c;
+  font-weight: 800;
+  padding: 10px 16px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.header-cta:hover {
+  filter: brightness(0.98);
+}
+
+.nav-toggle {
+  display: none;
+  margin-left: 4px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: white;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Mobile dropdown */
+.mobile-nav {
+  max-width: 1200px;
   margin: 0 auto;
-  border-radius: 70px;
+  padding: 0 18px 14px 18px;
+  display: grid;
+  gap: 10px;
 }
 
-/* Smaller “icon” image near “Helpful Tips & Resources” */
-.kb-image812_7e2a96-28 img {
-  max-width: 220px;
-  width: 100%;
-  margin: 0 auto;
+.mobile-nav a {
+  text-decoration: none;
+  color: #234d69;
+  font-weight: 700;
+  padding: 12px 12px;
+  border-radius: 14px;
+  background: rgba(35, 77, 105, 0.06);
 }
 
-/* =========================================================
-   BACKGROUND IMAGES (IMPORTANT for GitHub Pages)
-   ---------------------------------------------------------
-   Your pasted code contains WordPress/Kadence block comments
-   like: backgroundImg:[{...}]
-   On GitHub Pages those comments do NOTHING.
-   So the “background images” will appear missing/broken
-   unless we recreate them in CSS like below.
-   ========================================================= */
-
-/* HERO right column dog vector background */
-.kadence-column812_1723c2-92 {
-  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/Cute-Dog-vector-4.png");
-  background-size: contain;
-  background-position: 19% 70%;
-  background-repeat: no-repeat;
-  min-height: 520px; /* matches your row minHeight vibe */
+.mobile-nav a:hover {
+  background: rgba(35, 77, 105, 0.10);
 }
 
-/* Staff card decorative backgrounds (4-up row) */
-.kadence-column812_3ce0c2-b2 {
-  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/9.png");
-  background-size: 104% 70%;
-  background-position: 21% 12%;
-  background-repeat: no-repeat;
+.mobile-cta {
+  background: #ff9d00 !important;
+  color: #1a202c !important;
 }
 
-.kadence-column812_104b73-46 {
-  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/2.png");
-  background-size: 93% 56%;
-  background-position: 54% 14%;
-  background-repeat: no-repeat;
-}
-
-.kadence-column812_7109d8-9e {
-  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/6-e1768502291792.png");
-  background-size: 135% 60%;
-  background-position: 50% 23%;
-  background-repeat: no-repeat;
-}
-
-.kadence-column812_9eda68-77 {
-  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/5-e1768502391237.png");
-  background-size: 110% 60%;
-  background-position: 50% 11%;
-  background-repeat: no-repeat;
-}
-
-/* Staff card decorative backgrounds (second 4-up row) */
-.kadence-column812_149ee9-31 {
-  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/4.png");
-  background-size: 96% 74%;
-  background-position: 48% 0%;
-  background-repeat: no-repeat;
-}
-
-.kadence-column812_aba07c-62 {
-  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/10.png");
-  background-size: 93% 74%;
-  background-position: 46% 0%;
-  background-repeat: no-repeat;
-}
-
-.kadence-column812_357a92-af {
-  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/8.png");
-  background-size: 98% 76%;
-  background-position: 0% 0%;
-  background-repeat: no-repeat;
-}
-
-.kadence-column812_1cd85b-74 {
-  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/3.png");
-  background-size: 125% 69%;
-  background-position: 50% 14%;
-  background-repeat: no-repeat;
-}
-
-/* Testimonials columns decorative backgrounds */
-.kadence-column812_e66d12-be {
-  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/6-e1768503325619.png");
-  background-size: 129% 61%;
-  background-position: 52% 34%;
-  background-repeat: no-repeat;
-}
-
-.kadence-column812_abeec7-8a {
-  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/5-e1768502391237.png");
-  background-size: 117% 79%;
-  background-position: 54% 44%;
-  background-repeat: no-repeat;
-}
-
-.kadence-column812_0ab75c-14 {
-  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/9.png");
-  background-size: 103% 74%;
-  background-position: 61% 45%;
-  background-repeat: no-repeat;
-}
-
-/* Make sure backgrounds don’t “hide” behind content */
-.wp-block-kadence-column {
-  background-color: transparent;
-}
-
-/* Give background columns some breathing room so you can actually see them */
-.kadence-column812_3ce0c2-b2,
-.kadence-column812_104b73-46,
-.kadence-column812_7109d8-9e,
-.kadence-column812_9eda68-77,
-.kadence-column812_149ee9-31,
-.kadence-column812_aba07c-62,
-.kadence-column812_357a92-af,
-.kadence-column812_1cd85b-74,
-.kadence-column812_e66d12-be,
-.kadence-column812_abeec7-8a,
-.kadence-column812_0ab75c-14 {
-  padding: 30px;
-}
-
-/* =========================================================
-   MOBILE SAFETY (keeps images from overflowing)
-   ========================================================= */
-@media (max-width: 768px) {
-  .kadence-column812_1723c2-92 {
-    min-height: 360px;
-    background-position: 50% 80%;
+/* Responsive */
+@media (max-width: 900px) {
+  .site-nav,
+  .header-cta {
+    display: none;
   }
-
-  .kadence-column812_3ce0c2-b2 img,
-  .kadence-column812_104b73-46 img,
-  .kadence-column812_7109d8-9e img,
-  .kadence-column812_9eda68-77 img,
-  .kadence-column812_149ee9-31 img,
-  .kadence-column812_aba07c-62 img,
-  .kadence-column812_357a92-af img,
-  .kadence-column812_1cd85b-74 img {
-    max-width: 260px;
-    aspect-ratio: 4 / 5;
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
   }
 }
+
+/* Helps anchor links not hide behind sticky header */
+body { scroll-padding-top: 80px; }
