@@ -3,86 +3,164 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Videos — Bellbrook Veterinary Hospital (Demo)</title>
+  <title>Videos — Bellbrook Veterinary Demo</title>
   <meta name="description" content="Educational and clinic videos (demo site by Veteos.com)." />
 
-  <!-- Base path helper: supports / and /bellbrook/ -->
-  <script>
-    (function () {
-      var parts = location.pathname.split("/").filter(Boolean);
-      window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
-      window.href = function (p) { return window.BASE_PATH + p; };
+  <!-- FIX: GitHub Pages project-site base. This prevents /videos/resources bugs everywhere. -->
+  <base href="/bellbrook/" />
 
-      window.setHref = function (id, path) {
-        var el = document.getElementById(id);
-        if (el) el.href = href(path);
-      };
-      window.setText = function (id, value) {
-        var el = document.getElementById(id);
-        if (el) el.textContent = value;
-      };
-      window.setSrc = function (id, path) {
-        var el = document.getElementById(id);
-        if (el) el.src = href(path);
-      };
-    })();
-  </script>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Raleway:wght@100;300;400;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Load site CSS (order matters: tweaks AFTER base) -->
-  <link rel="stylesheet" href="/assets/css/style.css" />
-  <link rel="stylesheet" href="/assets/css/tweaks.css" />
-  <script>
-    (function () {
-      document.querySelectorAll('link[rel="stylesheet"]').forEach(function (l) {
-        var h = l.getAttribute("href") || "";
-        if (h.startsWith("/assets/")) l.href = window.href(h);
-      });
-    })();
-  </script>
+  <!-- Repo CSS (now relative to <base>) -->
+  <link rel="stylesheet" href="assets/css/site.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/tweaks.css" />
+
+  <!-- Header/nav + dropdown styling (matches homepage) -->
+  <style>
+    :root{
+      --nav-bg: rgba(255,255,255,0.92);
+      --nav-border: rgba(26,32,44,0.10);
+      --shadow: 0 18px 40px rgba(0,0,0,0.12);
+      --radius: 18px;
+      --brand: #234d69;
+      --accent: #2b6cb0;
+    }
+    body{ font-family: "Raleway", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    img{ max-width:100%; height:auto; display:block; }
+    .container{ width:min(1100px, calc(100% - 32px)); margin-inline:auto; }
+
+    /* Header */
+    .site-header{
+      position: sticky; top:0; z-index:999;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--nav-border);
+    }
+    .header-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding:10px 0;
+    }
+    .brand{
+      display:inline-flex; align-items:center; gap:10px;
+      text-decoration:none;
+    }
+    .brand img{ width:42px; height:42px; object-fit:contain; }
+    .brand span{
+      font-family:"Lilita One", cursive;
+      font-size:24px; letter-spacing:.5px;
+      color:#1a202c;
+    }
+
+    .nav-toggle{
+      display:none;
+      width:44px; height:44px;
+      border-radius:12px;
+      border:1px solid var(--nav-border);
+      background:#fff;
+      cursor:pointer;
+    }
+    .nav-toggle span{
+      display:block; height:2px; background:#1a202c;
+      margin:7px 8px; border-radius:2px;
+    }
+
+    nav.site-nav ul{
+      list-style:none; margin:0; padding:0;
+      display:flex; align-items:center; gap:14px;
+    }
+    nav.site-nav a{
+      text-decoration:none;
+      font-weight:700;
+      padding:10px 10px;
+      border-radius:12px;
+      display:inline-flex; align-items:center; gap:8px;
+      color:#1a202c;
+    }
+    nav.site-nav a:hover{ background: rgba(43,108,176,0.08); }
+
+    /* Dropdowns */
+    .has-dropdown{ position:relative; }
+    .dropdown{
+      display:none;
+      position:absolute;
+      top: calc(100% + 10px);
+      left:0;
+      min-width: 380px;
+      background:#fff;
+      border:1px solid var(--nav-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:12px;
+    }
+    .dropdown-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:8px;
+    }
+    .dropdown-item{
+      display:grid; gap:2px;
+      padding:12px;
+      border-radius:14px;
+      text-decoration:none;
+    }
+    .dropdown-item:hover{ background: rgba(35,77,105,0.08); }
+    .dropdown-item strong{ font-weight:800; color: var(--brand); }
+    .dropdown-item span{ font-size:13px; opacity:.8; color:#1a202c; }
+
+    @media (min-width: 901px){
+      .has-dropdown:hover .dropdown{ display:block; }
+    }
+
+    @media (max-width: 900px){
+      .nav-toggle{ display:inline-block; }
+      nav.site-nav{
+        position:fixed;
+        inset:64px 12px auto 12px;
+        background:#fff;
+        border:1px solid var(--nav-border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding:10px;
+        display:none;
+      }
+      nav.site-nav.open{ display:block; }
+      nav.site-nav ul{ flex-direction:column; align-items:stretch; gap:6px; }
+      nav.site-nav a{ justify-content:space-between; }
+      .dropdown{
+        position:static;
+        min-width:auto;
+        border:none;
+        box-shadow:none;
+        padding:8px 6px 10px;
+        display:none;
+      }
+      .has-dropdown.dropdown-open .dropdown{ display:block; }
+    }
+  </style>
 </head>
 
 <body>
-  <!-- Header -->
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="./">
-      <img class="brand-logo" src="assets/images/8196643567274865_icon-1024x1024.png" alt="Logo">
-      <span class="brand-name">Bellbrook Vet Demo</span>
-    </a>
+  <!-- HEADER (cohesive with homepage) -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/img/logo.svg" alt="Bellbrook" onerror="this.onerror=null;this.src='assets/images/8196643567274865_icon-1024x1024.png';" />
+        <span>Bellbrook</span>
+      </a>
 
-    <nav class="nav-desktop">
-      <a href="./">Home</a>
-      <a href="resources/">Resources</a>
-      <a href="videos/">Videos</a>
-      <a href="staff/">Staff</a>
-      <a href="contact/">Contact</a>
-    </nav>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
 
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-mobile">
-      ☰
-      <span class="sr-only">Menu</span>
-    </button>
-  </div>
-
-  <nav id="nav-mobile" class="nav-mobile" hidden>
-    <a href="./">Home</a>
-    <a href="resources/">Resources</a>
-    <a href="videos/">Videos</a>
-    <a href="staff/">Staff</a>
-    <a href="contact/">Contact</a>
-  </nav>
-</header>
-
-<script>
-  const btn = document.querySelector(".nav-toggle");
-  const menu = document.querySelector("#nav-mobile");
-  btn.addEventListener("click", () => {
-    const open = btn.getAttribute("aria-expanded") === "true";
-    btn.setAttribute("aria-expanded", String(!open));
-    menu.hidden = open;
-  });
-</script>
-
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul id="mainNav"></ul>
+      </nav>
+    </div>
+  </header>
 
   <main>
     <!-- Hero -->
@@ -97,7 +175,7 @@
 
         <div class="hero-actions">
           <a class="btn btn-primary" href="#library">Browse videos</a>
-          <a class="btn btn-secondary" href="#" id="resourcesBtnTop">Explore Resources</a>
+          <a class="btn btn-secondary" href="resources/index.html">Explore Resources</a>
         </div>
       </div>
 
@@ -121,17 +199,14 @@
             </p>
             <div class="cta-actions">
               <a class="btn btn-primary" href="#library">Watch more</a>
-              <a class="btn btn-secondary" href="#" id="contactBtnTop">Ask a question</a>
+              <a class="btn btn-secondary" href="contact/index.html">Ask a question</a>
             </div>
           </div>
 
           <div class="featured-right">
-            <!-- OPTION A: Veteos embed (recommended if you have it) -->
             <div class="card-embed">
               <script type="text/javascript" src="https://on-demand.veteos.com/embed-video/8196643567274865/e1YBgEUBhOF6TQ"></script>
             </div>
-
-            <!-- OPTION B: If you want a YouTube/Vimeo iframe instead, replace the div above with an iframe. -->
           </div>
         </section>
       </div>
@@ -148,7 +223,6 @@
             </p>
           </div>
 
-          <!-- Simple filter UI (optional, cosmetic) -->
           <div class="filters" aria-label="Video filters">
             <button class="chip is-active" type="button" data-filter="all">All</button>
             <button class="chip" type="button" data-filter="puppy">Puppy/Kitten</button>
@@ -158,67 +232,55 @@
         </div>
 
         <div class="video-grid">
-          <!-- Card 1 -->
           <article class="card video-card" data-tags="puppy care">
             <div class="video-top">
-              <div class="thumb">
-                <span class="play">▶</span>
-              </div>
+              <div class="thumb"><span class="play">▶</span></div>
               <span class="tag">Puppy/Kitten</span>
             </div>
             <h3>New Puppy/Kitten: First Steps</h3>
             <p>What to prioritize in the first few weeks: routines, prevention, and habits.</p>
             <div class="video-actions">
-              <a class="btn btn-primary" href="#" id="puppyTipsBtn">Related tips</a>
-              <a class="btn btn-secondary" href="#" id="resourcesAllBtn">All resources</a>
+              <a class="btn btn-primary" href="resources/puppy-kitten-tips/index.html">Related tips</a>
+              <a class="btn btn-secondary" href="resources/index.html">All resources</a>
             </div>
           </article>
 
-          <!-- Card 2 -->
           <article class="card video-card" data-tags="dental">
             <div class="video-top">
-              <div class="thumb">
-                <span class="play">▶</span>
-              </div>
+              <div class="thumb"><span class="play">▶</span></div>
               <span class="tag">Dental</span>
             </div>
             <h3>Dental Health Basics</h3>
             <p>How dental disease starts, what cleanings involve, and at-home routines.</p>
             <div class="video-actions">
-              <a class="btn btn-primary" href="#" id="dentalBtn">Dental resource</a>
-              <a class="btn btn-secondary" href="#" id="contactBtnDental">Questions?</a>
+              <a class="btn btn-primary" href="resources/dental-health/index.html">Dental resource</a>
+              <a class="btn btn-secondary" href="contact/index.html">Questions?</a>
             </div>
           </article>
 
-          <!-- Card 3 -->
           <article class="card video-card" data-tags="care">
             <div class="video-top">
-              <div class="thumb">
-                <span class="play">▶</span>
-              </div>
+              <div class="thumb"><span class="play">▶</span></div>
               <span class="tag">Preventive Care</span>
             </div>
             <h3>Preventive Care, Explained</h3>
             <p>Vaccines, parasite prevention, and why “preventive” saves stress later.</p>
             <div class="video-actions">
-              <a class="btn btn-primary" href="#" id="resourcesBtnCare">Explore resources</a>
-              <a class="btn btn-secondary" href="#" id="faqsBtnCare">FAQs</a>
+              <a class="btn btn-primary" href="resources/index.html">Explore resources</a>
+              <a class="btn btn-secondary" href="faqs/index.html">FAQs</a>
             </div>
           </article>
 
-          <!-- Card 4 -->
           <article class="card video-card" data-tags="care">
             <div class="video-top">
-              <div class="thumb">
-                <span class="play">▶</span>
-              </div>
+              <div class="thumb"><span class="play">▶</span></div>
               <span class="tag">How-to</span>
             </div>
             <h3>Giving Medications (No Drama)</h3>
             <p>Simple techniques for pills and liquids—plus what to do when it’s a hard “no.”</p>
             <div class="video-actions">
-              <a class="btn btn-primary" href="#" id="medsBtn">Giving meds</a>
-              <a class="btn btn-secondary" href="#" id="contactBtnMeds">Help</a>
+              <a class="btn btn-primary" href="resources/giving-medications/index.html">Giving meds</a>
+              <a class="btn btn-secondary" href="contact/index.html">Help</a>
             </div>
           </article>
         </div>
@@ -227,11 +289,10 @@
           <h3>Want even more?</h3>
           <p>Check out our Educational Videos collection inside Resources.</p>
           <div class="cta-actions">
-            <a class="btn btn-primary" href="#" id="eduVideosBtn">Educational Videos</a>
-            <a class="btn btn-secondary" href="#" id="contactBtn">Contact Us</a>
+            <a class="btn btn-primary" href="resources/educational-videos/index.html">Educational Videos</a>
+            <a class="btn btn-secondary" href="contact/index.html">Contact Us</a>
           </div>
         </section>
-
       </div>
     </section>
 
@@ -248,15 +309,15 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© <span id="year"></span> Bellbrook Veterinary Hospital (Demo)</p>
+      <p>© <span id="year"></span> Bellbrook Veterinary Demo</p>
       <p class="footer-links">
-        <a href="#" id="privacyLink">Privacy Policy</a>
+        <a href="privacy-policy/index.html">Privacy Policy</a>
       </p>
     </div>
   </footer>
 
+  <!-- Page styles (as you had them) -->
   <style>
-    /* Videos page styles (scoped) */
     .hero-actions{
       display:flex;
       gap: 12px;
@@ -429,67 +490,149 @@
   </style>
 
   <script>
-    // Logo (try svg, fall back to png) + GitHub Pages-safe
-    var logoEl = document.getElementById("brandLogo");
-    if (logoEl) {
-      logoEl.src = href("/assets/images/logo.svg");
-      logoEl.onerror = function () {
-        this.onerror = null;
-        this.src = href("/assets/images/logo.png");
-      };
-    }
+    (function () {
+      // Footer year
+      var y = document.getElementById("year");
+      if (y) y.textContent = new Date().getFullYear();
 
-    // Nav
-    setHref("homeLink", "/index.html");
-    setHref("aboutLink", "/about/index.html");
-    setHref("resourcesLink", "/resources/index.html");
-    setHref("videosLink", "/videos/index.html");
-    setHref("storiesLink", "/stories/index.html");
-    setHref("faqsLink", "/faqs/index.html");
-    setHref("contactLink", "/contact/index.html");
-    setHref("recruitingLink", "/recruiting/index.html");
-    setHref("privacyLink", "/privacy-policy/index.html");
+      // NAV MAP (same as homepage)
+      var NAV = [
+        { label: "Home", href: "index.html" },
+        {
+          label: "About",
+          items: [
+            { label: "About", href: "about/index.html", sub: "" },
+            { label: "About Us", href: "about-us/index.html", sub: "" },
+            { label: "Stories", href: "stories/index.html", sub: "" },
+            { label: "Recruiting", href: "recruiting/index.html", sub: "" }
+          ]
+        },
+        {
+          label: "Resources",
+          items: [
+            { label: "All Resources", href: "resources/index.html", sub: "Browse everything" },
+            { label: "Puppy & Kitten Tips", href: "resources/puppy-kitten-tips/index.html", sub: "First-year roadmap" },
+            { label: "Dental Health", href: "resources/dental-health/index.html", sub: "Cleanings & at-home care" },
+            { label: "Giving Medications", href: "resources/giving-medications/index.html", sub: "Easy techniques" },
+            { label: "Educational Videos", href: "resources/educational-videos/index.html", sub: "Learn quickly" }
+          ]
+        },
+        {
+          label: "Wellness Survey",
+          items: [
+            { label: "Start Survey", href: "wellness-survey/index.html", sub: "Begin the form" },
+            { label: "Results", href: "wellness-survey/results/index.html", sub: "View outcomes" }
+          ]
+        },
+        { label: "Videos", href: "videos/index.html" },
+        {
+          label: "Info",
+          items: [
+            { label: "FAQs", href: "faqs/index.html", sub: "" },
+            { label: "Privacy Policy", href: "privacy-policy/index.html", sub: "" },
+            { label: "Contact", href: "contact/index.html", sub: "" }
+          ]
+        }
+      ];
 
-    // Top CTAs
-    setHref("resourcesBtnTop", "/resources/index.html");
-    setHref("contactBtnTop", "/contact/index.html");
+      var navEl = document.getElementById("mainNav");
+      if (!navEl) return;
 
-    // Cards
-    setHref("puppyTipsBtn", "/resources/puppy-kitten-tips/index.html");
-    setHref("resourcesAllBtn", "/resources/index.html");
+      function makeA(label, href) {
+        var a = document.createElement("a");
+        a.textContent = label;
+        a.href = href;
+        return a;
+      }
 
-    setHref("dentalBtn", "/resources/dental-health/index.html");
-    setHref("contactBtnDental", "/contact/index.html");
+      navEl.innerHTML = "";
 
-    setHref("resourcesBtnCare", "/resources/index.html");
-    setHref("faqsBtnCare", "/faqs/index.html");
+      NAV.forEach(function (node) {
+        var li = document.createElement("li");
 
-    setHref("medsBtn", "/resources/giving-medications/index.html");
-    setHref("contactBtnMeds", "/contact/index.html");
+        if (!node.items) {
+          li.appendChild(makeA(node.label, node.href));
+        } else {
+          li.className = "has-dropdown";
 
-    // Bottom CTA
-    setHref("eduVideosBtn", "/resources/educational-videos/index.html");
-    setHref("contactBtn", "/contact/index.html");
+          var trigger = document.createElement("a");
+          trigger.href = "#";
+          trigger.className = "dropdown-trigger";
+          trigger.textContent = node.label;
 
-    setText("year", new Date().getFullYear());
+          var dd = document.createElement("div");
+          dd.className = "dropdown";
 
-    // Simple client-side filter (chips)
-    var chips = Array.from(document.querySelectorAll(".chip"));
-    var cards = Array.from(document.querySelectorAll(".video-card"));
-    function setActiveChip(target){
-      chips.forEach(function(c){ c.classList.toggle("is-active", c === target); });
-    }
-    chips.forEach(function(chip){
-      chip.addEventListener("click", function(){
-        var f = chip.getAttribute("data-filter") || "all";
-        setActiveChip(chip);
-        cards.forEach(function(card){
-          var tags = (card.getAttribute("data-tags") || "").toLowerCase();
-          var show = (f === "all") ? true : tags.includes(f);
-          card.style.display = show ? "" : "none";
+          var grid = document.createElement("div");
+          grid.className = "dropdown-grid";
+
+          node.items.forEach(function (item) {
+            var itemA = document.createElement("a");
+            itemA.className = "dropdown-item";
+            itemA.href = item.href;
+
+            var strong = document.createElement("strong");
+            strong.textContent = item.label;
+            itemA.appendChild(strong);
+
+            var sub = document.createElement("span");
+            sub.textContent = item.sub || "";
+            itemA.appendChild(sub);
+
+            grid.appendChild(itemA);
+          });
+
+          dd.appendChild(grid);
+
+          li.appendChild(trigger);
+          li.appendChild(dd);
+        }
+
+        navEl.appendChild(li);
+      });
+
+      // Mobile menu toggle
+      var btn = document.querySelector(".nav-toggle");
+      var nav = document.querySelector(".site-nav");
+      if (btn && nav) {
+        btn.addEventListener("click", function () {
+          var isOpen = nav.classList.toggle("open");
+          btn.setAttribute("aria-expanded", String(isOpen));
+        });
+      }
+
+      // Mobile dropdown expand
+      Array.prototype.slice.call(document.querySelectorAll(".dropdown-trigger")).forEach(function (trigger) {
+        trigger.addEventListener("click", function (e) {
+          if (window.matchMedia("(max-width: 900px)").matches) {
+            e.preventDefault();
+            var parent = trigger.closest(".has-dropdown");
+            if (parent) parent.classList.toggle("dropdown-open");
+          }
         });
       });
-    });
+
+      // Simple client-side filter (chips)
+      var chips = Array.prototype.slice.call(document.querySelectorAll(".chip"));
+      var cards = Array.prototype.slice.call(document.querySelectorAll(".video-card"));
+
+      function setActiveChip(target){
+        chips.forEach(function(c){ c.classList.toggle("is-active", c === target); });
+      }
+
+      chips.forEach(function(chip){
+        chip.addEventListener("click", function(){
+          var f = (chip.getAttribute("data-filter") || "all").toLowerCase();
+          setActiveChip(chip);
+
+          cards.forEach(function(card){
+            var tags = (card.getAttribute("data-tags") || "").toLowerCase();
+            var show = (f === "all") ? true : tags.indexOf(f) !== -1;
+            card.style.display = show ? "" : "none";
+          });
+        });
+      });
+    })();
   </script>
 </body>
 </html>
