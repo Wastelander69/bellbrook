@@ -1,728 +1,353 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Bellbrook Veterinary Hospital (Demo)</title>
-  <meta name="description" content="Bellbrook Veterinary Hospital demo site produced by Veteos.com." />
-
-  <!-- Base path helper: supports / and /bellbrook/ -->
-  <script>
-    (function () {
-      var parts = location.pathname.split("/").filter(Boolean);
-      window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
-      window.href = function (p) { return window.BASE_PATH + p; };
-
-      window.setHref = function (id, path) {
-        var el = document.getElementById(id);
-        if (el) el.href = href(path);
-      };
-      window.setText = function (id, value) {
-        var el = document.getElementById(id);
-        if (el) el.textContent = value;
-      };
-      window.setSrc = function (id, path) {
-        var el = document.getElementById(id);
-        if (el) el.src = href(path);
-      };
-    })();
-  </script>
-
-  <!-- Load site CSS (order matters: tweaks AFTER base) -->
-  <link rel="stylesheet" href="/assets/css/style.css" />
-  <link rel="stylesheet" href="/assets/css/tweaks.css" />
-  <script>
-    (function () {
-      document.querySelectorAll('link[rel="stylesheet"]').forEach(function (l) {
-        var h = l.getAttribute("href") || "";
-        if (h.startsWith("/assets/")) l.href = window.href(h);
-      });
-    })();
-  </script>
-</head>
-
-<body>
-
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#" id="homeLink">
-        <img class="brand-logo" id="brandLogo" src="" alt="Bellbrook Veterinary Hospital" />
-        <span class="brand-text">
-          <span class="brand-name">Bellbrook</span>
-          <span class="brand-sub">Veterinary Hospital</span>
-        </span>
-      </a>
-
-      <!-- Match your dropdown/nav system from About -->
-      <nav class="nav" aria-label="Primary">
-        <a class="nav-link is-active" href="#" id="homeNavLink">Home</a>
-        <a class="nav-link" href="#" id="aboutLink">About</a>
-
-        <div class="nav-dropdown">
-          <button class="nav-link nav-link--button" type="button" aria-haspopup="true" aria-expanded="false">
-            Services <span class="caret">▾</span>
-          </button>
-          <div class="nav-menu" role="menu">
-            <a role="menuitem" href="#" id="servicesPreventive">Preventive Care</a>
-            <a role="menuitem" href="#" id="servicesDental">Dental Health</a>
-            <a role="menuitem" href="#" id="servicesMeds">Giving Medications</a>
-          </div>
-        </div>
-
-        <div class="nav-dropdown">
-          <button class="nav-link nav-link--button" type="button" aria-haspopup="true" aria-expanded="false">
-            Resources <span class="caret">▾</span>
-          </button>
-          <div class="nav-menu" role="menu">
-            <a role="menuitem" href="#" id="resourcesLink">All Resources</a>
-            <a role="menuitem" href="#" id="resourcesPuppy">Puppy &amp; Kitten Tips</a>
-            <a role="menuitem" href="#" id="resourcesDental">Dental Health</a>
-            <a role="menuitem" href="#" id="resourcesMeds">Giving Medications</a>
-            <a role="menuitem" href="#" id="resourcesEdu">Educational Videos</a>
-          </div>
-        </div>
-
-        <a class="nav-link" href="#" id="videosLink">Videos</a>
-        <a class="nav-link" href="#" id="storiesLink">Stories</a>
-        <a class="nav-link" href="#" id="faqsLink">FAQs</a>
-        <a class="nav-link" href="#" id="contactLink">Contact</a>
-        <a class="nav-link" href="#" id="recruitingLink">Recruiting</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-
-    <!-- ===== HERO (replaces the Kadence hero rowlayout) ===== -->
-    <section class="hero hero--home">
-      <div class="hero-overlay" aria-hidden="true"></div>
-
-      <div class="container hero-grid">
-        <div class="hero-left">
-          <h1 class="home-hero-title">Your Pet:</h1>
-          <h2 class="home-hero-subtitle">Like Our Own</h2>
-
-          <div style="margin-top: 26px;">
-            <a class="btn btn-primary btn-icon" href="https://dev-on-demand.veteos.com/videos/8196643567274865/SVpKUXEz0aYAFx" target="_self" rel="noopener">
-              <span class="btn-icon__glyph" aria-hidden="true">▶</span>
-              Watch Our Video
-            </a>
-          </div>
-        </div>
-
-        <div class="hero-right" aria-hidden="true">
-          <!-- From your WP export: Home-Page-Happy-Dog-1.png -->
-          <img
-            class="hero-image"
-            src="https://bellbrookvet.com/wp-content/uploads/2023/03/Home-Page-Happy-Dog-1.png"
-            alt=""
-            loading="eager"
-          />
-        </div>
-      </div>
-
-      <!-- Wave bottom separator -->
-      <div class="wave wave--bottom" aria-hidden="true">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,60 C150,120 350,0 600,60 C850,120 1050,20 1200,60 L1200,120 L0,120 Z"></path>
-        </svg>
-      </div>
-    </section>
-
-    <!-- ===== VIDEO COLLECTION STRIP (Kadence rowlayout w/ veteos collection script) ===== -->
-    <section class="section-soft">
-      <div class="container">
-        <div class="card" style="padding: 26px;">
-          <!-- This is exactly what WP had: a script-injected collection -->
-          <script type="text/javascript" src="https://on-demand.veteos.com/collections/s/8196643567274865/D3IsACy9dTJULt"></script>
-
-          <div style="margin-top: 18px; text-align: center;">
-            <a class="btn btn-primary" href="#" id="watchMoreVideosBtn">Watch more videos</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== “DISCOVER EVENTS” CTA (Kadence wave-top strip) ===== -->
-    <section class="section-events-cta">
-      <div class="wave wave--top" aria-hidden="true">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,60 C150,0 350,120 600,60 C850,0 1050,100 1200,60 L1200,0 L0,0 Z"></path>
-        </svg>
-      </div>
-
-      <div class="container" style="text-align: center; padding: 80px 0 40px;">
-        <h2 class="section-title" style="margin-bottom: 14px;">
-          Discover events happening <br /> at the museum
-        </h2>
-        <a class="btn btn-primary" href="#" id="exploreEventsBtn">Explore All Events</a>
-      </div>
-    </section>
-
-    <!-- ===== EVENTS GRID (3 cards) ===== -->
-    <section class="section-events-grid">
-      <div class="container">
-        <div class="events-grid">
-
-          <article class="card event-card">
-            <h3 class="event-card-title">Space Exploration</h3>
-
-            <div class="event-media">
-              <script type="text/javascript" src="https://on-demand.veteos.com/embed-video/50929768076919256/qHQgensh30cADn"></script>
-            </div>
-
-            <p class="event-card-text">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
-            </p>
-
-            <a class="btn btn-secondary" href="https://bellbrookvet.com/event/space-exploration/" target="_self" rel="noopener">
-              More Details...
-            </a>
-          </article>
-
-          <article class="card event-card">
-            <h3 class="event-card-title">Scout the Wilderness</h3>
-
-            <div class="event-media">
-              <img
-                src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/09/discovery-4-min-1024x683.jpeg"
-                alt="Scout the Wilderness"
-                loading="lazy"
-              />
-            </div>
-
-            <p class="event-card-text">
-              Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
-            </p>
-
-            <a class="btn btn-secondary" href="https://bellbrookvet.com/event/scout-out-the-wilderness/" target="_self" rel="noopener">
-              More Details...
-            </a>
-          </article>
-
-          <article class="card event-card">
-            <h3 class="event-card-title">Science for the Ages</h3>
-
-            <div class="event-media">
-              <img
-                src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/09/kid-science-8-min-1024x683.jpeg"
-                alt="Science for the Ages"
-                loading="lazy"
-              />
-            </div>
-
-            <p class="event-card-text">
-              Dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam.
-            </p>
-
-            <a class="btn btn-secondary" href="https://bellbrookvet.com/event/science-for-the-ages/" target="_self" rel="noopener">
-              More Details...
-            </a>
-          </article>
-
-        </div>
-      </div>
-
-      <div class="wave wave--bottom" aria-hidden="true">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,60 C150,120 350,0 600,60 C850,120 1050,20 1200,60 L1200,120 L0,120 Z"></path>
-        </svg>
-      </div>
-    </section>
-
-    <!-- ===== “A FEW MOMENTS WITH US” (2-col: embed + photo grid + text/buttons) ===== -->
-    <section class="section-soft">
-      <div class="container moments-grid">
-
-        <div class="moments-left">
-          <div class="card" style="padding: 18px;">
-            <div class="event-media">
-              <script type="text/javascript" src="https://on-demand.veteos.com/embed-video/8196643567274865/e1YBgEUBhOF6TQ"></script>
-            </div>
-
-            <div class="moments-photos">
-              <img class="rounded" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/09/kids-stretching-min-1024x683.jpeg" alt="" loading="lazy">
-              <img class="rounded" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/09/banner-2-min-1024x683.jpeg" alt="" loading="lazy">
-            </div>
-          </div>
-        </div>
-
-        <div class="moments-right">
-          <h2 class="section-title" style="color:#f2bb6b; margin-bottom: 10px;">A few moments with us</h2>
-          <p class="section-text">
-            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-            sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam.
-          </p>
-
-          <div class="btn-row">
-            <a class="btn btn-primary" href="#" id="momentsExploreBtn">Explore Events</a>
-            <a class="btn btn-secondary btn-icon" href="#" id="momentsStoryBtn">
-              <span class="btn-icon__glyph" aria-hidden="true">▶</span>
-              Watch Our Story
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ===== STAFF SECTION ===== -->
-    <section class="section-soft">
-      <div class="container" style="text-align:center; padding-top: 30px;">
-        <h2 class="section-title">We love our staff and <br /> we think you will too</h2>
-        <p class="section-text" style="max-width: 760px; margin: 12px auto 0;">
-          Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-          sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam.
-        </p>
-      </div>
-
-      <div class="container staff-grid">
-        <!-- Row 1 -->
-        <article class="card staff-card">
-          <img class="staff-photo" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/09/teaacher-6-683x1024.jpg" alt="Toby Flennigan" loading="lazy">
-          <h4 class="staff-name">Toby Flennigan</h4>
-          <p class="staff-role">Scouts Leader</p>
-        </article>
-
-        <article class="card staff-card">
-          <img class="staff-photo" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/09/teacher-4-683x1024.jpg" alt="Melanie Smith" loading="lazy">
-          <h4 class="staff-name">Melanie Smith</h4>
-          <p class="staff-role">Director</p>
-        </article>
-
-        <article class="card staff-card">
-          <img class="staff-photo" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/09/teacher-3-678x1024.jpg" alt="Josh Lennon" loading="lazy">
-          <h4 class="staff-name">Josh Lennon</h4>
-          <p class="staff-role">Program Coordinator</p>
-        </article>
-
-        <article class="card staff-card">
-          <img class="staff-photo" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/10/teacher-6-683x1024.jpeg" alt="Josephine Lewis" loading="lazy">
-          <h4 class="staff-name">Josephine Lewis</h4>
-          <p class="staff-role">Research Expert</p>
-        </article>
-
-        <!-- Row 2 -->
-        <article class="card staff-card">
-          <img class="staff-photo" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/10/teacher-10-683x1024.jpeg" alt="Sarah Beth" loading="lazy">
-          <h4 class="staff-name">Sarah Beth</h4>
-          <p class="staff-role">Event Coordinator</p>
-        </article>
-
-        <article class="card staff-card">
-          <img class="staff-photo" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/10/teacher-7-683x1024.jpeg" alt="Ezekiel Legend" loading="lazy">
-          <h4 class="staff-name">Ezekiel Legend</h4>
-          <p class="staff-role">Exhibit Curator</p>
-        </article>
-
-        <article class="card staff-card">
-          <img class="staff-photo" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/10/teacher-8-683x1024.jpeg" alt="Ashley Clementine" loading="lazy">
-          <h4 class="staff-name">Ashley Clementine</h4>
-          <p class="staff-role">Event Coordinator</p>
-        </article>
-
-        <article class="card staff-card">
-          <img class="staff-photo" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/09/teacher-2-683x1024.jpg" alt="Melanie Smith" loading="lazy">
-          <h4 class="staff-name">Melanie Smith</h4>
-          <p class="staff-role">Exhibit Curator</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- ===== TESTIMONIALS ===== -->
-    <section class="section-testimonials">
-      <div class="container" style="text-align:center;">
-        <h2 class="section-title" style="color:#fff;">What parents are saying...</h2>
-      </div>
-
-      <div class="container testimonials-grid">
-        <div class="testimonial-bubble">
-          <div class="stars" aria-label="5 stars">★★★★★</div>
-          <p>
-            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
-          </p>
-          <div class="who">
-            <img src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/10/parent-f3-min-150x150.jpg" alt="Laura Bolden" loading="lazy">
-            <strong>Laura Bolden</strong>
-          </div>
-        </div>
-
-        <div class="testimonial-bubble">
-          <div class="stars" aria-label="5 stars">★★★★★</div>
-          <p>
-            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
-          </p>
-          <div class="who">
-            <img src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/10/parent-f1-min-150x150.jpg" alt="Sophie Riley" loading="lazy">
-            <strong>Sophie Riley</strong>
-          </div>
-        </div>
-
-        <div class="testimonial-bubble">
-          <div class="stars" aria-label="5 stars">★★★★★</div>
-          <p>
-            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
-          </p>
-          <div class="who">
-            <img src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/10/parent-f2-min-150x150.jpg" alt="Leslie Martin" loading="lazy">
-            <strong>Leslie Martin</strong>
-          </div>
-        </div>
-
-        <div class="testimonial-bubble">
-          <div class="stars" aria-label="5 stars">★★★★★</div>
-          <p>
-            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
-          </p>
-          <div class="who">
-            <img src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/10/parent-m1-min-150x150.jpg" alt="Greg Smith" loading="lazy">
-            <strong>Greg Smith</strong>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Disclaimer -->
-    <section class="quotes" style="padding: 40px 0 24px;">
-      <div class="container">
-        <p class="disclaimer">
-          <strong>Demo / Showcase Disclaimer:</strong> This page is a demonstration website produced by <strong>Veteos.com</strong>
-          for portfolio and presentation purposes. It is <strong>not an official website for any veterinary practice</strong> and
-          is not intended to represent an actual clinic’s current services, pricing, staff, policies, or availability. Any names,
-          testimonials, quotes, or content displayed may be fictional or used as examples. Nothing on this site constitutes
-          veterinary or medical advice. If you believe your pet is sick or injured, contact a licensed veterinarian immediately.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> Bellbrook Veterinary Hospital (Demo)</p>
-      <p class="footer-links">
-        <a href="#" id="privacyLink">Privacy Policy</a>
-      </p>
-    </div>
-  </footer>
-
-  <!-- Page-specific styles for the WP-ish sections -->
-  <style>
-    .hero--home{
-      position: relative;
-      padding: 110px 0 0;
-      background: #3c97f1;
-      overflow: hidden;
-    }
-    .hero--home .hero-overlay{
-      position:absolute;
-      inset:0;
-      background: linear-gradient(298deg, rgba(242,187,107,.49) 39%, rgba(227,143,20,.49) 64%);
-      pointer-events:none;
-    }
-    .hero-grid{
-      position: relative;
-      display:grid;
-      grid-template-columns: 44% 56%;
-      gap: 18px;
-      align-items:center;
-      padding-bottom: 85px;
-    }
-    .home-hero-title{
-      margin:0;
-      font-size: clamp(44px, 6vw, 82px);
-      line-height: .9;
-      letter-spacing: 1px;
-      color:#fff;
-      font-weight: 900;
-    }
-    .home-hero-subtitle{
-      margin: 8px 0 0;
-      font-size: clamp(34px, 4.6vw, 64px);
-      line-height: 1.05;
-      letter-spacing: 1px;
-      color:#fff;
-      font-weight: 300;
-    }
-    .hero-right{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      min-height: 420px;
-    }
-    .hero-image{
-      width: 100%;
-      max-width: 620px;
-      height: auto;
-      object-fit: contain;
-      transform: translateY(10px);
-    }
-
-    .section-soft{
-      background: var(--global-palette8, #f6f8fb);
-      padding: 70px 0;
-    }
-
-    .section-events-cta{
-      background:#8ecae6;
-      position: relative;
-    }
-
-    .section-events-grid{
-      background:#8ecae6;
-      position: relative;
-      padding: 10px 0 90px;
-    }
-
-    .section-title{
-      font-size: clamp(26px, 3.4vw, 44px);
-      font-weight: 950;
-      margin: 0;
-    }
-    .section-text{
-      color: rgba(30,42,58,.74);
-      font-weight: 750;
-      line-height: 1.7;
-      margin: 0;
-    }
-
-    .events-grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-    .event-card{
-      padding: 22px;
-      border-radius: 24px;
-    }
-    .event-card-title{
-      margin: 0 0 12px;
-      font-weight: 950;
-    }
-    .event-media{
-      overflow:hidden;
-      border-radius: 18px;
-      background:#fff;
-      border: 1px solid rgba(30,42,58,.10);
-      margin-bottom: 12px;
-    }
-    .event-media img{
-      display:block;
-      width:100%;
-      height:auto;
-    }
-    .event-card-text{
-      margin: 0 0 14px;
-      color: rgba(30,42,58,.72);
-      font-weight: 750;
-      line-height: 1.7;
-    }
-
-    .moments-grid{
-      display:grid;
-      grid-template-columns: 60% 40%;
-      gap: 22px;
-      align-items:center;
-    }
-    .moments-photos{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 14px;
-    }
-    .rounded{
-      border-radius: 24px;
-      width:100%;
-      height:auto;
-      display:block;
-    }
-    .btn-row{
-      display:flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 18px;
-    }
-    .btn-icon{ display:inline-flex; align-items:center; gap: 10px; }
-    .btn-icon__glyph{
-      display:inline-flex;
-      width: 32px;
-      height: 32px;
-      align-items:center;
-      justify-content:center;
-      border-radius: 999px;
-      background: rgba(255,255,255,.85);
-      color: #234d69;
-      font-weight: 950;
-      line-height: 1;
-    }
-
-    .staff-grid{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      padding: 26px 0 0;
-    }
-    .staff-card{
-      padding: 18px;
-      border-radius: 26px;
-      text-align:center;
-    }
-    .staff-photo{
-      width:100%;
-      height: auto;
-      border-radius: 22px;
-      display:block;
-      margin-bottom: 10px;
-    }
-    .staff-name{
-      margin: 6px 0 0;
-      font-weight: 950;
-    }
-    .staff-role{
-      margin: 4px 0 0;
-      font-weight: 900;
-      text-transform: uppercase;
-      font-size: 12px;
-      color: rgba(30,42,58,.68);
-      letter-spacing: .6px;
-    }
-
-    .section-testimonials{
-      background:#f28482;
-      padding: 90px 0;
-      position: relative;
-    }
-    .testimonials-grid{
-      margin-top: 24px;
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-    .testimonial-bubble{
-      background:#fff;
-      border-radius: 26px;
-      padding: 18px;
-      border: 10px solid rgba(246,248,251,1);
-      box-shadow: 0 12px 30px rgba(0,0,0,.12);
-    }
-    .testimonial-bubble p{
-      margin: 10px 0 0;
-      color: rgba(30,42,58,.72);
-      font-weight: 750;
-      line-height: 1.7;
-    }
-    .stars{
-      color: #f6bd60;
-      font-weight: 950;
-      letter-spacing: 1px;
-    }
-    .who{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      margin-top: 12px;
-    }
-    .who img{
-      width: 44px;
-      height: 44px;
-      border-radius: 999px;
-      object-fit: cover;
-    }
-
-    .wave--top svg,
-    .wave--bottom svg{
-      width: 100%;
-      height: 90px;
-      display:block;
-      fill: var(--global-palette8, #f6f8fb);
-    }
-
-    @media (max-width: 980px){
-      .hero-grid{ grid-template-columns: 1fr; padding-bottom: 55px; }
-      .events-grid{ grid-template-columns: 1fr; }
-      .moments-grid{ grid-template-columns: 1fr; }
-      .staff-grid{ grid-template-columns: 1fr 1fr; }
-      .testimonials-grid{ grid-template-columns: 1fr; }
-      .hero-right{ min-height: 240px; }
-    }
-    @media (max-width: 520px){
-      .staff-grid{ grid-template-columns: 1fr; }
-    }
-  </style>
-
-  <script>
-    // Logo (try svg, fall back to png) + GitHub Pages-safe
-    var logoEl = document.getElementById("brandLogo");
-    if (logoEl) {
-      logoEl.src = href("/assets/images/logo.svg");
-      logoEl.onerror = function () {
-        this.onerror = null;
-        this.src = href("/assets/images/logo.png");
-      };
-    }
-
-    // Global nav/internal links
-    setHref("homeLink", "/index.html");
-    setHref("homeNavLink", "/index.html");
-    setHref("aboutLink", "/about/index.html");
-    setHref("videosLink", "/videos/index.html");
-    setHref("storiesLink", "/stories/index.html");
-    setHref("faqsLink", "/faqs/index.html");
-    setHref("contactLink", "/contact/index.html");
-    setHref("recruitingLink", "/recruiting/index.html");
-    setHref("privacyLink", "/privacy-policy/index.html");
-
-    // Resources dropdown
-    setHref("resourcesLink", "/resources/index.html");
-    setHref("resourcesPuppy", "/resources/puppy-kitten-tips/index.html");
-    setHref("resourcesDental", "/resources/dental-health/index.html");
-    setHref("resourcesMeds", "/resources/giving-medications/index.html");
-    setHref("resourcesEdu", "/resources/educational-videos/index.html");
-
-    // Services dropdown
-    setHref("servicesPreventive", "/resources/index.html");
-    setHref("servicesDental", "/resources/dental-health/index.html");
-    setHref("servicesMeds", "/resources/giving-medications/index.html");
-
-    // Buttons
-    setHref("watchMoreVideosBtn", "/videos/index.html");
-    setHref("exploreEventsBtn", "/stories/index.html");
-    setHref("momentsExploreBtn", "/stories/index.html");
-    setHref("momentsStoryBtn", "/stories/index.html");
-
-    setText("year", new Date().getFullYear());
-
-    // Dropdown toggles
-    document.querySelectorAll(".nav-dropdown").forEach(function (dd) {
-      var btn = dd.querySelector("button");
-      if (!btn) return;
-      btn.addEventListener("click", function () {
-        var open = dd.classList.toggle("open");
-        btn.setAttribute("aria-expanded", open ? "true" : "false");
-      });
-    });
-
-    // Close dropdowns on outside click
-    document.addEventListener("click", function (e) {
-      document.querySelectorAll(".nav-dropdown.open").forEach(function (dd) {
-        if (!dd.contains(e.target)) {
-          dd.classList.remove("open");
-          var btn = dd.querySelector("button");
-          if (btn) btn.setAttribute("aria-expanded", "false");
-        }
-      });
-    });
-
-    // Close on escape
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") {
-        document.querySelectorAll(".nav-dropdown.open").forEach(function (dd) {
-          dd.classList.remove("open");
-          var btn = dd.querySelector("button");
-          if (btn) btn.setAttribute("aria-expanded", "false");
-        });
-      }
-    });
-  </script>
-</body>
-</html>
+<!-- wp:kadence/rowlayout {"uniqueID":"812_751a99-bb","colLayout":"equal","currentOverlayTab":"gradient","minHeight":520,"maxWidth":1920,"bgColor":"#ff9f00","bgImgPosition":"60% 100%","overlay":"#f2bb6b","overlaySecond":"#e38f14","overlayFirstOpacity":1,"overlaySecondOpacity":1,"overlayGradLoc":39,"overlayGradLocSecond":64,"overlayGradAngle":298,"overlayOpacity":69,"overlayBlendMode":"lighten","verticalAlignment":"middle","topSep":"","bottomSep":"","bottomSepColor":"palette8","bottomSepHeight":309,"bottomSepWidth":118,"firstColumnWidth":44,"secondColumnWidth":56,"thirdColumnWidth":0,"fourthColumnWidth":0,"fifthColumnWidth":0,"sixthColumnWidth":0,"columnsUnlocked":true,"columnsInnerHeight":true,"borderRadius":[0,"",0,""],"overlayGradient":"linear-gradient(298deg,rgb(242,187,107) 40%,rgb(227,143,20) 64%)","padding":[69,"","",""],"kbVersion":2} -->
+<!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"812_1ca02d-bb","textAlign":["left","",""],"direction":["vertical","",""],"justifyContent":["flex-start","",""],"rowGap":[0,"",""],"rowGapVariable":["none","",""],"padding":["","","",null],"kbVersion":2,"className":"inner-column-1"} -->
+<div class="wp-block-kadence-column kadence-column812_1ca02d-bb kb-section-dir-vertical inner-column-1"><div class="kt-inside-inner-col"><!-- wp:kadence/advancedheading {"level":1,"uniqueID":"812_45131d-90","align":"left","color":"palette9","letterSpacing":1.44,"typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markLetterSpacing":0,"markColor":"palette9","markPadding":[5,10,5,20],"markBorder":"","textTransform":"capitalize","markTextTransform":"capitalize","colorClass":"theme-palette9","textOrientation":"horizontal","fontSize":[90,"",""],"fontHeight":[77,"",""],"fontHeightType":"px","maxWidth":[874,"",""],"textGradient":"linear-gradient(175deg,rgb(252,252,252) 0%,var(\u002d\u002dglobal-palette1,#3182CE) 100%)"} -->
+<h1 class="kt-adv-heading812_45131d-90 wp-block-kadence-advancedheading has-theme-palette-9-color has-text-color" data-kb-block="kb-adv-heading812_45131d-90">We Love Your Pet</h1>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedheading {"level":1,"uniqueID":"812_0bb43f-64","color":"palette9","letterSpacing":1,"typography":"Raleway","googleFont":true,"fontSubset":"latin","fontVariant":"100","fontWeight":"100","markLetterSpacing":0,"markColor":"palette9","markPadding":[5,10,5,20],"markTabPadding":["","",0,""],"markBorder":"","textTransform":"none","markTextTransform":"capitalize","colorClass":"theme-palette9","fontSize":[64,"",""],"fontHeight":[7,"",""],"fontHeightType":"px"} -->
+<h1 class="kt-adv-heading812_0bb43f-64 wp-block-kadence-advancedheading has-theme-palette-9-color has-text-color" data-kb-block="kb-adv-heading812_0bb43f-64">Like Our Own </h1>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedbtn {"hAlign":"left","uniqueID":"812_0160c7-ad","btns":[],"margin":[{"desk":[40,"","",""],"tablet":["","","",""],"mobile":["","","",""]}]} -->
+<div class="wp-block-kadence-advancedbtn kb-buttons-wrap kb-btns812_0160c7-ad"><!-- wp:kadence/singlebtn {"uniqueID":"812_35a216-c4","text":"Watch Our Video","link":"https://dev-on-demand.veteos.com/videos/8196643567274865/SVpKUXEz0aYAFx","sizePreset":"large","width":[282,"",""],"widthType":"fixed","padding":[0,20,20,20],"color":"palette2","borderStyle":[{"top":["","",0],"right":["","",0],"bottom":["","",0],"left":["","",0],"unit":"px"}],"borderRadius":[50,50,50,50],"icon":"fas_play-circle","iconColor":"#69232a","iconColorHover":"palette9","iconSide":"left","iconSize":[32,"",""],"inheritStyles":"outline","typography":[{"size":["","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"","letterSpacing":["","",""],"letterType":"px","family":"","google":false,"style":"normal","weight":"regular","variant":"","subset":"","textTransform":"","loadGoogle":true}],"noCustomDefaults":true} /--></div>
+<!-- /wp:kadence/advancedbtn --></div></div>
+<!-- /wp:kadence/column -->
+
+<!-- wp:kadence/column {"id":2,"borderWidth":["","","",""],"uniqueID":"812_1723c2-92","backgroundImg":[{"bgImg":"https://bellbrookvet.com/wp-content/uploads/2026/01/Cute-Dog-vector-4.png","bgImgID":825,"bgImgSize":"contain","bgImgPosition":"19% 70%","bgImgAttachment":"scroll","bgImgRepeat":"no-repeat"}],"padding":[null,"","",""],"kbVersion":2,"className":"inner-column-2"} -->
+<div class="wp-block-kadence-column kadence-column812_1723c2-92 inner-column-2"><div class="kt-inside-inner-col"></div></div>
+<!-- /wp:kadence/column -->
+<!-- /wp:kadence/rowlayout -->
+
+<!-- wp:kadence/rowlayout {"uniqueID":"812_f9445f-fd","columns":1,"collapseGutter":"wider","customRowGutter":[60,"",""],"colLayout":"equal","currentOverlayTab":"gradient","maxWidth":2000,"bgColor":"#ff9d00","overlayOpacity":69,"overlayBlendMode":"lighten","topSep":"","bottomSep":"mtns","overlayGradient":"linear-gradient(250deg,rgb(242,187,107) 40%,rgb(227,143,20) 87%)","padding":[null,"","",""],"kbVersion":2} -->
+<!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"812_eb8b4d-99","direction":["vertical","",""],"rowGapVariable":["custom","custom","custom"],"padding":[0,"",100,""],"kbVersion":2} -->
+<div class="wp-block-kadence-column kadence-column812_eb8b4d-99 kb-section-dir-vertical"><div class="kt-inside-inner-col"><!-- wp:html -->
+<div class="veteos-embed veteos-embed--wide">
+  <script type="text/javascript" src="https://on-demand.veteos.com/collections/s/8196643567274865/D3IsACy9dTJULt"></script>
+</div>
+<!-- /wp:html -->
+
+<!-- wp:kadence/advancedbtn {"uniqueID":"812_b10f96-92","btns":[],"margin":[{"desk":[null,"","",""],"tablet":["","","",""],"mobile":["","","",""]}],"gap":[25,"",""],"orientation":["column-reverse","",""]} -->
+<div class="wp-block-kadence-advancedbtn kb-buttons-wrap kb-btns812_b10f96-92"><!-- wp:kadence/singlebtn {"uniqueID":"812_65d4a6-80","text":"Watch more videos","link":"https://bellbrookvet.com/videos/","widthType":"fixed","padding":[20,"",20,""],"color":"palette9","background":"#234d69","colorHover":"#234d69","backgroundHover":"palette9","borderStyle":[{"top":["rgba(85, 85, 85, 0)","",3],"right":["rgba(85, 85, 85, 0)","",3],"bottom":["rgba(85, 85, 85, 0)","",3],"left":["rgba(85, 85, 85, 0)","",3],"unit":"px"}],"borderHoverStyle":[{"top":["#444444","",""],"right":["#444444","",""],"bottom":["#444444","",""],"left":["#444444","",""],"unit":"px"}],"borderRadius":[50,50,50,50],"icon":"fas_play-circle","iconColor":"palette9","iconColorHover":"#234d69","inheritStyles":"outline","typography":[{"size":["none","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"","letterSpacing":["","",""],"letterType":"px","family":"","google":false,"style":"normal","weight":"regular","variant":"","subset":"","textTransform":"","loadGoogle":true}],"noCustomDefaults":true} /--></div>
+<!-- /wp:kadence/advancedbtn --></div></div>
+<!-- /wp:kadence/column -->
+<!-- /wp:kadence/rowlayout -->
+
+<!-- wp:kadence/rowlayout {"uniqueID":"812_e80d41-1f","colLayout":"equal","bgColor":"#7fa5c5","overlay":"#36a1d3","overlaySecond":"#8ecae6","overlayFirstOpacity":1,"overlaySecondOpacity":1,"topSep":"mtns","topSepColor":"palette9","topSepHeight":69,"bottomSep":"","bottomSepColor":"palette9","bottomSepHeight":69,"firstColumnWidth":30,"secondColumnWidth":70,"thirdColumnWidth":0,"fourthColumnWidth":0,"fifthColumnWidth":0,"sixthColumnWidth":0,"columnsUnlocked":true,"padding":[68,"",18,""],"margin":[0,"","",""],"kbVersion":2} -->
+<!-- wp:kadence/column {"id":2,"borderWidth":["","","",""],"uniqueID":"812_198354-b9","kbVersion":2} -->
+<div class="wp-block-kadence-column kadence-column812_198354-b9"><div class="kt-inside-inner-col"><!-- wp:kadence/image {"id":12,"sizeSlug":"large","linkDestination":"none","uniqueID":"812_7e2a96-28"} -->
+<figure class="wp-block-kadence-image kb-image812_7e2a96-28 size-large"><img src="https://bellbrookvet.com/wp-content/uploads/2022/04/8196643567274865_icon-1024x1024.png" alt="" class="kb-img wp-image-12"/></figure>
+<!-- /wp:kadence/image --></div></div>
+<!-- /wp:kadence/column -->
+
+<!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"812_7dadf5-ce","kbVersion":2} -->
+<div class="wp-block-kadence-column kadence-column812_7dadf5-ce"><div class="kt-inside-inner-col"><!-- wp:kadence/advancedheading {"level":1,"uniqueID":"812_77e682-6b","align":"center","color":"palette9","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","colorClass":"theme-palette9","fontSize":["xxl","",""],"maxWidth":[1222,"",""]} -->
+<h1 class="kt-adv-heading812_77e682-6b wp-block-kadence-advancedheading has-theme-palette-9-color has-text-color" data-kb-block="kb-adv-heading812_77e682-6b">Helpful Tips &amp; Resources<br>for Pet Parents</h1>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedbtn {"uniqueID":"812_30d95c-c0","btns":[],"margin":[{"desk":[-17,"",0,""],"tablet":["","","",""],"mobile":["","","",""]}],"gap":[25,"",""],"className":"kt-btn-align-center kt-btn-tablet-align-inherit kt-btn-mobile-align-inherit kt-btns-wrap kt-btns_7d0f88-86"} -->
+<div class="wp-block-kadence-advancedbtn kb-buttons-wrap kb-btns812_30d95c-c0 kt-btn-align-center kt-btn-tablet-align-inherit kt-btn-mobile-align-inherit kt-btns-wrap kt-btns_7d0f88-86"><!-- wp:kadence/singlebtn {"uniqueID":"812_62bfb3-fb","text":"Explore Resources","widthType":"fixed","padding":[20,69,20,69],"color":"palette9","background":"#2b6cb0","backgroundHover":"#df5640","borderStyle":[{"top":["#22bb66","",""],"right":["#22bb66","",""],"bottom":["#22bb66","",""],"left":["#22bb66","",""],"unit":"px"}],"borderHoverStyle":[{"top":["#df5640","",""],"right":["#df5640","",""],"bottom":["#df5640","",""],"left":["#df5640","",""],"unit":"px"}],"borderRadius":[50,50,50,50],"inheritStyles":"outline","typography":[{"size":["","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"","letterSpacing":["","",""],"letterType":"px","family":"","google":false,"style":"normal","weight":"regular","variant":"","subset":"","textTransform":"","loadGoogle":true}],"noCustomDefaults":true} /--></div>
+<!-- /wp:kadence/advancedbtn --></div></div>
+<!-- /wp:kadence/column -->
+
+<!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"812_f5c182-d3","kbVersion":2,"className":"inner-column-1"} -->
+<div class="wp-block-kadence-column kadence-column812_f5c182-d3 inner-column-1"><div class="kt-inside-inner-col"></div></div>
+<!-- /wp:kadence/column -->
+<!-- /wp:kadence/rowlayout -->
+
+<!-- wp:kadence/rowlayout {"uniqueID":"812_359bfe-2c","columns":3,"colLayout":"equal","currentOverlayTab":"gradient","bgColor":"#7fa5c5","overlay":"#36a1d3","overlaySecond":"#8ecae6","overlayFirstOpacity":1,"overlaySecondOpacity":1,"overlayGradLoc":41,"overlayGradLocSecond":54,"topSep":"","bottomSep":"mtns","bottomSepColor":"palette8","columnsInnerHeight":true,"inheritMaxWidth":true,"overlayGradient":"linear-gradient(180deg, #36a1d3 41%, #8ecae6 54%)","padding":[19,"",122,""],"kbVersion":2,"kadenceBlockCSS":"selector\u005cn"} -->
+<!-- wp:kadence/column {"background":"palette9","borderWidth":["","","",""],"borderRadius":[30,30,30,30],"uniqueID":"812_6b07ec-b9","textAlign":[null,"",""],"displayShadow":true,"padding":["","",40,""],"borderStyle":[{"top":["palette7","",""],"right":["palette7","",""],"bottom":["palette7","",""],"left":["palette7","",""],"unit":"px"}],"kbVersion":2,"className":"inner-column-1"} -->
+<div class="wp-block-kadence-column kadence-column812_6b07ec-b9 inner-column-1"><div class="kt-inside-inner-col"><!-- wp:kadence/advancedheading {"level":4,"uniqueID":"812_a9415e-47","align":"center","color":"palette4","lineType":"em","letterSpacing":1,"typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","margin":["","",0,""],"padding":[30,20,30,20],"markBorder":"","textTransform":"uppercase","colorClass":"theme-palette4"} -->
+<h4 class="kt-adv-heading812_a9415e-47 wp-block-kadence-advancedheading has-theme-palette-4-color has-text-color" data-kb-block="kb-adv-heading812_a9415e-47">Puppy &amp; Kitten Tips</h4>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:html -->
+<script type="text/javascript" src="https://on-demand.veteos.com/embed-video/50929768076919256/qHQgensh30cADn"></script>
+<!-- /wp:html -->
+
+<!-- wp:kadence/advancedheading {"uniqueID":"812_21a219-25","color":"palette4","fontWeight":"300","padding":[20,20,20,20],"markBorder":"","colorClass":"theme-palette4","htmlTag":"p"} -->
+<p class="kt-adv-heading812_21a219-25 wp-block-kadence-advancedheading has-theme-palette-4-color has-text-color" data-kb-block="kb-adv-heading812_21a219-25">Keep your pet protected year-round with personalized vaccine and parasite-prevention plans.</p>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedbtn {"uniqueID":"812_fd9c99-ed","btns":[],"margin":[{"desk":["",20,"",20],"tablet":["","","",""],"mobile":["","","",""]}],"className":"kt-btn-align-center kt-btn-tablet-align-inherit kt-btn-mobile-align-inherit kt-btns-wrap kt-btns_b9d675-cc kt-force-btn-fullwidth"} -->
+<div class="wp-block-kadence-advancedbtn kb-buttons-wrap kb-btns812_fd9c99-ed kt-btn-align-center kt-btn-tablet-align-inherit kt-btn-mobile-align-inherit kt-btns-wrap kt-btns_b9d675-cc kt-force-btn-fullwidth"><!-- wp:kadence/singlebtn {"uniqueID":"812_517a8c-6e","text":"More Details...","link":"https://bellbrookvet.com/event/space-exploration/","widthType":"full","padding":[20,"",20,""],"color":"palette9","background":"palette2","colorHover":"palette9","backgroundHover":"#df5640","borderStyle":[{"top":["","",0],"right":["","",0],"bottom":["","",0],"left":["","",0],"unit":"px"}],"borderRadius":[50,50,50,50],"typography":[{"size":["","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"","letterSpacing":["","",""],"letterType":"px","family":"","google":false,"style":"normal","weight":"regular","variant":"","subset":"","textTransform":"","loadGoogle":true}],"noCustomDefaults":true} /--></div>
+<!-- /wp:kadence/advancedbtn --></div></div>
+<!-- /wp:kadence/column -->
+
+<!-- wp:kadence/column {"id":2,"background":"palette9","borderWidth":["","","",""],"borderRadius":[30,30,30,30],"uniqueID":"812_6ad8d9-b2","displayShadow":true,"padding":["","",40,""],"kbVersion":2,"className":"inner-column-2"} -->
+<div class="wp-block-kadence-column kadence-column812_6ad8d9-b2 inner-column-2"><div class="kt-inside-inner-col"><!-- wp:kadence/advancedheading {"level":4,"uniqueID":"812_a9da6d-0a","align":"center","color":"palette4","lineType":"em","letterSpacing":1,"typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","margin":["","",0,""],"padding":[30,20,30,20],"markBorder":"","textTransform":"uppercase","colorClass":"theme-palette4"} -->
+<h4 class="kt-adv-heading812_a9da6d-0a wp-block-kadence-advancedheading has-theme-palette-4-color has-text-color" data-kb-block="kb-adv-heading812_a9da6d-0a">Preventive Care</h4>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:image {"id":798,"sizeSlug":"full","linkDestination":"none","align":"center","className":"event-img"} -->
+<figure class="wp-block-image aligncenter size-full event-img"><img src="https://bellbrookvet.com/wp-content/uploads/2026/01/Cute-Cat-1.png" alt="" class="wp-image-798"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:kadence/advancedheading {"uniqueID":"812_3e8811-48","color":"palette4","fontWeight":"300","padding":[20,20,20,20],"markBorder":"","colorClass":"theme-palette4","htmlTag":"p"} -->
+<p class="kt-adv-heading812_3e8811-48 wp-block-kadence-advancedheading has-theme-palette-4-color has-text-color" data-kb-block="kb-adv-heading812_3e8811-48">New puppy or kitten? Get an easy first-year roadmap for vaccines, nutrition, and early habits.</p>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedbtn {"uniqueID":"812_344f73-e2","btns":[],"margin":[{"desk":["",20,"",20],"tablet":["","","",""],"mobile":["","","",""]}],"className":"kt-btn-align-center kt-btn-tablet-align-inherit kt-btn-mobile-align-inherit kt-btns-wrap kt-btns_ac2fb1-56 kt-force-btn-fullwidth"} -->
+<div class="wp-block-kadence-advancedbtn kb-buttons-wrap kb-btns812_344f73-e2 kt-btn-align-center kt-btn-tablet-align-inherit kt-btn-mobile-align-inherit kt-btns-wrap kt-btns_ac2fb1-56 kt-force-btn-fullwidth"><!-- wp:kadence/singlebtn {"uniqueID":"812_b0b4ec-e4","text":"\u003cmeta charset=\u0022utf-8\u0022\u003e\u003cmeta charset=\u0022utf-8\u0022\u003eMore Details...","link":"/resources/puppy-kitten-tips/","widthType":"full","padding":[20,"",20,""],"color":"palette9","background":"palette2","colorHover":"palette9","backgroundHover":"#df5640","borderStyle":[{"top":["#84a59d","",0],"right":["#84a59d","",0],"bottom":["#84a59d","",0],"left":["#84a59d","",0],"unit":"px"}],"borderHoverStyle":[{"top":["palette2","",""],"right":["palette2","",""],"bottom":["palette2","",""],"left":["palette2","",""],"unit":"px"}],"borderRadius":[50,50,50,50],"typography":[{"size":["none","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"","letterSpacing":["","",""],"letterType":"px","family":"","google":false,"style":"normal","weight":"regular","variant":"","subset":"","textTransform":"","loadGoogle":true}],"noCustomDefaults":true} /--></div>
+<!-- /wp:kadence/advancedbtn --></div></div>
+<!-- /wp:kadence/column -->
+
+<!-- wp:kadence/column {"id":3,"background":"palette9","borderWidth":["","","",""],"borderRadius":[30,30,30,30],"uniqueID":"812_6a8f02-73","displayShadow":true,"padding":["","",40,""],"kbVersion":2,"className":"inner-column-3"} -->
+<div class="wp-block-kadence-column kadence-column812_6a8f02-73 inner-column-3"><div class="kt-inside-inner-col"><!-- wp:kadence/advancedheading {"level":4,"uniqueID":"812_1f603b-be","align":"center","color":"palette4","lineType":"em","letterSpacing":1,"typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","margin":["","",0,""],"padding":[30,20,30,20],"markBorder":"","textTransform":"uppercase","colorClass":"theme-palette4"} -->
+<h4 class="kt-adv-heading812_1f603b-be wp-block-kadence-advancedheading has-theme-palette-4-color has-text-color" data-kb-block="kb-adv-heading812_1f603b-be">Dental Health</h4>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:image {"id":830,"sizeSlug":"large","linkDestination":"none","align":"center","className":"event-img"} -->
+<figure class="wp-block-image aligncenter size-large event-img"><img src="https://bellbrookvet.com/wp-content/uploads/2026/01/puppy-dental-care-pic-1-1024x1024.png" alt="" class="wp-image-830"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:kadence/advancedheading {"uniqueID":"812_455967-a2","color":"palette4","fontWeight":"300","padding":[20,20,20,20],"markBorder":"","colorClass":"theme-palette4","htmlTag":"p"} -->
+<p class="kt-adv-heading812_455967-a2 wp-block-kadence-advancedheading has-theme-palette-4-color has-text-color" data-kb-block="kb-adv-heading812_455967-a2">Learn what to watch for, how cleanings work, and simple at-home steps that support healthier teeth.</p>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedbtn {"uniqueID":"812_15ca22-ab","btns":[],"margin":[{"desk":["",20,"",20],"tablet":["","","",""],"mobile":["","","",""]}],"className":"kt-btn-align-center kt-btn-tablet-align-inherit kt-btn-mobile-align-inherit kt-btns-wrap kt-btns_541912-0b kt-force-btn-fullwidth"} -->
+<div class="wp-block-kadence-advancedbtn kb-buttons-wrap kb-btns812_15ca22-ab kt-btn-align-center kt-btn-tablet-align-inherit kt-btn-mobile-align-inherit kt-btns-wrap kt-btns_541912-0b kt-force-btn-fullwidth"><!-- wp:kadence/singlebtn {"uniqueID":"812_622b1c-2f","text":"\u003cmeta charset=\u0022utf-8\u0022\u003e\u003cmeta charset=\u0022utf-8\u0022\u003eMore Details...","link":"/resources/dental-health/","widthType":"full","padding":[20,"",20,""],"color":"palette9","background":"palette2","colorHover":"palette9","backgroundHover":"#df5640","borderStyle":[{"top":["#84a59d","",0],"right":["#84a59d","",0],"bottom":["#84a59d","",0],"left":["#84a59d","",0],"unit":"px"}],"borderHoverStyle":[{"top":["palette2","",""],"right":["palette2","",""],"bottom":["palette2","",""],"left":["palette2","",""],"unit":"px"}],"borderRadius":[50,50,50,50],"typography":[{"size":["none","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"","letterSpacing":["","",""],"letterType":"px","family":"","google":false,"style":"normal","weight":"regular","variant":"","subset":"","textTransform":"","loadGoogle":true}],"noCustomDefaults":true} /--></div>
+<!-- /wp:kadence/advancedbtn --></div></div>
+<!-- /wp:kadence/column -->
+<!-- /wp:kadence/rowlayout -->
+
+<!-- wp:kadence/rowlayout {"uniqueID":"812_93c387-80","columnGutter":"custom","customGutter":[80,"",""],"colLayout":"equal","bgColor":"#b6dcfe","verticalAlignment":"middle","topSep":"mtns","topSepColor":"palette8","bottomSep":"mtns","bottomSepColor":"palette9","firstColumnWidth":60,"secondColumnWidth":40,"inheritMaxWidth":true,"padding":[100,"",99,""],"kbVersion":2,"kadenceBlockCSS":"selector .rounded-corners {\u005cn  border-radius: 70px;\u005cn}"} -->
+<!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"812_f25823-d2","direction":["vertical","",""],"rowGapVariable":["custom","custom","custom"],"kbVersion":2} -->
+<div class="wp-block-kadence-column kadence-column812_f25823-d2 kb-section-dir-vertical"><div class="kt-inside-inner-col"><!-- wp:html -->
+<script type="text/javascript" src="https://on-demand.veteos.com/embed-video/8196643567274865/e1YBgEUBhOF6TQ"></script>
+<!-- /wp:html -->
+
+<!-- wp:kadence/rowlayout {"uniqueID":"812_6a70b4-fe","colLayout":"equal","padding":[0,"",25,""],"kbVersion":2} -->
+<!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"812_86b7dd-72","kbVersion":2,"className":"inner-column-1"} -->
+<div class="wp-block-kadence-column kadence-column812_86b7dd-72 inner-column-1"><div class="kt-inside-inner-col"><!-- wp:image {"id":831,"sizeSlug":"large","linkDestination":"none","className":"rounded-corners is-style-rounded"} -->
+<figure class="wp-block-image size-large rounded-corners is-style-rounded"><img src="https://bellbrookvet.com/wp-content/uploads/2026/01/Vet-and-Dog-pic-1-1024x1024.png" alt="" class="wp-image-831"/></figure>
+<!-- /wp:image --></div></div>
+<!-- /wp:kadence/column -->
+
+<!-- wp:kadence/column {"id":2,"borderWidth":["","","",""],"uniqueID":"812_aca7f5-10","kbVersion":2,"className":"inner-column-2"} -->
+<div class="wp-block-kadence-column kadence-column812_aca7f5-10 inner-column-2"><div class="kt-inside-inner-col"><!-- wp:image {"id":834,"sizeSlug":"large","linkDestination":"none","className":"rounded-corners is-style-rounded"} -->
+<figure class="wp-block-image size-large rounded-corners is-style-rounded"><img src="https://bellbrookvet.com/wp-content/uploads/2026/01/bunny-and-vet-pic-1-1024x1024.png" alt="" class="wp-image-834"/></figure>
+<!-- /wp:image --></div></div>
+<!-- /wp:kadence/column -->
+<!-- /wp:kadence/rowlayout --></div></div>
+<!-- /wp:kadence/column -->
+
+<!-- wp:kadence/column {"id":2,"borderWidth":["","","",""],"uniqueID":"812_29c5c2-79","kbVersion":2,"className":"inner-column-2"} -->
+<div class="wp-block-kadence-column kadence-column812_29c5c2-79 inner-column-2"><div class="kt-inside-inner-col"><!-- wp:kadence/advancedheading {"uniqueID":"812_a5043a-18","align":"left","color":"#ff9d00","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","colorClass":"","fontSize":["lg","",""],"borderStyle":[{"top":["palette5","",0],"right":["palette5","",0],"bottom":["palette5","",0],"left":["palette5","",0],"unit":"px"}],"textGradient":"linear-gradient(180deg,rgb(255,157,0) 55%,rgb(68,79,87) 100%)"} -->
+<h2 class="kt-adv-heading812_a5043a-18 wp-block-kadence-advancedheading" data-kb-block="kb-adv-heading812_a5043a-18">A few moments with us</h2>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedheading {"uniqueID":"812_80182a-b0","align":"left","color":"palette4","fontWeight":"300","markBorder":"","colorClass":"theme-palette4","htmlTag":"p"} -->
+<p class="kt-adv-heading812_80182a-b0 wp-block-kadence-advancedheading has-theme-palette-4-color has-text-color" data-kb-block="kb-adv-heading812_80182a-b0">Kind people, gentle handling, and clear communication. <br>All so you and your pet feel comfortable every step of the way.</p>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedbtn {"hAlign":"left","uniqueID":"812_0534c8-b6","btns":[],"margin":[{"desk":[40,"","",""],"tablet":["","","",""],"mobile":["","","",""]}],"gap":[25,"",""],"className":"kt-btn-align-left kt-btn-tablet-align-inherit kt-btn-mobile-align-inherit kt-btns-wrap kt-btns_4f86ba-5d kt-force-btn-fullwidth"} -->
+<div class="wp-block-kadence-advancedbtn kb-buttons-wrap kb-btns812_0534c8-b6 kt-btn-align-left kt-btn-tablet-align-inherit kt-btn-mobile-align-inherit kt-btns-wrap kt-btns_4f86ba-5d kt-force-btn-fullwidth"><!-- wp:kadence/singlebtn {"uniqueID":"812_16e47f-ed","text":"Explore Resources","widthType":"full","padding":[20,"",20,""],"color":"palette9","background":"palette2","backgroundHover":"#df5640","borderStyle":[{"top":["rgba(26,32,44,0)","",""],"right":["rgba(26,32,44,0)","",""],"bottom":["rgba(26,32,44,0)","",""],"left":["rgba(26,32,44,0)","",""],"unit":"px"}],"borderHoverStyle":[{"top":["palette4","",""],"right":["palette4","",""],"bottom":["palette4","",""],"left":["palette4","",""],"unit":"px"}],"borderRadius":[50,50,50,50],"inheritStyles":"outline","typography":[{"size":["","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"","letterSpacing":["","",""],"letterType":"px","family":"","google":false,"style":"normal","weight":"regular","variant":"","subset":"","textTransform":"","loadGoogle":true}],"noCustomDefaults":true} /-->
+
+<!-- wp:kadence/singlebtn {"uniqueID":"812_8e960a-86","text":"Watch Our Story","widthType":"full","padding":[20,"",20,""],"color":"palette1","colorHover":"#df5640","backgroundHover":"palette9","borderStyle":[{"top":["","",0],"right":["","",0],"bottom":["","",0],"left":["","",0],"unit":"px"}],"borderRadius":[50,50,50,50],"icon":"fas_play-circle","iconColor":"#ff9d00","iconColorHover":"#df5640","iconSide":"left","iconSize":[32,"",""],"inheritStyles":"outline","typography":[{"size":["","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"","letterSpacing":["","",""],"letterType":"px","family":"","google":false,"style":"normal","weight":"regular","variant":"","subset":"","textTransform":"","loadGoogle":true}],"noCustomDefaults":true} /--></div>
+<!-- /wp:kadence/advancedbtn --></div></div>
+<!-- /wp:kadence/column -->
+<!-- /wp:kadence/rowlayout -->
+
+<!-- wp:kadence/rowlayout {"uniqueID":"812_c92ee8-97","columns":1,"colLayout":"equal","maxWidth":750,"bgColor":"#e6f4f1","bgImgPosition":"50% 50%","overlayOpacity":65,"topSep":"mtns","topSepHeight":77,"padding":[89,"",25,""],"kbVersion":2} -->
+<!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"812_beecb6-77","kbVersion":2,"className":"inner-column-1"} -->
+<div class="wp-block-kadence-column kadence-column812_beecb6-77 inner-column-1"><div class="kt-inside-inner-col"><!-- wp:kadence/advancedheading {"uniqueID":"812_061ead-05","align":"center","color":"palette4","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","colorClass":"theme-palette4","fontSize":["xl","",""],"maxWidth":[1134,"",""]} -->
+<h2 class="kt-adv-heading812_061ead-05 wp-block-kadence-advancedheading has-theme-palette-4-color has-text-color" data-kb-block="kb-adv-heading812_061ead-05">We love our staff and think <br>you will too.</h2>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedheading {"uniqueID":"812_7a6ca0-d1","align":"center","color":"palette4","fontWeight":"300","markBorder":"","colorClass":"theme-palette4","htmlTag":"p","fontSize":["md","",""]} -->
+<p class="kt-adv-heading812_7a6ca0-d1 wp-block-kadence-advancedheading has-theme-palette-4-color has-text-color" data-kb-block="kb-adv-heading812_7a6ca0-d1">Friendly faces, calm visits, and clear answers. <br>Our team is here to help you feel confident about your pet’s care.</p>
+<!-- /wp:kadence/advancedheading --></div></div>
+<!-- /wp:kadence/column -->
+<!-- /wp:kadence/rowlayout -->
+
+<!-- wp:kadence/rowlayout {"uniqueID":"812_dcc90f-a0","columns":4,"columnGutter":"none","colLayout":"equal","bgColor":"#e6f4f1","verticalAlignment":"middle","inheritMaxWidth":true,"padding":[25,"",0,""],"kbVersion":2,"kadenceBlockCSS":"selector .rounded-corners {\u005cn  border-radius: 70px;\u005cn}"} -->
+<!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"812_3ce0c2-b2","backgroundImg":[{"bgImg":"https://bellbrookvet.com/wp-content/uploads/2026/01/9.png","bgImgID":870,"bgImgSize":"104% 70%","bgImgPosition":"21% 12%","bgImgAttachment":"scroll","bgImgRepeat":"no-repeat"}],"padding":[30,30,30,30],"kbVersion":2,"className":"inner-column-1"} -->
+<div class="wp-block-kadence-column kadence-column812_3ce0c2-b2 inner-column-1"><div class="kt-inside-inner-col"><!-- wp:image {"id":839,"width":"241px","height":"auto","aspectRatio":"0.7998340593237917","sizeSlug":"large","linkDestination":"none","className":"rounded-corners is-style-rounded"} -->
+<figure class="wp-block-image size-large is-resized rounded-corners is-style-rounded"><img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-3-819x1024.png" alt="" class="wp-image-839" style="aspect-ratio:0.7998340593237917;width:241px;height:auto"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:kadence/advancedheading {"level":4,"uniqueID":"812_7291c5-ed","align":"center","color":"palette2","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","textTransform":"capitalize","colorClass":"theme-palette2"} -->
+<h4 class="kt-adv-heading812_7291c5-ed wp-block-kadence-advancedheading has-theme-palette-2-color has-text-color" data-kb-block="kb-adv-heading812_7291c5-ed">Dr. Jordan Bell</h4>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedheading {"level":5,"uniqueID":"812_424ce8-b4","align":"center","color":"palette6","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","textTransform":"uppercase","colorClass":"theme-palette6"} -->
+<h5 class="kt-adv-heading812_424ce8-b4 wp-block-kadence-advancedheading has-theme-palette-6-color has-text-color" data-kb-block="kb-adv-heading812_424ce8-b4">Veterinarian</h5>
+<!-- /wp:kadence/advancedheading --></div></div>
+<!-- /wp:kadence/column -->
+
+<!-- wp:kadence/column {"id":2,"borderWidth":["","","",""],"uniqueID":"812_104b73-46","backgroundImg":[{"bgImg":"https://bellbrookvet.com/wp-content/uploads/2026/01/2.png","bgImgID":863,"bgImgSize":"93% 56%","bgImgPosition":"54% 14.000000000000002%","bgImgAttachment":"scroll","bgImgRepeat":"no-repeat"}],"padding":[30,30,30,30],"kbVersion":2,"className":"inner-column-2"} -->
+<div class="wp-block-kadence-column kadence-column812_104b73-46 inner-column-2"><div class="kt-inside-inner-col"><!-- wp:image {"id":842,"sizeSlug":"large","linkDestination":"none","className":"rounded-corners is-style-rounded"} -->
+<figure class="wp-block-image size-large rounded-corners is-style-rounded"><img src="https://bellbrookvet.com/wp-content/uploads/2026/01/dog-vet-1-819x1024.png" alt="" class="wp-image-842"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:kadence/advancedheading {"level":4,"uniqueID":"812_9b4846-68","align":"center","color":"palette2","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","textTransform":"capitalize","colorClass":"theme-palette2"} -->
+<h4 class="kt-adv-heading812_9b4846-68 wp-block-kadence-advancedheading has-theme-palette-2-color has-text-color" data-kb-block="kb-adv-heading812_9b4846-68">Sam "Good Boy" Rivera</h4>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedheading {"level":5,"uniqueID":"812_74cc57-42","align":"center","color":"palette6","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","textTransform":"uppercase","colorClass":"theme-palette6"} -->
+<h5 class="kt-adv-heading812_74cc57-42 wp-block-kadence-advancedheading has-theme-palette-6-color has-text-color" data-kb-block="kb-adv-heading812_74cc57-42">Office Manager</h5>
+<!-- /wp:kadence/advancedheading --></div></div>
+<!-- /wp:kadence/column -->
+
+<!-- wp:kadence/column {"id":3,"borderWidth":["","","",""],"uniqueID":"812_7109d8-9e","backgroundImg":[{"bgImg":"https://bellbrookvet.com/wp-content/uploads/2026/01/6-e1768502291792.png","bgImgID":867,"bgImgSize":"135% 60%","bgImgPosition":"50% 23%","bgImgAttachment":"scroll","bgImgRepeat":"no-repeat"}],"overlay":"rgba(0,0,102,0)","padding":[30,30,30,30],"kbVersion":2,"className":"inner-column-3"} -->
+<div class="wp-block-kadence-column kadence-column812_7109d8-9e kb-section-has-overlay inner-column-3"><div class="kt-inside-inner-col"><!-- wp:image {"id":858,"sizeSlug":"large","linkDestination":"none","className":"rounded-corners is-style-rounded"} -->
+<figure class="wp-block-image size-large rounded-corners is-style-rounded"><img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-5-819x1024.png" alt="" class="wp-image-858"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:kadence/advancedheading {"level":4,"uniqueID":"812_ae7ed4-81","align":"center","color":"palette2","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","textTransform":"capitalize","colorClass":"theme-palette2"} -->
+<h4 class="kt-adv-heading812_ae7ed4-81 wp-block-kadence-advancedheading has-theme-palette-2-color has-text-color" data-kb-block="kb-adv-heading812_ae7ed4-81">Dr. Ryan Fredricks</h4>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedheading {"level":5,"uniqueID":"812_ff8aac-24","align":"center","color":"palette6","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","textTransform":"uppercase","colorClass":"theme-palette6"} -->
+<h5 class="kt-adv-heading812_ff8aac-24 wp-block-kadence-advancedheading has-theme-palette-6-color has-text-color" data-kb-block="kb-adv-heading812_ff8aac-24">Client Care</h5>
+<!-- /wp:kadence/advancedheading --></div></div>
+<!-- /wp:kadence/column -->
+
+<!-- wp:kadence/column {"id":4,"borderWidth":["","","",""],"uniqueID":"812_9eda68-77","backgroundImg":[{"bgImg":"https://bellbrookvet.com/wp-content/uploads/2026/01/5-e1768502391237.png","bgImgID":866,"bgImgSize":"110% 60%","bgImgPosition":"50% 11%","bgImgAttachment":"scroll","bgImgRepeat":"no-repeat"}],"padding":[30,30,30,30],"kbVersion":2,"className":"inner-column-4"} -->
+<div class="wp-block-kadence-column kadence-column812_9eda68-77 inner-column-4"><div class="kt-inside-inner-col"><!-- wp:image {"id":837,"sizeSlug":"large","linkDestination":"none","className":"rounded-corners is-style-rounded"} -->
+<figure class="wp-block-image size-large rounded-corners is-style-rounded"><img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-tech-1-819x1024.png" alt="" class="wp-image-837"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:kadence/advancedheading {"level":4,"uniqueID":"812_591974-02","align":"center","color":"palette2","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","textTransform":"capitalize","colorClass":"theme-palette2"} -->
+<h4 class="kt-adv-heading812_591974-02 wp-block-kadence-advancedheading has-theme-palette-2-color has-text-color" data-kb-block="kb-adv-heading812_591974-02">Alexis Grant</h4>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedheading {"level":5,"uniqueID":"812_fb2aed-d1","align":"center","color":"palette6","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","textTransform":"uppercase","colorClass":"theme-palette6"} -->
+<h5 class="kt-adv-heading812_fb2aed-d1 wp-block-kadence-advancedheading has-theme-palette-6-color has-text-color" data-kb-block="kb-adv-heading812_fb2aed-d1">Veterinary Assistant</h5>
+<!-- /wp:kadence/advancedheading --></div></div>
+<!-- /wp:kadence/column -->
+<!-- /wp:kadence/rowlayout -->
+
+<!-- wp:kadence/rowlayout {"uniqueID":"812_5e943b-8e","columns":4,"columnGutter":"none","colLayout":"equal","bgColor":"#e6f4f1","verticalAlignment":"middle","bottomSep":"mtns","inheritMaxWidth":true,"padding":[25,"",100,""],"kbVersion":2,"kadenceBlockCSS":"selector .rounded-corners {\u005cn  border-radius: 70px;\u005cn}"} -->
+<!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"812_149ee9-31","backgroundImg":[{"bgImg":"https://bellbrookvet.com/wp-content/uploads/2026/01/4.png","bgImgID":865,"bgImgSize":"96% 74%","bgImgPosition":"48% 0%","bgImgAttachment":"scroll","bgImgRepeat":"no-repeat"}],"padding":[30,30,30,30],"kbVersion":2,"className":"inner-column-1"} -->
+<div class="wp-block-kadence-column kadence-column812_149ee9-31 inner-column-1"><div class="kt-inside-inner-col"><!-- wp:image {"id":835,"sizeSlug":"large","linkDestination":"none","className":"rounded-corners is-style-rounded"} -->
+<figure class="wp-block-image size-large rounded-corners is-style-rounded"><img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-tech-3-819x1024.png" alt="" class="wp-image-835"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:kadence/advancedheading {"level":4,"uniqueID":"812_d1d909-a8","align":"center","color":"palette2","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","textTransform":"capitalize","colorClass":"theme-palette2"} -->
+<h4 class="kt-adv-heading812_d1d909-a8 wp-block-kadence-advancedheading has-theme-palette-2-color has-text-color" data-kb-block="kb-adv-heading812_d1d909-a8">Taylor Brooks</h4>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedheading {"level":5,"uniqueID":"812_9062c3-d7","align":"center","color":"palette6","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","textTransform":"uppercase","colorClass":"theme-palette6"} -->
+<h5 class="kt-adv-heading812_9062c3-d7 wp-block-kadence-advancedheading has-theme-palette-6-color has-text-color" data-kb-block="kb-adv-heading812_9062c3-d7">Veterinary Technician</h5>
+<!-- /wp:kadence/advancedheading --></div></div>
+<!-- /wp:kadence/column -->
+
+<!-- wp:kadence/column {"id":2,"borderWidth":["","","",""],"uniqueID":"812_aba07c-62","backgroundImg":[{"bgImg":"https://bellbrookvet.com/wp-content/uploads/2026/01/10.png","bgImgID":871,"bgImgSize":"93% 74%","bgImgPosition":"46% 0%","bgImgAttachment":"scroll","bgImgRepeat":"no-repeat"}],"padding":[30,30,30,30],"kbVersion":2,"className":"inner-column-2"} -->
+<div class="wp-block-kadence-column kadence-column812_aba07c-62 inner-column-2"><div class="kt-inside-inner-col"><!-- wp:image {"id":838,"sizeSlug":"large","linkDestination":"none","className":"rounded-corners is-style-rounded"} -->
+<figure class="wp-block-image size-large rounded-corners is-style-rounded"><img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-4-819x1024.png" alt="" class="wp-image-838"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:kadence/advancedheading {"level":4,"uniqueID":"812_789afd-5a","align":"center","color":"palette2","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","textTransform":"capitalize","colorClass":"theme-palette2"} -->
+<h4 class="kt-adv-heading812_789afd-5a wp-block-kadence-advancedheading has-theme-palette-2-color has-text-color" data-kb-block="kb-adv-heading812_789afd-5a">Dr. Priya Patel</h4>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedheading {"level":5,"uniqueID":"812_fef7ac-53","align":"center","color":"palette6","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","textTransform":"uppercase","colorClass":"theme-palette6"} -->
+<h5 class="kt-adv-heading812_fef7ac-53 wp-block-kadence-advancedheading has-theme-palette-6-color has-text-color" data-kb-block="kb-adv-heading812_fef7ac-53">Veterinarian</h5>
+<!-- /wp:kadence/advancedheading --></div></div>
+<!-- /wp:kadence/column -->
+
+<!-- wp:kadence/column {"id":3,"borderWidth":["","","",""],"uniqueID":"812_357a92-af","backgroundImg":[{"bgImg":"https://bellbrookvet.com/wp-content/uploads/2026/01/8.png","bgImgID":869,"bgImgSize":"98% 76%","bgImgPosition":"0% 0%","bgImgAttachment":"scroll","bgImgRepeat":"no-repeat"}],"padding":[30,30,30,30],"kbVersion":2,"className":"inner-column-3"} -->
+<div class="wp-block-kadence-column kadence-column812_357a92-af inner-column-3"><div class="kt-inside-inner-col"><!-- wp:image {"id":836,"sizeSlug":"large","linkDestination":"none","className":"rounded-corners is-style-rounded"} -->
+<figure class="wp-block-image size-large rounded-corners is-style-rounded"><img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-tech-2-819x1024.png" alt="" class="wp-image-836"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:kadence/advancedheading {"level":4,"uniqueID":"812_cf11e4-ba","align":"center","color":"palette2","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","textTransform":"capitalize","colorClass":"theme-palette2"} -->
+<h4 class="kt-adv-heading812_cf11e4-ba wp-block-kadence-advancedheading has-theme-palette-2-color has-text-color" data-kb-block="kb-adv-heading812_cf11e4-ba">Casey Myers</h4>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedheading {"level":5,"uniqueID":"812_10efe4-11","align":"center","color":"palette6","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","textTransform":"uppercase","colorClass":"theme-palette6"} -->
+<h5 class="kt-adv-heading812_10efe4-11 wp-block-kadence-advancedheading has-theme-palette-6-color has-text-color" data-kb-block="kb-adv-heading812_10efe4-11">Technician Assistant</h5>
+<!-- /wp:kadence/advancedheading --></div></div>
+<!-- /wp:kadence/column -->
+
+<!-- wp:kadence/column {"id":4,"borderWidth":["","","",""],"uniqueID":"812_1cd85b-74","backgroundImg":[{"bgImg":"https://bellbrookvet.com/wp-content/uploads/2026/01/3.png","bgImgID":864,"bgImgSize":"125% 69%","bgImgPosition":"50% 14.000000000000002%","bgImgAttachment":"scroll","bgImgRepeat":"no-repeat"}],"padding":[30,30,30,30],"kbVersion":2,"className":"inner-column-4"} -->
+<div class="wp-block-kadence-column kadence-column812_1cd85b-74 inner-column-4"><div class="kt-inside-inner-col"><!-- wp:image {"id":841,"sizeSlug":"large","linkDestination":"none","className":"rounded-corners is-style-rounded"} -->
+<figure class="wp-block-image size-large rounded-corners is-style-rounded"><img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-1-819x1024.png" alt="" class="wp-image-841"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:kadence/advancedheading {"level":4,"uniqueID":"812_2476a9-4c","align":"center","color":"palette2","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","textTransform":"capitalize","colorClass":"theme-palette2"} -->
+<h4 class="kt-adv-heading812_2476a9-4c wp-block-kadence-advancedheading has-theme-palette-2-color has-text-color" data-kb-block="kb-adv-heading812_2476a9-4c">Riley Johnson</h4>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/advancedheading {"level":5,"uniqueID":"812_e979d4-66","align":"center","color":"palette6","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","textTransform":"uppercase","colorClass":"theme-palette6"} -->
+<h5 class="kt-adv-heading812_e979d4-66 wp-block-kadence-advancedheading has-theme-palette-6-color has-text-color" data-kb-block="kb-adv-heading812_e979d4-66">Client Care</h5>
+<!-- /wp:kadence/advancedheading --></div></div>
+<!-- /wp:kadence/column -->
+<!-- /wp:kadence/rowlayout -->
+
+<!-- wp:kadence/rowlayout {"uniqueID":"812_0a456d-94","columns":1,"colLayout":"equal","maxWidth":750,"bgColor":"#234d69","overlay":"#f28482","overlayFirstOpacity":1,"overlayOpacity":0,"topSep":"wavesi","topSepColor":"palette9","bottomSep":"","padding":[155,"",25,""],"kbVersion":2} -->
+<!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"812_133a8b-9a","kbVersion":2,"className":"inner-column-1"} -->
+<div class="wp-block-kadence-column kadence-column812_133a8b-9a inner-column-1"><div class="kt-inside-inner-col"><!-- wp:kadence/advancedheading {"uniqueID":"812_404d20-92","align":"center","color":"palette9","typography":"Lilita One","googleFont":true,"fontSubset":"latin","fontVariant":"regular","fontWeight":"400","markBorder":"","colorClass":"theme-palette9","fontSize":["lg","",""]} -->
+<h2 class="kt-adv-heading812_404d20-92 wp-block-kadence-advancedheading has-theme-palette-9-color has-text-color" data-kb-block="kb-adv-heading812_404d20-92">Comments from Our Clients and Staff ♡</h2>
+<!-- /wp:kadence/advancedheading --></div></div>
+<!-- /wp:kadence/column -->
+<!-- /wp:kadence/rowlayout -->
+
+<!-- wp:kadence/rowlayout {"uniqueID":"812_73c063-10","columns":3,"colLayout":"equal","currentOverlayTab":"gradient","bgColor":"#234d69","overlay":"#f28482","overlaySecond":"#f5cac3","overlayFirstOpacity":1,"overlaySecondOpacity":1,"overlayGradLoc":41,"overlayGradLocSecond":54,"overlayOpacity":33,"topSep":"","bottomSep":"wavesi","bottomSepColor":"palette8","inheritMaxWidth":true,"overlayGradient":"linear-gradient(1deg,rgb(214,226,214) 41%,rgb(35,77,105) 94%)","padding":[0,"",125,""],"kbVersion":2} -->
+<!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"812_e66d12-be","backgroundImg":[{"bgImg":"https://bellbrookvet.com/wp-content/uploads/2026/01/6-e1768503325619.png","bgImgID":867,"bgImgSize":"129% 61%","bgImgPosition":"52% 34%","bgImgAttachment":"scroll","bgImgRepeat":"no-repeat"}],"textAlign":["center","",""],"padding":["","",null,""],"kbVersion":2,"className":"inner-column-1"} -->
+<div class="wp-block-kadence-column kadence-column812_e66d12-be inner-column-1"><div class="kt-inside-inner-col"><!-- wp:group {"style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group" style="padding-top:0;padding-bottom:0"><!-- wp:kadence/spacer {"dividerOpacity":2,"dividerColor":"#f5cac3","uniqueID":"812_d7b5c5-5f"} -->
+<div class="wp-block-kadence-spacer aligncenter kt-block-spacer-812_d7b5c5-5f"><div class="kt-block-spacer kt-block-spacer-halign-center"><hr class="kt-divider"/></div></div>
+<!-- /wp:kadence/spacer --></div>
+<!-- /wp:group -->
+
+<!-- wp:kadence/infobox {"uniqueID":"812_1bfed5-74","containerBackground":"#ffffff","containerPadding":["sm","sm","sm","sm"],"mediaImage":[{"url":"","id":"","alt":"","width":"","height":"","maxWidth":100,"hoverAnimation":"none","flipUrl":"","flipId":"","flipAlt":"","flipWidth":"","flipHeight":"","subtype":"","flipSubtype":""}],"mediaIcon":[{"icon":"fas_paw","size":50,"width":2,"title":"","color":"","hoverColor":"","hoverAnimation":"none","flipIcon":""}],"mediaStyle":[{"background":"#ffffff","hoverBackground":"","border":"var(\u002d\u002dglobal-palette7, #eeeeee)","hoverBorder":"","borderRadius":200,"borderWidth":[5,5,5,5],"padding":[20,20,20,20],"margin":[-75,0,20,0]}],"titleFont":[{"level":2,"size":["","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","textTransform":"","family":"","google":false,"style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":[0,0,0,0],"paddingControl":"linked","margin":[5,0,10,0],"marginControl":"individual"}],"textFont":[{"size":["md","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true,"textTransform":""}],"containerMargin":[50,"","",""],"borderStyle":[{"top":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"right":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"bottom":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"left":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"unit":"px"}],"borderRadius":[20,20,20,20],"kbVersion":2} -->
+<div class="wp-block-kadence-infobox kt-info-box812_1bfed5-74"><span class="kt-blocks-info-box-link-wrap info-box-link kt-blocks-info-box-media-align-top kt-info-halign-center"><div class="kt-blocks-info-box-media-container"><div class="kt-blocks-info-box-media kt-info-media-animate-none"><div class="kadence-info-box-icon-container kt-info-icon-animate-none"><div class="kadence-info-box-icon-inner-container"><span data-name="fas_paw" data-class="kt-info-svg-icon" class="kadence-dynamic-icon"></span></div></div></div></div><div class="kt-infobox-textcontent"><h2 class="kt-blocks-info-box-title">Dr. Priya</h2><p class="kt-blocks-info-box-text">“I’ll always explain the ‘why’—you deserve to feel confident about every decision.” - Staff</p></div></span></div>
+<!-- /wp:kadence/infobox -->
+
+<!-- wp:kadence/spacer {"spacerHeight":75,"dividerWidth":63,"uniqueID":"812_893e21-48"} -->
+<div class="wp-block-kadence-spacer aligncenter kt-block-spacer-812_893e21-48"><div class="kt-block-spacer kt-block-spacer-halign-center"><hr class="kt-divider"/></div></div>
+<!-- /wp:kadence/spacer -->
+
+<!-- wp:kadence/infobox {"uniqueID":"812_5de30a-e1","containerBackground":"#ffffff","containerPadding":["sm","sm","sm","sm"],"mediaImage":[{"url":"","id":"","alt":"","width":"","height":"","maxWidth":100,"hoverAnimation":"none","flipUrl":"","flipId":"","flipAlt":"","flipWidth":"","flipHeight":"","subtype":"","flipSubtype":""}],"mediaIcon":[{"icon":"fe_aperture","size":50,"width":2,"title":"","color":"","hoverColor":"","hoverAnimation":"none","flipIcon":""}],"mediaStyle":[{"background":"#ffffff","hoverBackground":"","border":"var(\u002d\u002dglobal-palette7, #eeeeee)","hoverBorder":"","borderRadius":200,"borderWidth":[5,5,5,5],"padding":[20,20,20,20],"margin":[-75,0,20,0]}],"titleFont":[{"level":2,"size":["","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","textTransform":"","family":"","google":false,"style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":[0,0,0,0],"paddingControl":"linked","margin":[5,0,10,0],"marginControl":"individual"}],"textFont":[{"size":["md","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true,"textTransform":""}],"containerMargin":[50,"","",""],"borderStyle":[{"top":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"right":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"bottom":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"left":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"unit":"px"}],"borderRadius":[20,20,20,20],"kbVersion":2} -->
+<div class="wp-block-kadence-infobox kt-info-box812_5de30a-e1"><span class="kt-blocks-info-box-link-wrap info-box-link kt-blocks-info-box-media-align-top kt-info-halign-center"><div class="kt-blocks-info-box-media-container"><div class="kt-blocks-info-box-media kt-info-media-animate-none"><div class="kadence-info-box-icon-container kt-info-icon-animate-none"><div class="kadence-info-box-icon-inner-container"><span data-name="fe_aperture" data-stroke="2" data-class="kt-info-svg-icon" class="kadence-dynamic-icon"></span></div></div></div></div><div class="kt-infobox-textcontent"><h2 class="kt-blocks-info-box-title">Casey M. </h2><p class="kt-blocks-info-box-text">“I’m basically a professional ‘good boy/girl’ announcer.” - Staff</p></div></span></div>
+<!-- /wp:kadence/infobox --></div></div>
+<!-- /wp:kadence/column -->
+
+<!-- wp:kadence/column {"id":2,"borderWidth":["","","",""],"uniqueID":"812_abeec7-8a","backgroundImg":[{"bgImg":"https://bellbrookvet.com/wp-content/uploads/2026/01/5-e1768502391237.png","bgImgID":866,"bgImgSize":"117% 79%","bgImgPosition":"54% 44%","bgImgAttachment":"scroll","bgImgRepeat":"no-repeat"}],"textAlign":["center","",""],"padding":["","",null,""],"kbVersion":2,"className":"inner-column-1"} -->
+<div class="wp-block-kadence-column kadence-column812_abeec7-8a inner-column-1"><div class="kt-inside-inner-col"><!-- wp:group {"layout":{"type":"constrained"}} -->
+<div class="wp-block-group"><!-- wp:kadence/spacer {"spacerHeight":38,"dividerOpacity":2,"dividerColor":"#f5cac3","uniqueID":"812_1c511b-94"} -->
+<div class="wp-block-kadence-spacer aligncenter kt-block-spacer-812_1c511b-94"><div class="kt-block-spacer kt-block-spacer-halign-center"><hr class="kt-divider"/></div></div>
+<!-- /wp:kadence/spacer --></div>
+<!-- /wp:group -->
+
+<!-- wp:kadence/infobox {"uniqueID":"812_30ecbc-bf","containerBackground":"#ffffff","containerPadding":["sm","sm","sm","sm"],"mediaImage":[{"url":"","id":"","alt":"","width":"","height":"","maxWidth":100,"hoverAnimation":"none","flipUrl":"","flipId":"","flipAlt":"","flipWidth":"","flipHeight":"","subtype":"","flipSubtype":""}],"mediaIcon":[{"icon":"fe_aperture","size":50,"width":2,"title":"","color":"","hoverColor":"","hoverAnimation":"none","flipIcon":""}],"mediaStyle":[{"background":"#ffffff","hoverBackground":"","border":"var(\u002d\u002dglobal-palette7, #eeeeee)","hoverBorder":"","borderRadius":200,"borderWidth":[5,5,5,5],"padding":[20,20,20,20],"margin":[-75,0,20,0]}],"titleFont":[{"level":2,"size":["","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","textTransform":"","family":"","google":false,"style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":[0,0,0,0],"paddingControl":"linked","margin":[5,0,10,0],"marginControl":"individual"}],"textFont":[{"size":["md","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true,"textTransform":""}],"containerMargin":[50,"","",""],"borderStyle":[{"top":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"right":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"bottom":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"left":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"unit":"px"}],"borderRadius":[20,20,20,20],"kbVersion":2} -->
+<div class="wp-block-kadence-infobox kt-info-box812_30ecbc-bf"><span class="kt-blocks-info-box-link-wrap info-box-link kt-blocks-info-box-media-align-top kt-info-halign-center"><div class="kt-blocks-info-box-media-container"><div class="kt-blocks-info-box-media kt-info-media-animate-none"><div class="kadence-info-box-icon-container kt-info-icon-animate-none"><div class="kadence-info-box-icon-inner-container"><span data-name="fe_aperture" data-stroke="2" data-class="kt-info-svg-icon" class="kadence-dynamic-icon"></span></div></div></div></div><div class="kt-infobox-textcontent"><h2 class="kt-blocks-info-box-title">Josh B.</h2><p class="kt-blocks-info-box-text">“My dog’s breath was rough and I thought it was ‘normal.’ Turns out it wasn’t. So glad we came in.” - Client</p></div></span></div>
+<!-- /wp:kadence/infobox -->
+
+<!-- wp:kadence/spacer {"spacerHeight":74,"uniqueID":"812_4ef975-9f"} -->
+<div class="wp-block-kadence-spacer aligncenter kt-block-spacer-812_4ef975-9f"><div class="kt-block-spacer kt-block-spacer-halign-center"><hr class="kt-divider"/></div></div>
+<!-- /wp:kadence/spacer -->
+
+<!-- wp:kadence/infobox {"uniqueID":"812_f7007b-c8","containerBackground":"#ffffff","containerPadding":["sm","sm","sm","sm"],"mediaImage":[{"url":"","id":"","alt":"","width":"","height":"","maxWidth":100,"hoverAnimation":"none","flipUrl":"","flipId":"","flipAlt":"","flipWidth":"","flipHeight":"","subtype":"","flipSubtype":""}],"mediaIcon":[{"icon":"fas_camera-retro","size":50,"width":2,"title":"","color":"","hoverColor":"","hoverAnimation":"none","flipIcon":""}],"mediaStyle":[{"background":"#ffffff","hoverBackground":"","border":"var(\u002d\u002dglobal-palette7, #eeeeee)","hoverBorder":"","borderRadius":200,"borderWidth":[5,5,5,5],"padding":[20,20,20,20],"margin":[-75,0,20,0]}],"titleFont":[{"level":2,"size":["","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","textTransform":"","family":"","google":false,"style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":[0,0,0,0],"paddingControl":"linked","margin":[5,0,10,0],"marginControl":"individual"}],"textFont":[{"size":["md","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true,"textTransform":""}],"containerMargin":[50,"","",""],"borderStyle":[{"top":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"right":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"bottom":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"left":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"unit":"px"}],"borderRadius":[20,20,20,20],"kbVersion":2} -->
+<div class="wp-block-kadence-infobox kt-info-box812_f7007b-c8"><span class="kt-blocks-info-box-link-wrap info-box-link kt-blocks-info-box-media-align-top kt-info-halign-center"><div class="kt-blocks-info-box-media-container"><div class="kt-blocks-info-box-media kt-info-media-animate-none"><div class="kadence-info-box-icon-container kt-info-icon-animate-none"><div class="kadence-info-box-icon-inner-container"><span data-name="fas_camera-retro" data-class="kt-info-svg-icon" class="kadence-dynamic-icon"></span></div></div></div></div><div class="kt-infobox-textcontent"><h2 class="kt-blocks-info-box-title">Riley J.</h2><p class="kt-blocks-info-box-text">“I’ll never rush your questions. If you’re worried, it matters.” - Staff</p></div></span></div>
+<!-- /wp:kadence/infobox --></div></div>
+<!-- /wp:kadence/column -->
+
+<!-- wp:kadence/column {"id":3,"borderWidth":["","","",""],"uniqueID":"812_0ab75c-14","backgroundImg":[{"bgImg":"https://bellbrookvet.com/wp-content/uploads/2026/01/9.png","bgImgID":870,"bgImgSize":"103% 74%","bgImgPosition":"61% 45%","bgImgAttachment":"scroll","bgImgRepeat":"no-repeat"}],"textAlign":["center","",""],"kbVersion":2} -->
+<div class="wp-block-kadence-column kadence-column812_0ab75c-14"><div class="kt-inside-inner-col"><!-- wp:kadence/column {"borderWidth":["","","",""],"uniqueID":"812_5ad8ab-6b","kbVersion":2} -->
+<div class="wp-block-kadence-column kadence-column812_5ad8ab-6b"><div class="kt-inside-inner-col"><!-- wp:group {"layout":{"type":"constrained"}} -->
+<div class="wp-block-group"><!-- wp:kadence/spacer {"dividerOpacity":1,"dividerColor":"#eeeeee","uniqueID":"812_157e62-e8"} -->
+<div class="wp-block-kadence-spacer aligncenter kt-block-spacer-812_157e62-e8"><div class="kt-block-spacer kt-block-spacer-halign-center"><hr class="kt-divider"/></div></div>
+<!-- /wp:kadence/spacer --></div>
+<!-- /wp:group --></div></div>
+<!-- /wp:kadence/column -->
+
+<!-- wp:kadence/infobox {"uniqueID":"812_56996a-81","containerBackground":"#ffffff","containerPadding":["sm","sm","sm","sm"],"mediaImage":[{"url":"","id":"","alt":"","width":"","height":"","maxWidth":100,"hoverAnimation":"none","flipUrl":"","flipId":"","flipAlt":"","flipWidth":"","flipHeight":"","subtype":"","flipSubtype":""}],"mediaIcon":[{"icon":"fe_aperture","size":50,"width":2,"title":"","color":"","hoverColor":"","hoverAnimation":"none","flipIcon":""}],"mediaStyle":[{"background":"#ffffff","hoverBackground":"","border":"var(\u002d\u002dglobal-palette7, #eeeeee)","hoverBorder":"","borderRadius":200,"borderWidth":[5,5,5,5],"padding":[20,20,20,20],"margin":[-75,0,20,0]}],"titleFont":[{"level":2,"size":["","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","textTransform":"","family":"","google":false,"style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":[0,0,0,0],"paddingControl":"linked","margin":[5,0,10,0],"marginControl":"individual"}],"textFont":[{"size":["md","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true,"textTransform":""}],"containerMargin":[50,"","",""],"borderStyle":[{"top":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"right":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"bottom":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"left":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"unit":"px"}],"borderRadius":[20,20,20,20],"kbVersion":2} -->
+<div class="wp-block-kadence-infobox kt-info-box812_56996a-81"><span class="kt-blocks-info-box-link-wrap info-box-link kt-blocks-info-box-media-align-top kt-info-halign-center"><div class="kt-blocks-info-box-media-container"><div class="kt-blocks-info-box-media kt-info-media-animate-none"><div class="kadence-info-box-icon-container kt-info-icon-animate-none"><div class="kadence-info-box-icon-inner-container"><span data-name="fe_aperture" data-stroke="2" data-class="kt-info-svg-icon" class="kadence-dynamic-icon"></span></div></div></div></div><div class="kt-infobox-textcontent"><h2 class="kt-blocks-info-box-title">Craig S.</h2><p class="kt-blocks-info-box-text">“I never felt rushed, and neither did my pet.” - Client </p></div></span></div>
+<!-- /wp:kadence/infobox -->
+
+<!-- wp:kadence/spacer {"spacerHeight":86,"uniqueID":"812_d43e52-8c"} -->
+<div class="wp-block-kadence-spacer aligncenter kt-block-spacer-812_d43e52-8c"><div class="kt-block-spacer kt-block-spacer-halign-center"><hr class="kt-divider"/></div></div>
+<!-- /wp:kadence/spacer -->
+
+<!-- wp:kadence/infobox {"uniqueID":"812_0147d3-81","containerBackground":"#ffffff","containerPadding":["sm","sm","sm","sm"],"mediaImage":[{"url":"","id":"","alt":"","width":"","height":"","maxWidth":100,"hoverAnimation":"none","flipUrl":"","flipId":"","flipAlt":"","flipWidth":"","flipHeight":"","subtype":"","flipSubtype":""}],"mediaIcon":[{"icon":"fe_aperture","size":50,"width":2,"title":"","color":"","hoverColor":"","hoverAnimation":"none","flipIcon":""}],"mediaStyle":[{"background":"#ffffff","hoverBackground":"","border":"var(\u002d\u002dglobal-palette7, #eeeeee)","hoverBorder":"","borderRadius":200,"borderWidth":[5,5,5,5],"padding":[20,20,20,20],"margin":[-75,0,20,0]}],"titleFont":[{"level":2,"size":["","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","textTransform":"","family":"","google":false,"style":"","weight":"","variant":"","subset":"","loadGoogle":true,"padding":[0,0,0,0],"paddingControl":"linked","margin":[5,0,10,0],"marginControl":"individual"}],"textFont":[{"size":["md","",""],"sizeType":"px","lineHeight":["","",""],"lineType":"px","letterSpacing":"","family":"","google":"","style":"","weight":"","variant":"","subset":"","loadGoogle":true,"textTransform":""}],"containerMargin":[50,"","",""],"borderStyle":[{"top":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"right":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"bottom":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"left":["var(\u002d\u002dglobal-palette7, #eeeeee)","",5],"unit":"px"}],"borderRadius":[20,20,20,20],"kbVersion":2} -->
+<div class="wp-block-kadence-infobox kt-info-box812_0147d3-81"><span class="kt-blocks-info-box-link-wrap info-box-link kt-blocks-info-box-media-align-top kt-info-halign-center"><div class="kt-blocks-info-box-media-container"><div class="kt-blocks-info-box-media kt-info-media-animate-none"><div class="kadence-info-box-icon-container kt-info-icon-animate-none"><div class="kadence-info-box-icon-inner-container"><span data-name="fe_aperture" data-stroke="2" data-class="kt-info-svg-icon" class="kadence-dynamic-icon"></span></div></div></div></div><div class="kt-infobox-textcontent"><h2 class="kt-blocks-info-box-title">Taylor B. </h2><p class="kt-blocks-info-box-text">“The best part of my day is when a nervous pet walks out a little braver than they walked in.” - Staff</p></div></span></div>
+<!-- /wp:kadence/infobox --></div></div>
+<!-- /wp:kadence/column -->
+<!-- /wp:kadence/rowlayout -->
+
+<!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|theme-palette5"}}}},"textColor":"theme-palette5","fontSize":"small"} -->
+<p class="has-theme-palette-5-color has-text-color has-link-color has-small-font-size">***<strong>Demo / Showcase Disclaimer:</strong> This page is a demonstration website produced by <strong>Veteos.com</strong> for portfolio and presentation purposes. It is <strong>not an official website for any veterinary practice</strong> and is not intended to represent an actual clinic’s current services, pricing, staff, policies, or availability. Any names, testimonials, quotes, or content displayed may be fictional or used as examples. Nothing on this site constitutes veterinary or medical advice. If you believe your pet is sick or injured, contact a licensed veterinarian immediately.</p>
+<!-- /wp:paragraph -->
