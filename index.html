@@ -5,56 +5,802 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bellbrook Vet Demo</title>
 
-  <!-- Your CSS file -->
-  <link rel="stylesheet" href="./styles.css" />
+  <!-- Fonts (safe for GitHub Pages) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Raleway:wght@100;300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --ink:#1a202c;
+      --muted:#4a5568;
+      --white:#ffffff;
+
+      --brand-blue:#234d69;
+      --brand-blue-2:#2b6cb0;
+      --brand-orange:#ff9d00;
+      --brand-orange-2:#e38f14;
+      --brand-peach:#f2bb6b;
+      --brand-pink:#df5640;
+
+      --bg-sky:#7fa5c5;
+      --bg-mint:#e6f4f1;
+
+      --card:#ffffff;
+      --stroke:#e9eef3;
+
+      --shadow: 0 12px 30px rgba(0,0,0,.12);
+      --radius-xl: 28px;
+      --radius-pill: 999px;
+      --max: 1200px;
+    }
+
+    /* --- RESET (keeps images from "breaking") --- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Raleway, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background: #fff;
+      line-height: 1.35;
+    }
+
+    /* Images: safe defaults so CSS never collapses them */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--max), 92vw); margin: 0 auto; }
+
+    /* --- HEADER / TOP BAR --- */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,.86);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    .topbar-inner {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 16px;
+      padding: 12px 0;
+    }
+    .brand {
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+    .brand img{
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
+    .nav {
+      display:flex;
+      align-items:center;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav a{
+      font-size: 14px;
+      color: rgba(26,32,44,.85);
+      padding: 8px 10px;
+      border-radius: 12px;
+    }
+    .nav a:hover { background: rgba(43,108,176,.10); }
+
+    .nav .cta {
+      background: var(--brand-blue);
+      color: var(--white);
+      padding: 10px 14px;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      box-shadow: 0 10px 20px rgba(35,77,105,.18);
+    }
+    .nav .cta:hover { background: #1e425a; }
+
+    /* --- BUTTONS --- */
+    .btn-row { display:flex; gap: 14px; flex-wrap: wrap; align-items:center; }
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      border: 0;
+      cursor: pointer;
+      padding: 14px 18px;
+      border-radius: var(--radius-pill);
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: .2px;
+      transition: transform .08s ease, background .18s ease, color .18s ease;
+      user-select: none;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: var(--brand-blue-2); color: var(--white); }
+    .btn-primary:hover { background: #245a92; }
+    .btn-dark { background: var(--brand-blue); color: var(--white); }
+    .btn-dark:hover { background: #1e425a; }
+    .btn-light {
+      background: var(--white);
+      color: var(--brand-blue);
+      border: 2px solid rgba(35,77,105,.20);
+    }
+    .btn-light:hover {
+      background: rgba(35,77,105,.06);
+      border-color: rgba(35,77,105,.28);
+    }
+    .btn-accent { background: var(--brand-orange); color: #2b2b2b; }
+    .btn-accent:hover { background: #ffb02a; }
+    .btn-danger { background: var(--brand-pink); color: var(--white); }
+    .btn-danger:hover { background: #c74c38; }
+
+    /* --- SECTIONS --- */
+    section { padding: 72px 0; }
+    .section-title{
+      font-family: "Lilita One", system-ui, sans-serif;
+      font-weight: 400;
+      margin: 0;
+      line-height: 1;
+    }
+    .kicker {
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: rgba(26,32,44,.6);
+    }
+    .lead { color: rgba(26,32,44,.75); font-size: 16px; }
+
+    /* --- HERO --- */
+    .hero {
+      padding: 70px 0 40px;
+      background:
+        radial-gradient(1200px 600px at 20% 20%, rgba(242,187,107,.90), rgba(242,187,107,0)),
+        radial-gradient(900px 700px at 70% 30%, rgba(227,143,20,.55), rgba(227,143,20,0)),
+        linear-gradient(298deg, rgba(242,187,107,.85) 40%, rgba(227,143,20,.85) 64%),
+        #ff9f00;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 28px;
+      align-items:center;
+    }
+    .hero h1{
+      margin: 0;
+      font-family: "Lilita One", system-ui, sans-serif;
+      font-weight: 400;
+      font-size: clamp(44px, 6vw, 90px);
+      color: #fff;
+      text-shadow: 0 10px 30px rgba(0,0,0,.14);
+    }
+    .hero h2{
+      margin: 10px 0 18px;
+      font-family: Raleway, system-ui, sans-serif;
+      font-weight: 100;
+      font-size: clamp(28px, 4.4vw, 64px);
+      color: rgba(255,255,255,.96);
+    }
+    .hero-art{
+      width: 100%;
+      min-height: 360px;
+      border-radius: var(--radius-xl);
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(500px 350px at 70% 20%, rgba(255,255,255,.22), rgba(255,255,255,0)),
+        rgba(255,255,255,.08);
+      box-shadow: var(--shadow);
+    }
+    .hero-art::after{
+      content:"";
+      position:absolute; inset:0;
+      background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/Cute-Dog-vector-4.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: 19% 70%;
+      opacity: 1;
+    }
+
+    /* --- EMBED / VIDEO STRIP --- */
+    .strip {
+      padding: 40px 0 70px;
+      background:
+        linear-gradient(250deg, rgba(242,187,107,.7) 40%, rgba(227,143,20,.7) 87%),
+        #ff9d00;
+    }
+    .embed-card{
+      background: rgba(255,255,255,.92);
+      border-radius: var(--radius-xl);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .embed-card .embed-title{
+      font-weight: 900;
+      margin: 0 0 12px;
+      color: rgba(26,32,44,.85);
+    }
+    .embed-wide{
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* --- RESOURCES HEADER --- */
+    .resources-head{
+      background:
+        linear-gradient(180deg, rgba(54,161,211,.85) 41%, rgba(142,202,230,.85) 54%),
+        var(--bg-sky);
+      color: #fff;
+      padding: 62px 0 34px;
+    }
+    .resources-head .row{
+      display:flex;
+      align-items:center;
+      gap: 18px;
+      justify-content:center;
+      flex-wrap: wrap;
+      text-align:center;
+    }
+    .resources-head img{
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.18));
+    }
+    .resources-head h2{
+      font-family:"Lilita One", system-ui, sans-serif;
+      font-weight:400;
+      font-size: clamp(34px, 4vw, 56px);
+      margin: 0;
+      line-height: 1.05;
+    }
+
+    /* --- CARDS GRID --- */
+    .cards {
+      background:
+        linear-gradient(180deg, rgba(54,161,211,.85) 41%, rgba(142,202,230,.85) 54%),
+        var(--bg-sky);
+      padding: 24px 0 90px;
+    }
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+    .card{
+      background: var(--card);
+      border-radius: 30px;
+      border: 1px solid rgba(0,0,0,.06);
+      box-shadow: 0 14px 28px rgba(0,0,0,.14);
+      overflow:hidden;
+      display:flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    .card h3{
+      font-family:"Lilita One", system-ui, sans-serif;
+      font-weight:400;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 18px;
+      color: #2d3748;
+      margin: 0;
+      padding: 22px 20px 8px;
+      text-align:center;
+    }
+    .card .media{
+      padding: 10px 16px 0;
+    }
+    .card .media img{
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 18px;
+    }
+    .card .body{
+      padding: 14px 18px 18px;
+      color: rgba(26,32,44,.78);
+      font-size: 15px;
+      flex: 1;
+    }
+    .card .footer{
+      padding: 0 18px 18px;
+    }
+    .card .footer .btn { width: 100%; }
+
+    /* --- MOMENTS SECTION --- */
+    .moments{
+      background: #b6dcfe;
+      padding: 80px 0;
+    }
+    .moments-grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 26px;
+      align-items: center;
+    }
+    .moments .panel{
+      background: rgba(255,255,255,.8);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--radius-xl);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .photo-pair{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .rounded-img{
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 24px;
+    }
+    .moments h2{
+      font-family:"Lilita One", system-ui, sans-serif;
+      font-weight: 400;
+      margin: 0 0 10px;
+      font-size: clamp(28px, 3.6vw, 44px);
+      background: linear-gradient(180deg, rgb(255,157,0) 55%, rgb(68,79,87) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* --- STAFF INTRO (MINT) --- */
+    .staff-intro{
+      background: var(--bg-mint);
+      padding: 72px 0 24px;
+      text-align:center;
+    }
+    .staff-intro h2{
+      font-family:"Lilita One", system-ui, sans-serif;
+      font-weight:400;
+      margin: 0 0 10px;
+      font-size: clamp(30px, 3.6vw, 48px);
+      color: #2d3748;
+    }
+    .staff-intro p{
+      margin: 0 auto;
+      max-width: 820px;
+      color: rgba(26,32,44,.75);
+      font-size: 16px;
+    }
+
+    /* --- STAFF GRID --- */
+    .staff-grid{
+      background: var(--bg-mint);
+      padding: 20px 0 70px;
+    }
+    .grid-4{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .person{
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 26px;
+      box-shadow: 0 14px 28px rgba(0,0,0,.10);
+      padding: 18px;
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+      text-align:center;
+      min-height: 100%;
+    }
+    .person img{
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 22px;
+      margin-bottom: 14px;
+    }
+    .person .name{
+      font-family:"Lilita One", system-ui, sans-serif;
+      font-weight:400;
+      margin: 0;
+      font-size: 20px;
+      color: #2b6cb0;
+    }
+    .person .role{
+      font-family:"Lilita One", system-ui, sans-serif;
+      font-weight:400;
+      margin: 6px 0 0;
+      font-size: 14px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(26,32,44,.65);
+    }
+
+    /* --- TESTIMONIALS --- */
+    .testimonials-head{
+      background: var(--brand-blue);
+      color: #fff;
+      padding: 70px 0 18px;
+      text-align:center;
+    }
+    .testimonials-head h2{
+      font-family:"Lilita One", system-ui, sans-serif;
+      font-weight:400;
+      margin: 0;
+      font-size: clamp(28px, 3.2vw, 44px);
+    }
+
+    .testimonials{
+      background:
+        linear-gradient(1deg, rgb(214,226,214) 41%, rgb(35,77,105) 94%);
+      padding: 30px 0 80px;
+    }
+    .t-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .quote{
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 22px;
+      box-shadow: 0 14px 28px rgba(0,0,0,.12);
+      padding: 18px;
+      position: relative;
+    }
+    .quote .icon{
+      width: 54px; height: 54px;
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+      font-size: 22px;
+      background: rgba(43,108,176,.10);
+      margin-bottom: 10px;
+    }
+    .quote h3{
+      margin: 0 0 8px;
+      font-family:"Lilita One", system-ui, sans-serif;
+      font-weight:400;
+      font-size: 22px;
+      color: #2d3748;
+    }
+    .quote p{
+      margin: 0;
+      color: rgba(26,32,44,.78);
+      font-size: 15px;
+    }
+
+    /* --- DISCLAIMER --- */
+    .disclaimer{
+      padding: 26px 0 40px;
+      background: #fff;
+    }
+    .disclaimer p{
+      margin: 0;
+      font-size: 13px;
+      color: rgba(26,32,44,.7);
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .hero-art{ min-height: 300px; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .moments-grid{ grid-template-columns: 1fr; }
+      .grid-4{ grid-template-columns: repeat(2, 1fr); }
+      .t-grid{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px){
+      .grid-4{ grid-template-columns: 1fr; }
+      .photo-pair{ grid-template-columns: 1fr; }
+      .rounded-img{ height: 220px; }
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- ✅ TOP HEADER GOES HERE -->
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="./">
-        <img
-          class="brand-logo"
-          src="https://bellbrookvet.com/wp-content/uploads/2022/04/8196643567274865_icon-1024x1024.png"
-          alt="Bellbrook Vet"
-        />
-        <span class="brand-name">Bellbrook Vet</span>
-      </a>
+  <!-- TOP BAR / HEADER -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <img src="https://bellbrookvet.com/wp-content/uploads/2022/04/8196643567274865_icon-1024x1024.png" alt="Logo">
+        <span>Bellbrook Vet Demo</span>
+      </div>
 
-      <nav class="site-nav" aria-label="Primary">
-        <a href="./">Home</a>
-        <a href="./videos/">Videos</a>
-        <a href="./resources/">Resources</a>
-        <a href="./contact/">Contact</a>
+      <nav class="nav">
+        <a href="#videos">Videos</a>
+        <a href="#resources">Resources</a>
+        <a href="#moments">Moments</a>
+        <a href="#staff">Staff</a>
+        <a href="#comments">Comments</a>
+        <a class="cta" href="#resources">Explore</a>
       </nav>
-
-      <a class="header-cta" href="https://bellbrookvet.com/videos/">Watch Videos</a>
-
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" type="button">
-        ☰
-      </button>
-    </div>
-
-    <div class="mobile-nav" hidden>
-      <a href="./">Home</a>
-      <a href="./videos/">Videos</a>
-      <a href="./resources/">Resources</a>
-      <a href="./contact/">Contact</a>
-      <a class="mobile-cta" href="https://bellbrookvet.com/videos/">Watch Videos</a>
     </div>
   </header>
 
-  <!-- ✅ PAGE CONTENT GOES HERE -->
-  <main>
-    <section style="padding: 40px 18px; max-width: 1200px; margin: 0 auto;">
-      <h1 style="margin:0 0 10px;">Your page content goes here</h1>
-      <p style="margin:0;">Next step we’ll paste your sections into this area.</p>
-    </section>
-  </main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>We Love Your Pet</h1>
+        <h2>Like Our Own</h2>
+        <div class="btn-row">
+          <a class="btn btn-accent" href="https://dev-on-demand.veteos.com/videos/8196643567274865/SVpKUXEz0aYAFx" target="_blank" rel="noreferrer">
+            ▶ Watch Our Video
+          </a>
+        </div>
+      </div>
 
-  <!-- Your JS file -->
-  <script src="./script.js"></script>
+      <div class="hero-art" aria-label="Hero dog art"></div>
+    </div>
+  </section>
+
+  <!-- VIDEO STRIP -->
+  <section id="videos" class="strip">
+    <div class="container">
+      <div class="embed-card">
+        <p class="embed-title">Featured Collection</p>
+
+        <!-- Your original embed script -->
+        <div class="embed-wide">
+          <div class="veteos-embed veteos-embed--wide">
+            <script type="text/javascript" src="https://on-demand.veteos.com/collections/s/8196643567274865/D3IsACy9dTJULt"></script>
+          </div>
+        </div>
+
+        <div style="margin-top:16px; display:flex; justify-content:center;">
+          <a class="btn btn-dark" href="https://bellbrookvet.com/videos/" target="_blank" rel="noreferrer">
+            ▶ Watch more videos
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESOURCES HEADER -->
+  <section id="resources" class="resources-head">
+    <div class="container">
+      <div class="row">
+        <img src="https://bellbrookvet.com/wp-content/uploads/2022/04/8196643567274865_icon-1024x1024.png" alt="Icon">
+        <div>
+          <h2>Helpful Tips &amp; Resources<br>for Pet Parents</h2>
+          <div style="margin-top:16px;">
+            <a class="btn btn-primary" href="#resources-cards">Explore Resources</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 RESOURCE CARDS -->
+  <section id="resources-cards" class="cards">
+    <div class="container">
+      <div class="grid-3">
+        <!-- Card 1 -->
+        <article class="card">
+          <h3>Puppy &amp; Kitten Tips</h3>
+          <div class="media">
+            <!-- Your embed (kept) -->
+            <script type="text/javascript" src="https://on-demand.veteos.com/embed-video/50929768076919256/qHQgensh30cADn"></script>
+          </div>
+          <div class="body">
+            Keep your pet protected year-round with personalized vaccine and parasite-prevention plans.
+          </div>
+          <div class="footer">
+            <a class="btn btn-accent" href="https://bellbrookvet.com/event/space-exploration/" target="_blank" rel="noreferrer">
+              More Details...
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card">
+          <h3>Preventive Care</h3>
+          <div class="media">
+            <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/Cute-Cat-1.png" alt="Cute cat">
+          </div>
+          <div class="body">
+            New puppy or kitten? Get an easy first-year roadmap for vaccines, nutrition, and early habits.
+          </div>
+          <div class="footer">
+            <a class="btn btn-accent" href="/resources/puppy-kitten-tips/">
+              More Details...
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card">
+          <h3>Dental Health</h3>
+          <div class="media">
+            <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/puppy-dental-care-pic-1-1024x1024.png" alt="Dental care">
+          </div>
+          <div class="body">
+            Learn what to watch for, how cleanings work, and simple at-home steps that support healthier teeth.
+          </div>
+          <div class="footer">
+            <a class="btn btn-accent" href="/resources/dental-health/">
+              More Details...
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOMENTS -->
+  <section id="moments" class="moments">
+    <div class="container moments-grid">
+      <div class="panel">
+        <p class="kicker">A few moments with us</p>
+
+        <!-- Your embed -->
+        <script type="text/javascript" src="https://on-demand.veteos.com/embed-video/8196643567274865/e1YBgEUBhOF6TQ"></script>
+
+        <div class="photo-pair">
+          <img class="rounded-img" src="https://bellbrookvet.com/wp-content/uploads/2026/01/Vet-and-Dog-pic-1-1024x1024.png" alt="Vet and dog">
+          <img class="rounded-img" src="https://bellbrookvet.com/wp-content/uploads/2026/01/bunny-and-vet-pic-1-1024x1024.png" alt="Bunny and vet">
+        </div>
+      </div>
+
+      <div>
+        <h2>A few moments with us</h2>
+        <p class="lead">
+          Kind people, gentle handling, and clear communication.<br>
+          All so you and your pet feel comfortable every step of the way.
+        </p>
+
+        <div class="btn-row" style="margin-top:18px;">
+          <a class="btn btn-accent" href="#resources">Explore Resources</a>
+          <a class="btn btn-light" href="https://dev-on-demand.veteos.com/videos/8196643567274865/SVpKUXEz0aYAFx" target="_blank" rel="noreferrer">
+            ▶ Watch Our Story
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAFF INTRO -->
+  <section id="staff" class="staff-intro">
+    <div class="container">
+      <h2>We love our staff and think<br>you will too.</h2>
+      <p>
+        Friendly faces, calm visits, and clear answers.<br>
+        Our team is here to help you feel confident about your pet’s care.
+      </p>
+    </div>
+  </section>
+
+  <!-- STAFF GRID -->
+  <section class="staff-grid">
+    <div class="container">
+      <div class="grid-4">
+        <div class="person">
+          <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-3-819x1024.png" alt="Dr. Jordan Bell">
+          <h3 class="name">Dr. Jordan Bell</h3>
+          <p class="role">Veterinarian</p>
+        </div>
+
+        <div class="person">
+          <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/dog-vet-1-819x1024.png" alt="Sam Rivera">
+          <h3 class="name">Sam “Good Boy” Rivera</h3>
+          <p class="role">Office Manager</p>
+        </div>
+
+        <div class="person">
+          <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-5-819x1024.png" alt="Dr. Ryan Fredricks">
+          <h3 class="name">Dr. Ryan Fredricks</h3>
+          <p class="role">Client Care</p>
+        </div>
+
+        <div class="person">
+          <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-tech-1-819x1024.png" alt="Alexis Grant">
+          <h3 class="name">Alexis Grant</h3>
+          <p class="role">Veterinary Assistant</p>
+        </div>
+
+        <div class="person">
+          <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-tech-3-819x1024.png" alt="Taylor Brooks">
+          <h3 class="name">Taylor Brooks</h3>
+          <p class="role">Veterinary Technician</p>
+        </div>
+
+        <div class="person">
+          <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-4-819x1024.png" alt="Dr. Priya Patel">
+          <h3 class="name">Dr. Priya Patel</h3>
+          <p class="role">Veterinarian</p>
+        </div>
+
+        <div class="person">
+          <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-tech-2-819x1024.png" alt="Casey Myers">
+          <h3 class="name">Casey Myers</h3>
+          <p class="role">Technician Assistant</p>
+        </div>
+
+        <div class="person">
+          <img src="https://bellbrookvet.com/wp-content/uploads/2026/01/vet-1-819x1024.png" alt="Riley Johnson">
+          <h3 class="name">Riley Johnson</h3>
+          <p class="role">Client Care</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="comments" class="testimonials-head">
+    <div class="container">
+      <h2>Comments from Our Clients and Staff ♡</h2>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="container">
+      <div class="t-grid">
+        <div class="quote">
+          <div class="icon">🐾</div>
+          <h3>Dr. Priya</h3>
+          <p>“I’ll always explain the ‘why’—you deserve to feel confident about every decision.” - Staff</p>
+        </div>
+
+        <div class="quote">
+          <div class="icon">📷</div>
+          <h3>Josh B.</h3>
+          <p>“My dog’s breath was rough and I thought it was ‘normal.’ Turns out it wasn’t. So glad we came in.” - Client</p>
+        </div>
+
+        <div class="quote">
+          <div class="icon">📷</div>
+          <h3>Craig S.</h3>
+          <p>“I never felt rushed, and neither did my pet.” - Client</p>
+        </div>
+
+        <div class="quote">
+          <div class="icon">📷</div>
+          <h3>Casey M.</h3>
+          <p>“I’m basically a professional ‘good boy/girl’ announcer.” - Staff</p>
+        </div>
+
+        <div class="quote">
+          <div class="icon">📷</div>
+          <h3>Riley J.</h3>
+          <p>“I’ll never rush your questions. If you’re worried, it matters.” - Staff</p>
+        </div>
+
+        <div class="quote">
+          <div class="icon">📷</div>
+          <h3>Taylor B.</h3>
+          <p>“The best part of my day is when a nervous pet walks out a little braver than they walked in.” - Staff</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <section class="disclaimer">
+    <div class="container">
+      <p>
+        *** <strong>Demo / Showcase Disclaimer:</strong> This page is a demonstration website produced by
+        <strong>Veteos.com</strong> for portfolio and presentation purposes. It is <strong>not an official website for any
+        veterinary practice</strong> and is not intended to represent an actual clinic’s current services, pricing, staff,
+        policies, or availability. Any names, testimonials, quotes, or content displayed may be fictional or used as examples.
+        Nothing on this site constitutes veterinary or medical advice. If you believe your pet is sick or injured, contact a
+        licensed veterinarian immediately.
+      </p>
+    </div>
+  </section>
+
 </body>
 </html>
