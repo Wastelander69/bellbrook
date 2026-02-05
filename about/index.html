@@ -47,50 +47,46 @@
 
 <body>
   <!-- Header -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#" id="homeLink">
-        <!-- set via JS so GitHub Pages subpath works; svg falls back to png -->
-        <img class="brand-logo" id="brandLogo" src="" alt="Bellbrook Veterinary Hospital" />
-        <span class="brand-text">
-          <span class="brand-name">Bellbrook</span>
-          <span class="brand-sub">Veterinary Hospital</span>
-        </span>
-      </a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="./">
+      <img class="brand-logo" src="assets/images/8196643567274865_icon-1024x1024.png" alt="Logo">
+      <span class="brand-name">Bellbrook Vet Demo</span>
+    </a>
 
-      <nav class="nav" aria-label="Primary">
-        <a class="nav-link is-active" href="#" id="aboutLink">About</a>
+    <nav class="nav-desktop">
+      <a href="./">Home</a>
+      <a href="resources/">Resources</a>
+      <a href="videos/">Videos</a>
+      <a href="staff/">Staff</a>
+      <a href="contact/">Contact</a>
+    </nav>
 
-        <div class="nav-dropdown">
-          <button class="nav-link nav-link--button" type="button" aria-haspopup="true" aria-expanded="false">
-            Services <span class="caret">▾</span>
-          </button>
-          <div class="nav-menu" role="menu">
-            <a role="menuitem" href="#" id="servicesPreventive">Preventive Care</a>
-            <a role="menuitem" href="#" id="servicesDental">Dental Health</a>
-            <a role="menuitem" href="#" id="servicesMeds">Giving Medications</a>
-          </div>
-        </div>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-mobile">
+      ☰
+      <span class="sr-only">Menu</span>
+    </button>
+  </div>
 
-        <div class="nav-dropdown">
-          <button class="nav-link nav-link--button" type="button" aria-haspopup="true" aria-expanded="false">
-            Resources <span class="caret">▾</span>
-          </button>
-          <div class="nav-menu" role="menu">
-            <a role="menuitem" href="#" id="resourcesLink">All Resources</a>
-            <a role="menuitem" href="#" id="resourcesPuppy">Puppy &amp; Kitten Tips</a>
-            <a role="menuitem" href="#" id="resourcesDental">Dental Health</a>
-            <a role="menuitem" href="#" id="resourcesMeds">Giving Medications</a>
-            <a role="menuitem" href="#" id="resourcesEdu">Educational Videos</a>
-          </div>
-        </div>
+  <nav id="nav-mobile" class="nav-mobile" hidden>
+    <a href="./">Home</a>
+    <a href="resources/">Resources</a>
+    <a href="videos/">Videos</a>
+    <a href="staff/">Staff</a>
+    <a href="contact/">Contact</a>
+  </nav>
+</header>
 
-        <a class="nav-link" href="#" id="videosLink">Videos</a>
-        <a class="nav-link" href="#" id="faqsLink">FAQs</a>
-        <a class="nav-link" href="#" id="contactLink">Contact</a>
-      </nav>
-    </div>
-  </header>
+<script>
+  const btn = document.querySelector(".nav-toggle");
+  const menu = document.querySelector("#nav-mobile");
+  btn.addEventListener("click", () => {
+    const open = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!open));
+    menu.hidden = open;
+  });
+</script>
+
 
   <!-- ===== Page content below (KEEP YOUR EXISTING ABOUT PAGE CONTENT) ===== -->
   <!-- I’m leaving your page body intact: only header/footer/linking + assets were fixed. -->
