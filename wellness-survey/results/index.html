@@ -2,583 +2,627 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Survey Results — Bellbrook Veterinary Hospital (Demo)</title>
-  <meta name="description" content="Wellness survey results (demo site by Veteos.com)." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wellness Survey Results • Bellbrook Demo</title>
 
-  <!-- Base path helper: supports / and /bellbrook/ -->
-  <script>
-    (function () {
-      var parts = location.pathname.split("/").filter(Boolean);
-      window.BASE_PATH = (parts.length && parts[0].toLowerCase() === "bellbrook") ? "/bellbrook" : "";
-      window.href = function (p) { return window.BASE_PATH + p; };
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Raleway:wght@100;300;400;600;700&display=swap" rel="stylesheet" />
 
-      window.setHref = function (id, path) {
-        var el = document.getElementById(id);
-        if (el) el.href = href(path);
-      };
-      window.setText = function (id, value) {
-        var el = document.getElementById(id);
-        if (el) el.textContent = value;
-      };
-      window.setHTML = function (id, value) {
-        var el = document.getElementById(id);
-        if (el) el.innerHTML = value;
-      };
-      window.setSrc = function (id, path) {
-        var el = document.getElementById(id);
-        if (el) el.src = href(path);
-      };
-    })();
-  </script>
+  <!-- Existing repo CSS (NOTE: correct relative paths for /wellness-survey/results/) -->
+  <link rel="stylesheet" href="../../assets/css/site.css" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+  <link rel="stylesheet" href="../../assets/css/tweaks.css" />
 
-  <!-- Load site CSS (order matters: tweaks AFTER base) -->
-  <link rel="stylesheet" href="/assets/css/style.css" />
-  <link rel="stylesheet" href="/assets/css/tweaks.css" />
-  <script>
-    (function () {
-      document.querySelectorAll('link[rel="stylesheet"]').forEach(function (l) {
-        var h = l.getAttribute("href") || "";
-        if (h.startsWith("/assets/")) l.href = window.href(h);
-      });
-    })();
-  </script>
+  <!-- Safe additions: header/nav consistency + image robustness -->
+  <style>
+    :root{
+      --nav-bg: rgba(255,255,255,0.92);
+      --nav-border: rgba(26,32,44,0.10);
+      --shadow: 0 18px 40px rgba(0,0,0,0.12);
+      --radius: 18px;
+      --brand: #234d69;
+      --accent: #2b6cb0;
+      --muted: rgba(26,32,44,0.70);
+      --card: #ffffff;
+      --page: #f3f6fb;
+    }
+    body{
+      font-family: "Raleway", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--page);
+      margin: 0;
+    }
+    img{ max-width:100%; height:auto; display:block; }
+    .container{ width:min(1100px, calc(100% - 32px)); margin-inline:auto; }
+
+    /* Header */
+    .site-header{
+      position: sticky; top:0; z-index:999;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--nav-border);
+    }
+    .header-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding:10px 0;
+    }
+    .brand{
+      display:inline-flex; align-items:center; gap:10px;
+      text-decoration:none;
+    }
+    .brand img{ width:42px; height:42px; object-fit:contain; }
+    .brand span{
+      font-family:"Lilita One", cursive;
+      font-size:24px; letter-spacing:.5px;
+      color:#1a202c;
+    }
+
+    .nav-toggle{
+      display:none;
+      width:44px; height:44px;
+      border-radius:12px;
+      border:1px solid var(--nav-border);
+      background:#fff;
+      cursor:pointer;
+    }
+    .nav-toggle span{
+      display:block; height:2px; background:#1a202c;
+      margin:7px 8px; border-radius:2px;
+    }
+
+    nav.site-nav ul{
+      list-style:none; margin:0; padding:0;
+      display:flex; align-items:center; gap:14px;
+    }
+    nav.site-nav a{
+      text-decoration:none;
+      font-weight:700;
+      padding:10px 10px;
+      border-radius:12px;
+      display:inline-flex; align-items:center; gap:8px;
+      color:#1a202c;
+    }
+    nav.site-nav a:hover{ background: rgba(43,108,176,0.08); }
+
+    /* Dropdowns */
+    .has-dropdown{ position:relative; }
+    .dropdown{
+      display:none;
+      position:absolute;
+      top: calc(100% + 10px);
+      left:0;
+      min-width: 380px;
+      background:#fff;
+      border:1px solid var(--nav-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:12px;
+    }
+    .dropdown-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:8px;
+    }
+    .dropdown-item{
+      display:grid; gap:2px;
+      padding:12px;
+      border-radius:14px;
+      text-decoration:none;
+    }
+    .dropdown-item:hover{ background: rgba(35,77,105,0.08); }
+    .dropdown-item strong{ font-weight:800; color: var(--brand); }
+    .dropdown-item span{ font-size:13px; opacity:.8; color:#1a202c; }
+
+    @media (min-width: 901px){
+      .has-dropdown:hover .dropdown{ display:block; }
+    }
+
+    @media (max-width: 900px){
+      .nav-toggle{ display:inline-block; }
+      nav.site-nav{
+        position:fixed;
+        inset:64px 12px auto 12px;
+        background:#fff;
+        border:1px solid var(--nav-border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding:10px;
+        display:none;
+      }
+      nav.site-nav.open{ display:block; }
+      nav.site-nav ul{ flex-direction:column; align-items:stretch; gap:6px; }
+      nav.site-nav a{ justify-content:space-between; }
+      .dropdown{
+        position:static;
+        min-width:auto;
+        border:none;
+        box-shadow:none;
+        padding:8px 6px 10px;
+        display:none;
+      }
+      .has-dropdown.dropdown-open .dropdown{ display:block; }
+    }
+
+    /* Page layout */
+    .page-hero{
+      background: linear-gradient(180deg, rgba(35,77,105,1) 0%, rgba(35,77,105,0.92) 60%, rgba(243,246,251,1) 100%);
+      padding: 46px 0 30px;
+    }
+    .hero-inner{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:18px;
+      flex-wrap:wrap;
+    }
+    .hero-title{
+      margin:0;
+      font-family:"Lilita One", cursive;
+      letter-spacing:.5px;
+      color:#fff;
+      font-size: clamp(30px, 4vw, 48px);
+    }
+    .hero-sub{
+      margin:8px 0 0;
+      color: rgba(255,255,255,0.82);
+      font-weight: 300;
+      max-width: 70ch;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.22);
+      color:#fff;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .content{
+      padding: 20px 0 54px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap:18px;
+      align-items:start;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns:1fr; }
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid rgba(26,32,44,0.08);
+      border-radius: 22px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+      overflow:hidden;
+    }
+    .card h2{
+      margin:0;
+      padding:16px 16px 6px;
+      font-family:"Lilita One", cursive;
+      color:#1a202c;
+      font-size: 26px;
+      letter-spacing:.3px;
+    }
+    .card p{
+      margin:0;
+      padding:0 16px 16px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .card .body{ padding: 0 16px 16px; }
+    .results-list{
+      display:grid;
+      gap:12px;
+      margin:0;
+      padding: 0 16px 18px;
+      list-style:none;
+    }
+    .result-item{
+      border: 1px solid rgba(26,32,44,0.10);
+      border-radius: 16px;
+      padding: 12px;
+      display:grid;
+      gap:6px;
+      background: rgba(243,246,251,0.60);
+    }
+    .result-item strong{ color:#1a202c; }
+    .result-item small{ color: var(--muted); }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      padding: 0 16px 18px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:800;
+      border:1px solid rgba(26,32,44,0.12);
+      background:#fff;
+      color:#1a202c;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background: var(--accent);
+      color:#fff;
+      border-color: rgba(0,0,0,0);
+    }
+    .btn:hover{ filter: brightness(0.98); }
+
+    .note{
+      padding: 14px 16px 18px;
+      border-top: 1px solid rgba(26,32,44,0.08);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      background: rgba(243,246,251,0.45);
+    }
+
+    /* Footer */
+    .site-footer{
+      background:#0f2230;
+      color: rgba(255,255,255,0.85);
+      padding:18px 0;
+      margin-top: 20px;
+    }
+    .footer-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .footer-inner a{ color: rgba(255,255,255,0.85); text-decoration:none; }
+    .footer-inner a:hover{ color:#fff; text-decoration:underline; }
+  </style>
 </head>
 
 <body>
-  <!-- Header -->
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="./">
-      <img class="brand-logo" src="assets/images/8196643567274865_icon-1024x1024.png" alt="Logo">
-      <span class="brand-name">Bellbrook Vet Demo</span>
-    </a>
 
-    <nav class="nav-desktop">
-      <a href="./">Home</a>
-      <a href="resources/">Resources</a>
-      <a href="videos/">Videos</a>
-      <a href="staff/">Staff</a>
-      <a href="contact/">Contact</a>
-    </nav>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#" data-home-link>
+        <img src="../../assets/img/logo.svg" alt="Bellbrook" onerror="this.style.display='none';" />
+        <span>Bellbrook</span>
+      </a>
 
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-mobile">
-      ☰
-      <span class="sr-only">Menu</span>
-    </button>
-  </div>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
 
-  <nav id="nav-mobile" class="nav-mobile" hidden>
-    <a href="./">Home</a>
-    <a href="resources/">Resources</a>
-    <a href="videos/">Videos</a>
-    <a href="staff/">Staff</a>
-    <a href="contact/">Contact</a>
-  </nav>
-</header>
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul id="mainNav"></ul>
+      </nav>
+    </div>
+  </header>
 
-<script>
-  const btn = document.querySelector(".nav-toggle");
-  const menu = document.querySelector("#nav-mobile");
-  btn.addEventListener("click", () => {
-    const open = btn.getAttribute("aria-expanded") === "true";
-    btn.setAttribute("aria-expanded", String(!open));
-    menu.hidden = open;
-  });
-</script>
-
-
-  <main>
-    <!-- Hero -->
-    <section class="hero" style="padding: 60px 0 50px;">
-      <div class="container">
-        <h1 class="hero-title" style="font-size: clamp(36px, 4vw, 62px); margin-bottom: 10px;">
-          Survey Results
-        </h1>
-        <p class="hero-subtitle" style="font-size: clamp(16px, 2.2vw, 26px); margin-top: 0;">
-          A quick snapshot — plus helpful next steps.
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container hero-inner">
+      <div>
+        <h1 class="hero-title">Wellness Survey Results</h1>
+        <p class="hero-sub">
+          Here’s a quick summary based on your answers. If nothing shows up, it usually means the survey hasn’t been submitted on this device yet.
         </p>
+      </div>
+      <div class="pill" id="resultsPill">Results: <span id="resultsStatus">Loading…</span></div>
+    </div>
+  </section>
 
-        <div class="hero-actions">
-          <a class="btn btn-secondary" href="#" id="retakeBtn">Retake survey</a>
-          <a class="btn btn-primary" href="#" id="contactBtnTop">Contact us</a>
+  <!-- CONTENT -->
+  <main class="content">
+    <div class="container grid">
+
+      <!-- Results Card -->
+      <section class="card" aria-labelledby="resultsHeading">
+        <h2 id="resultsHeading">Your Summary</h2>
+        <p id="resultsIntro">We’ll display whatever we can find from the survey submission.</p>
+
+        <ul class="results-list" id="resultsList">
+          <!-- populated by JS -->
+        </ul>
+
+        <div class="actions">
+          <a class="btn primary" href="#" data-link="wellness-survey/index.html">Retake Survey</a>
+          <a class="btn" href="#" data-link="resources/index.html">Explore Resources</a>
+          <button class="btn" type="button" id="clearBtn">Clear Saved Results</button>
         </div>
-      </div>
 
-      <div class="wave wave--bottom" aria-hidden="true">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,60 C150,120 350,0 600,60 C850,120 1050,20 1200,60 L1200,120 L0,120 Z"></path>
-        </svg>
-      </div>
-    </section>
+        <div class="note">
+          <strong>Note:</strong> This is a demo. Results are shown from your browser storage (if present) or URL parameters.
+        </div>
+      </section>
 
-    <!-- Results -->
-    <section style="background:#fff; padding: 70px 0;">
-      <div class="container">
-
-        <section class="card results-card">
-          <div class="results-top">
-            <div>
-              <p class="kicker" id="petLine">For your pet</p>
-              <h2 id="headline">Your wellness snapshot</h2>
-              <p class="sub" id="summaryText">
-                Based on your answers, here are a few things to celebrate — and a few areas to keep an eye on.
-              </p>
-            </div>
-
-            <div class="score" aria-label="Score">
-              <div class="score-ring">
-                <div class="score-inner">
-                  <div class="score-num" id="scoreNum">—</div>
-                  <div class="score-label">Score</div>
-                </div>
-              </div>
-              <div class="score-note" id="scoreNote">—</div>
-            </div>
-          </div>
-
-          <div class="chips" id="chips"></div>
-
-          <hr class="divider" />
-
-          <div class="grid-2">
-            <div class="card mini-card">
-              <h3>What looks solid</h3>
-              <ul class="bullets" id="goodList"></ul>
-            </div>
-            <div class="card mini-card">
-              <h3>Worth watching</h3>
-              <ul class="bullets" id="watchList"></ul>
-            </div>
-          </div>
-
-          <hr class="divider" />
-
-          <div class="next-steps">
-            <div class="next-head">
-              <h3>Helpful next steps</h3>
-              <p>Quick links to resources that match your survey answers.</p>
-            </div>
-            <div class="steps-grid">
-              <a class="card step-card" href="#" id="stepResources">
-                <h4>Explore Resources</h4>
-                <p>Browse tips for prevention, dental care, meds, and more.</p>
-                <span class="step-cta">Open resources →</span>
-              </a>
-              <a class="card step-card" href="#" id="stepDental">
-                <h4>Dental Health</h4>
-                <p>Learn what to watch for and easy at-home habits.</p>
-                <span class="step-cta">Dental tips →</span>
-              </a>
-              <a class="card step-card" href="#" id="stepMeds">
-                <h4>Giving Medications</h4>
-                <p>Simple tricks for pills, liquids, and stress-free dosing.</p>
-                <span class="step-cta">Medication help →</span>
-              </a>
-              <a class="card step-card" href="#" id="stepVideos">
-                <h4>Educational Videos</h4>
-                <p>Short, practical videos made for pet parents.</p>
-                <span class="step-cta">Watch videos →</span>
-              </a>
-            </div>
-          </div>
-
-          <div class="results-actions">
-            <a class="btn btn-secondary" href="#" id="backHomeBtn">Back to home</a>
-            <a class="btn btn-primary" href="#" id="contactBtnBottom">Contact us</a>
-          </div>
-        </section>
-
-      </div>
-    </section>
-
-    <!-- Disclaimer -->
-    <section class="quotes" style="padding: 40px 0 24px;">
-      <div class="container">
-        <p class="disclaimer">
-          <strong>Demo / Showcase Disclaimer:</strong> This page is part of a demonstration website
-          produced by <strong>Veteos.com</strong>. It does not represent a real veterinary practice.
-          Nothing on this site constitutes veterinary or medical advice. If you believe your pet is sick or injured,
-          contact a licensed veterinarian immediately.
+      <!-- Next Steps Card -->
+      <aside class="card" aria-labelledby="nextHeading">
+        <h2 id="nextHeading">Next Steps</h2>
+        <p>
+          Use the dropdown menu in the header to navigate the full site. You can also jump to:
         </p>
-      </div>
-    </section>
+
+        <div class="body">
+          <div style="display:grid; gap:10px;">
+            <a class="btn" href="#" data-link="videos/index.html">Videos</a>
+            <a class="btn" href="#" data-link="stories/index.html">Stories</a>
+            <a class="btn" href="#" data-link="contact/index.html">Contact</a>
+            <a class="btn" href="#" data-link="faqs/index.html">FAQs</a>
+          </div>
+        </div>
+
+        <div class="note">
+          If this page “wouldn’t load” before, it was likely due to broken header markup or bad script paths. This file fixes the paths for this folder depth.
+        </div>
+      </aside>
+
+    </div>
   </main>
 
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© <span id="year"></span> Bellbrook Veterinary Hospital (Demo)</p>
-      <p class="footer-links">
-        <a href="#" id="privacyLink">Privacy Policy</a>
-      </p>
+      <span>© <span id="year"></span> Bellbrook Demo</span>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="#" data-home-link>Home</a>
+        <a href="#" data-link="resources/index.html">Resources</a>
+        <a href="#" data-link="videos/index.html">Videos</a>
+        <a href="#" data-link="contact/index.html">Contact</a>
+      </div>
     </div>
   </footer>
 
-  <style>
-    /* Results styles (scoped) */
-    .hero-actions{
-      display:flex;
-      gap: 12px;
-      margin-top: 18px;
-      flex-wrap: wrap;
-    }
+  <!-- Existing repo JS (correct path from this folder) -->
+  <script src="../../assets/js/site-nav.js" defer></script>
 
-    .results-card{ padding: 26px; }
-    .results-top{
-      display:flex;
-      gap: 18px;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-    }
-    .kicker{
-      margin: 0 0 8px;
-      font-weight: 900;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: rgba(30,42,58,.62);
-      font-size: 12px;
-    }
-    .results-card h2{
-      margin: 0 0 8px;
-      font-weight: 950;
-    }
-    .sub{
-      margin: 0;
-      color: rgba(30,42,58,.72);
-      font-weight: 750;
-      line-height: 1.7;
-      max-width: 70ch;
-    }
-
-    .score{
-      display:grid;
-      gap: 10px;
-      justify-items: center;
-      min-width: 180px;
-    }
-    .score-ring{
-      width: 138px;
-      height: 138px;
-      border-radius: 999px;
-      background: conic-gradient(rgba(43,108,176,.75) var(--pct), rgba(30,42,58,.10) 0);
-      display:grid;
-      place-items:center;
-      border: 1px solid rgba(30,42,58,.10);
-      box-shadow: 0 18px 45px rgba(16, 24, 40, .12);
-    }
-    .score-inner{
-      width: 108px;
-      height: 108px;
-      border-radius: 999px;
-      background: #fff;
-      display:grid;
-      place-items:center;
-      border: 1px solid rgba(30,42,58,.08);
-    }
-    .score-num{
-      font-weight: 950;
-      font-size: 40px;
-      line-height: 1;
-      color: rgba(30,42,58,.92);
-    }
-    .score-label{
-      margin-top: -6px;
-      font-weight: 900;
-      font-size: 12px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: rgba(30,42,58,.55);
-    }
-    .score-note{
-      font-weight: 850;
-      color: rgba(30,42,58,.74);
-      text-align:center;
-      max-width: 22ch;
-    }
-
-    .chips{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-weight: 900;
-      border: 1px solid rgba(30,42,58,.12);
-      background: rgba(30,42,58,.03);
-      color: rgba(30,42,58,.82);
-    }
-    .chip strong{ font-weight: 950; }
-
-    .divider{
-      border: none;
-      border-top: 1px solid rgba(30,42,58,.10);
-      margin: 18px 0;
-    }
-
-    .grid-2{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .mini-card{ padding: 18px; }
-    .mini-card h3{
-      margin: 0 0 10px;
-      font-weight: 950;
-    }
-    .bullets{
-      margin: 0;
-      padding-left: 18px;
-      color: rgba(30,42,58,.78);
-      font-weight: 750;
-      line-height: 1.7;
-    }
-    .bullets li{ margin: 4px 0; }
-
-    .next-steps{
-      margin-top: 6px;
-    }
-    .next-head h3{
-      margin: 0 0 6px;
-      font-weight: 950;
-    }
-    .next-head p{
-      margin: 0 0 14px;
-      color: rgba(30,42,58,.72);
-      font-weight: 750;
-      line-height: 1.7;
-    }
-    .steps-grid{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-    .step-card{
-      padding: 18px;
-      text-decoration: none;
-      color: inherit;
-      display:grid;
-      gap: 8px;
-      transition: transform .12s ease, box-shadow .12s ease;
-    }
-    .step-card:hover{ transform: translateY(-2px); }
-    .step-card h4{
-      margin: 0;
-      font-weight: 950;
-    }
-    .step-card p{
-      margin: 0;
-      color: rgba(30,42,58,.72);
-      font-weight: 750;
-      line-height: 1.6;
-    }
-    .step-cta{
-      margin-top: 4px;
-      font-weight: 950;
-      color: rgba(43,108,176,.95);
-    }
-
-    .results-actions{
-      display:flex;
-      justify-content: flex-end;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 18px;
-    }
-
-    @media (max-width: 980px){
-      .grid-2{ grid-template-columns: 1fr; }
-      .steps-grid{ grid-template-columns: 1fr; }
-      .score{ width: 100%; }
-    }
-  </style>
-
+  <!-- Nav builder + Results logic (works even if site-nav.js is empty/broken) -->
   <script>
-    // Logo (try svg, fall back to png) + GitHub Pages-safe
-    var logoEl = document.getElementById("brandLogo");
-    if (logoEl) {
-      logoEl.src = href("/assets/images/logo.svg");
-      logoEl.onerror = function () {
-        this.onerror = null;
-        this.src = href("/assets/images/logo.png");
-      };
+    // GitHub Pages base path helper:
+    // If site is hosted at /bellbrook/, base becomes "/bellbrook/"
+    // If hosted at root domain, base becomes "/"
+    function getBasePath() {
+      const parts = window.location.pathname.split("/").filter(Boolean);
+      if (parts.length > 0) return "/" + parts[0] + "/";
+      return "/";
     }
 
-    // Nav
-    setHref("homeLink", "/index.html");
-    setHref("aboutLink", "/about/index.html");
-    setHref("resourcesLink", "/resources/index.html");
-    setHref("videosLink", "/videos/index.html");
-    setHref("storiesLink", "/stories/index.html");
-    setHref("faqsLink", "/faqs/index.html");
-    setHref("contactLink", "/contact/index.html");
-    setHref("recruitingLink", "/recruiting/index.html");
-    setHref("surveyLink", "/wellness-survey/index.html");
-    setHref("privacyLink", "/privacy-policy/index.html");
+    const BASE = getBasePath();
 
-    // Buttons
-    setHref("retakeBtn", "/wellness-survey/index.html");
-    setHref("contactBtnTop", "/contact/index.html");
-    setHref("contactBtnBottom", "/contact/index.html");
-    setHref("backHomeBtn", "/index.html");
+    function hrefTo(rel) {
+      rel = rel.replace(/^\/+/, "");
+      return BASE + rel;
+    }
 
-    // Resource steps
-    setHref("stepResources", "/resources/index.html");
-    setHref("stepDental", "/resources/dental-health/index.html");
-    setHref("stepMeds", "/resources/giving-medications/index.html");
-    setHref("stepVideos", "/resources/educational-videos/index.html");
+    // Fill links
+    document.querySelectorAll("[data-home-link]").forEach(a => a.setAttribute("href", hrefTo("index.html")));
+    document.querySelectorAll("[data-link]").forEach(a => a.setAttribute("href", hrefTo(a.getAttribute("data-link"))));
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    setText("year", new Date().getFullYear());
+    // NAV MAP (from your repo tree)
+    const NAV = [
+      { label: "Home", href: "index.html" },
+      {
+        label: "About",
+        items: [
+          { label: "About", href: "about/index.html" },
+          { label: "About Us", href: "about-us/index.html" },
+          { label: "Stories", href: "stories/index.html" },
+          { label: "Recruiting", href: "recruiting/index.html" }
+        ]
+      },
+      {
+        label: "Resources",
+        items: [
+          { label: "All Resources", href: "resources/index.html", sub: "Browse everything" },
+          { label: "Puppy & Kitten Tips", href: "resources/puppy-kitten-tips/index.html", sub: "First-year roadmap" },
+          { label: "Dental Health", href: "resources/dental-health/index.html", sub: "Cleanings & at-home care" },
+          { label: "Giving Medications", href: "resources/giving-medications/index.html", sub: "Easy techniques" },
+          { label: "Educational Videos", href: "resources/educational-videos/index.html", sub: "Learn quickly" }
+        ]
+      },
+      {
+        label: "Wellness Survey",
+        items: [
+          { label: "Start Survey", href: "wellness-survey/index.html", sub: "Begin the form" },
+          { label: "Results", href: "wellness-survey/results/index.html", sub: "View outcomes" }
+        ]
+      },
+      { label: "Videos", href: "videos/index.html" },
+      {
+        label: "Info",
+        items: [
+          { label: "FAQs", href: "faqs/index.html" },
+          { label: "Privacy Policy", href: "privacy-policy/index.html" },
+          { label: "Contact", href: "contact/index.html" }
+        ]
+      }
+    ];
 
-    // ----- Results logic -----
-    function getParams(){
-      var sp = new URLSearchParams(location.search);
-      var obj = {};
-      sp.forEach(function(v,k){ obj[k] = v; });
+    const navEl = document.getElementById("mainNav");
+
+    function navLink(label, href) {
+      const a = document.createElement("a");
+      a.textContent = label;
+      a.href = hrefTo(href);
+      return a;
+    }
+
+    function buildNav() {
+      if (!navEl) return;
+      navEl.innerHTML = "";
+
+      NAV.forEach(node => {
+        const li = document.createElement("li");
+
+        if (!node.items) {
+          li.appendChild(navLink(node.label, node.href));
+        } else {
+          li.className = "has-dropdown";
+          const trigger = document.createElement("a");
+          trigger.href = "#";
+          trigger.className = "dropdown-trigger";
+          trigger.textContent = node.label;
+
+          const dd = document.createElement("div");
+          dd.className = "dropdown";
+
+          const grid = document.createElement("div");
+          grid.className = "dropdown-grid";
+
+          node.items.forEach(item => {
+            const itemA = document.createElement("a");
+            itemA.className = "dropdown-item";
+            itemA.href = hrefTo(item.href);
+
+            const strong = document.createElement("strong");
+            strong.textContent = item.label;
+
+            itemA.appendChild(strong);
+
+            const sub = document.createElement("span");
+            sub.textContent = item.sub || "";
+            itemA.appendChild(sub);
+
+            grid.appendChild(itemA);
+          });
+
+          dd.appendChild(grid);
+
+          li.appendChild(trigger);
+          li.appendChild(dd);
+        }
+
+        navEl.appendChild(li);
+      });
+
+      // Mobile dropdown click expand
+      document.querySelectorAll(".dropdown-trigger").forEach((trigger) => {
+        trigger.addEventListener("click", (e) => {
+          if (window.matchMedia("(max-width: 900px)").matches) {
+            e.preventDefault();
+            const parent = trigger.closest(".has-dropdown");
+            parent && parent.classList.toggle("dropdown-open");
+          }
+        });
+      });
+    }
+
+    // Mobile menu toggle
+    const btn = document.querySelector(".nav-toggle");
+    const nav = document.querySelector(".site-nav");
+    btn && btn.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("open");
+      btn.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    buildNav();
+
+    // ---------------------------
+    // Results logic (non-breaking)
+    // ---------------------------
+    const resultsStatus = document.getElementById("resultsStatus");
+    const resultsList = document.getElementById("resultsList");
+    const resultsIntro = document.getElementById("resultsIntro");
+    const clearBtn = document.getElementById("clearBtn");
+
+    function addResult(title, value, note) {
+      const li = document.createElement("li");
+      li.className = "result-item";
+
+      const strong = document.createElement("strong");
+      strong.textContent = title;
+
+      const div = document.createElement("div");
+      div.textContent = value;
+
+      li.appendChild(strong);
+      li.appendChild(div);
+
+      if (note) {
+        const small = document.createElement("small");
+        small.textContent = note;
+        li.appendChild(small);
+      }
+
+      resultsList.appendChild(li);
+    }
+
+    function parseQueryParams() {
+      const params = new URLSearchParams(window.location.search);
+      const obj = {};
+      for (const [k, v] of params.entries()) obj[k] = v;
       return obj;
     }
 
-    function titleCase(s){
-      return (s || "").toLowerCase().replace(/\b\w/g, function(m){ return m.toUpperCase(); });
+    function loadResults() {
+      resultsList.innerHTML = "";
+
+      // Option A: localStorage (preferred)
+      let stored = null;
+      try {
+        stored = localStorage.getItem("wellnessSurveyResults") || localStorage.getItem("wellnessSurvey");
+      } catch (_) {}
+
+      // Option B: URL params
+      const qp = parseQueryParams();
+
+      let data = null;
+
+      if (stored) {
+        try {
+          data = JSON.parse(stored);
+        } catch (_) {
+          // if it was plain text
+          data = { summary: stored };
+        }
+      } else if (Object.keys(qp).length) {
+        data = qp;
+      }
+
+      if (!data) {
+        resultsStatus.textContent = "No saved results";
+        resultsIntro.textContent = "No results were found on this device. Try taking the survey first, then return here.";
+        addResult("What to do next", "Take the survey, then come back to results.", "Tip: Use the header dropdown to navigate.");
+        return;
+      }
+
+      resultsStatus.textContent = "Ready";
+      resultsIntro.textContent = "Here’s what we found from your last submission:";
+
+      // Render common keys nicely, but also handle arbitrary JSON
+      const preferredOrder = ["petName", "pet_type", "petType", "age", "concerns", "score", "risk", "recommendation", "summary"];
+
+      const seen = new Set();
+      for (const key of preferredOrder) {
+        if (key in data) {
+          addResult(key.replace(/([A-Z])/g, " $1").replace(/^./, c => c.toUpperCase()), String(data[key]));
+          seen.add(key);
+        }
+      }
+
+      for (const key of Object.keys(data)) {
+        if (seen.has(key)) continue;
+        addResult(key.replace(/([A-Z])/g, " $1").replace(/^./, c => c.toUpperCase()), String(data[key]));
+      }
     }
 
-    function pushLi(id, text){
-      var ul = document.getElementById(id);
-      if (!ul) return;
-      var li = document.createElement("li");
-      li.textContent = text;
-      ul.appendChild(li);
-    }
+    clearBtn.addEventListener("click", () => {
+      try {
+        localStorage.removeItem("wellnessSurveyResults");
+        localStorage.removeItem("wellnessSurvey");
+      } catch (_) {}
+      loadResults();
+    });
 
-    function addChip(label, value){
-      var wrap = document.getElementById("chips");
-      if (!wrap) return;
-      var div = document.createElement("div");
-      div.className = "chip";
-      div.innerHTML = "<strong>" + label + ":</strong> " + value;
-      wrap.appendChild(div);
-    }
-
-    var p = getParams();
-
-    var petName = (p.petName || "").trim();
-    var petType = (p.petType || "dog").trim();
-    var age = (p.age || "").trim();
-    var weight = (p.weight || "").trim();
-
-    // Defaults if someone visits directly
-    var energy = p.energy || "great";
-    var appetite = p.appetite || "normal";
-    var gi = p.gi || "normal";
-    var skin = p.skin || "none";
-    var teeth = p.teeth || "fresh";
-
-    var vaccines = (p.vaccines || "yes") === "yes";
-    var parasite = (p.parasite || "yes") === "yes";
-    var dentalCare = (p.dentalCare || "no") === "yes";
-
-    var notes = (p.notes || "").trim();
-
-    // Header text
-    var petLabel = "For your pet";
-    if (petName) petLabel = "For " + petName;
-    else if (petType) petLabel = "For your " + petType;
-
-    setText("petLine", petLabel);
-
-    // Chips
-    if (petName) addChip("Name", petName);
-    addChip("Type", titleCase(petType));
-    if (age) addChip("Age", age + " yrs");
-    if (weight) addChip("Weight", weight + " lbs");
-
-    // Score calculation (simple + explainable)
-    var score = 100;
-    var watch = [];
-    var good = [];
-
-    // Energy
-    if (energy === "great") good.push("Energy level looks great.");
-    if (energy === "okay") watch.push("Energy is a little lower than usual — monitor sleep, activity, and appetite.");
-    if (energy === "low") { score -= 18; watch.push("Low energy can mean discomfort, illness, or pain — consider a check-in."); }
-
-    // Appetite
-    if (appetite === "normal") good.push("Appetite is normal.");
-    if (appetite === "picky") { score -= 8; watch.push("Picky appetite can be stress, nausea, or dental discomfort — keep an eye on patterns."); }
-    if (appetite === "reduced") { score -= 14; watch.push("Reduced appetite can be significant — if it persists, reach out."); }
-
-    // GI
-    if (gi === "normal") good.push("GI/stools seem normal.");
-    if (gi === "soft") { score -= 10; watch.push("Soft stools can be diet changes or sensitivity — consider a bland reset and monitor."); }
-    if (gi === "vomit") { score -= 18; watch.push("Vomiting/diarrhea can become urgent — monitor hydration and contact a vet if it continues."); }
-
-    // Skin
-    if (skin === "none") good.push("No major itching/skin concerns noted.");
-    if (skin === "some") { score -= 8; watch.push("Some itching may be seasonal or diet-related — note frequency and hotspots."); }
-    if (skin === "lots") { score -= 14; watch.push("Frequent itching can indicate allergies, parasites, or infection — worth an exam."); }
-
-    // Teeth
-    if (teeth === "fresh") good.push("Breath/teeth seem okay.");
-    if (teeth === "stinky") { score -= 10; watch.push("Bad breath is often the first sign of dental disease — consider dental tips + a check."); }
-    if (teeth === "concerning") { score -= 16; watch.push("Concerning breath/teeth can mean pain or infection — dental exam recommended."); }
-
-    // Prevention
-    if (vaccines) good.push("Vaccines are up to date.");
-    else { score -= 10; watch.push("Vaccines aren’t marked up to date — consider getting current."); }
-
-    if (parasite) good.push("Parasite prevention is on track.");
-    else { score -= 10; watch.push("Not on parasite prevention — talk to your vet about the right plan for your area."); }
-
-    if (dentalCare) good.push("Dental care routine is a great habit.");
-    else watch.push("No dental routine marked — small steps like brushing or chews can help.");
-
-    // Clamp score
-    score = Math.max(0, Math.min(100, score));
-
-    // Score text
-    var scoreNote = "Looking good overall.";
-    if (score < 85) scoreNote = "A few things to watch.";
-    if (score < 70) scoreNote = "Worth checking in soon.";
-    if (score < 55) scoreNote = "Consider contacting a vet.";
-
-    // Paint score ring
-    var ring = document.querySelector(".score-ring");
-    if (ring) ring.style.setProperty("--pct", score + "%");
-
-    setText("scoreNum", score);
-    setText("scoreNote", scoreNote);
-
-    // Headline / summary
-    var headline = "Your wellness snapshot";
-    if (petName) headline = petName + "’s wellness snapshot";
-    setText("headline", headline);
-
-    var summary = "Based on your answers, here are a few things to celebrate — and a few areas to keep an eye on.";
-    if (notes) summary = summary + " You also mentioned: “" + notes + "”.";
-    setText("summaryText", summary);
-
-    // Lists
-    if (good.length === 0) good.push("Nothing stood out as “perfect,” but that’s okay — this is just a quick check-in.");
-    if (watch.length === 0) watch.push("Nothing urgent flagged — keep doing what you’re doing and stay consistent.");
-
-    good.slice(0, 6).forEach(function(t){ pushLi("goodList", t); });
-    watch.slice(0, 7).forEach(function(t){ pushLi("watchList", t); });
-
-    // Smart-ish step emphasis: if teeth is stinky/concerning, highlight dental card slightly
-    if (teeth !== "fresh"){
-      var dentalCard = document.getElementById("stepDental");
-      if (dentalCard) dentalCard.style.outline = "3px solid rgba(43,108,176,.25)";
-    }
-    if (gi === "vomit" || gi === "soft"){
-      var resourcesCard = document.getElementById("stepResources");
-      if (resourcesCard) resourcesCard.style.outline = "3px solid rgba(43,108,176,.18)";
-    }
+    loadResults();
   </script>
+
 </body>
 </html>
