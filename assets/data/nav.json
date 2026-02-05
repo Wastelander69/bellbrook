@@ -1,0 +1,25 @@
+{
+  "brand": { "label": "Bellbrook Vet Demo", "href": "/bellbrook/" },
+  "items": [
+    { "label": "Home", "href": "/bellbrook/" },
+    {
+      "label": "Pages",
+      "children": [
+        { "label": "Wellness Survey", "href": "/bellbrook/wellness-survey/" },
+        { "label": "Wellness Results", "href": "/bellbrook/wellness-survey/results/" },
+        { "label": "FAQs (placeholder)":, "href": "/bellbrook/faqs/" },
+        { "label": "Stories (placeholder)":, "href": "/bellbrook/stories/" },
+        { "label": "Contact Us (placeholder)":, "href": "/bellbrook/contact/" },
+        { "label": "Privacy Polocy (placeholder)":, "href": "/bellbrook/privacy-policy/" },
+
+        { "label": "Resources (placeholder)", "href": "/bellbrook/resources/" },
+        { "label": "Educational Videos (placeholder)", "href": "/bellbrook/resources/educational-videos/" },
+        { "label": "Puppy Kitten Tips (placeholder)":, "href": "/bellbrook/resources/puppy-kitten-tips/" },
+        { "label": "Giving Medications {placeholder)":, "href": "/bellbrook/resources/giving-medications/" },
+        { "label": "Dental Health (placeholder)":, "href": "/bellbrook/resources/Dental-Health/" ),
+        { "label": "Videos (placeholder)", "href": "/bellbrook/videos/" }
+      ]
+    }
+  ],
+  "cta": { "label": "Explore", "href": "/bellbrook/#resources" }
+}
