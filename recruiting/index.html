@@ -43,26 +43,46 @@
 
 <body>
   <!-- Header -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#" id="homeLink">
-        <img class="brand-logo" id="brandLogo" src="" alt="Bellbrook Veterinary Hospital" />
-        <span class="brand-text">
-          <span class="brand-name">Bellbrook</span>
-          <span class="brand-sub">Veterinary Hospital</span>
-        </span>
-      </a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="./">
+      <img class="brand-logo" src="assets/images/8196643567274865_icon-1024x1024.png" alt="Logo">
+      <span class="brand-name">Bellbrook Vet Demo</span>
+    </a>
 
-      <nav class="nav" aria-label="Primary">
-        <a class="nav-link" href="#" id="aboutLink">About</a>
-        <a class="nav-link" href="#" id="resourcesLink">Resources</a>
-        <a class="nav-link" href="#" id="videosLink">Videos</a>
-        <a class="nav-link" href="#" id="faqsLink">FAQs</a>
-        <a class="nav-link" href="#" id="contactLink">Contact</a>
-        <a class="nav-link is-active" href="#" id="recruitingLink">Recruiting</a>
-      </nav>
-    </div>
-  </header>
+    <nav class="nav-desktop">
+      <a href="./">Home</a>
+      <a href="resources/">Resources</a>
+      <a href="videos/">Videos</a>
+      <a href="staff/">Staff</a>
+      <a href="contact/">Contact</a>
+    </nav>
+
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-mobile">
+      ☰
+      <span class="sr-only">Menu</span>
+    </button>
+  </div>
+
+  <nav id="nav-mobile" class="nav-mobile" hidden>
+    <a href="./">Home</a>
+    <a href="resources/">Resources</a>
+    <a href="videos/">Videos</a>
+    <a href="staff/">Staff</a>
+    <a href="contact/">Contact</a>
+  </nav>
+</header>
+
+<script>
+  const btn = document.querySelector(".nav-toggle");
+  const menu = document.querySelector("#nav-mobile");
+  btn.addEventListener("click", () => {
+    const open = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!open));
+    menu.hidden = open;
+  });
+</script>
+
 
   <main>
     <!-- Hero -->
@@ -338,3 +358,4 @@
   </script>
 </body>
 </html>
+
