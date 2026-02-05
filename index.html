@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Bellbrook Veterinary Hospital (Demo)</title>
-  <meta name="description" content="A clean, modern demo site for a veterinary clinic — produced by Veteos.com." />
+  <meta name="description" content="Bellbrook Veterinary Hospital demo site produced by Veteos.com." />
 
   <!-- Base path helper: supports / and /bellbrook/ -->
   <script>
@@ -42,10 +42,11 @@
 </head>
 
 <body>
+
   <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#" id="homeLink" aria-label="Bellbrook home">
+      <a class="brand" href="#" id="homeLink">
         <img class="brand-logo" id="brandLogo" src="" alt="Bellbrook Veterinary Hospital" />
         <span class="brand-text">
           <span class="brand-name">Bellbrook</span>
@@ -53,10 +54,35 @@
         </span>
       </a>
 
+      <!-- Match your dropdown/nav system from About -->
       <nav class="nav" aria-label="Primary">
         <a class="nav-link is-active" href="#" id="homeNavLink">Home</a>
         <a class="nav-link" href="#" id="aboutLink">About</a>
-        <a class="nav-link" href="#" id="resourcesLink">Resources</a>
+
+        <div class="nav-dropdown">
+          <button class="nav-link nav-link--button" type="button" aria-haspopup="true" aria-expanded="false">
+            Services <span class="caret">▾</span>
+          </button>
+          <div class="nav-menu" role="menu">
+            <a role="menuitem" href="#" id="servicesPreventive">Preventive Care</a>
+            <a role="menuitem" href="#" id="servicesDental">Dental Health</a>
+            <a role="menuitem" href="#" id="servicesMeds">Giving Medications</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button class="nav-link nav-link--button" type="button" aria-haspopup="true" aria-expanded="false">
+            Resources <span class="caret">▾</span>
+          </button>
+          <div class="nav-menu" role="menu">
+            <a role="menuitem" href="#" id="resourcesLink">All Resources</a>
+            <a role="menuitem" href="#" id="resourcesPuppy">Puppy &amp; Kitten Tips</a>
+            <a role="menuitem" href="#" id="resourcesDental">Dental Health</a>
+            <a role="menuitem" href="#" id="resourcesMeds">Giving Medications</a>
+            <a role="menuitem" href="#" id="resourcesEdu">Educational Videos</a>
+          </div>
+        </div>
+
         <a class="nav-link" href="#" id="videosLink">Videos</a>
         <a class="nav-link" href="#" id="storiesLink">Stories</a>
         <a class="nav-link" href="#" id="faqsLink">FAQs</a>
@@ -67,69 +93,134 @@
   </header>
 
   <main>
-    <!-- HERO -->
-    <section class="hero hero-home">
+
+    <!-- ===== HERO (replaces the Kadence hero rowlayout) ===== -->
+    <section class="hero hero--home">
+      <div class="hero-overlay" aria-hidden="true"></div>
+
       <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="hero-kicker">Gentle care. Clear answers.</p>
-          <h1 class="hero-title">
-            We love your pet <span class="hero-highlight">like our own</span>.
-          </h1>
-          <p class="hero-subtitle">
-            Kind people, low-stress handling, and thoughtful medicine — so you feel confident at every visit.
-          </p>
+        <div class="hero-left">
+          <h1 class="home-hero-title">Your Pet:</h1>
+          <h2 class="home-hero-subtitle">Like Our Own</h2>
 
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#" id="watchVideoBtn">
-              ▶ Watch our video
+          <div style="margin-top: 26px;">
+            <a class="btn btn-primary btn-icon" href="https://dev-on-demand.veteos.com/videos/8196643567274865/SVpKUXEz0aYAFx" target="_self" rel="noopener">
+              <span class="btn-icon__glyph" aria-hidden="true">▶</span>
+              Watch Our Video
             </a>
-            <a class="btn btn-secondary" href="#" id="exploreResourcesBtn">
-              Explore resources
-            </a>
-          </div>
-
-          <div class="trust-row">
-            <div class="trust-pill">🐾 Low-stress handling</div>
-            <div class="trust-pill">🩺 Preventive-first care</div>
-            <div class="trust-pill">💬 No rushed questions</div>
           </div>
         </div>
 
-        <div class="hero-art" aria-hidden="true">
-          <!-- Use your own image later; this is a clean “shape + image” holder -->
-          <div class="hero-card">
-            <div class="hero-card-top">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            </div>
-            <div class="hero-card-body">
-              <div class="hero-photo" id="heroPhoto">
-                <div class="hero-photo-fallback">
-                  <div class="paw">🐾</div>
-                  <div>
-                    <div class="hero-photo-title">Calm visits</div>
-                    <div class="hero-photo-sub">for pets + people</div>
-                  </div>
-                </div>
-              </div>
+        <div class="hero-right" aria-hidden="true">
+          <!-- From your WP export: Home-Page-Happy-Dog-1.png -->
+          <img
+            class="hero-image"
+            src="https://bellbrookvet.com/wp-content/uploads/2023/03/Home-Page-Happy-Dog-1.png"
+            alt=""
+            loading="eager"
+          />
+        </div>
+      </div>
 
-              <div class="hero-mini">
-                <div class="mini-metric">
-                  <div class="mini-num">5★</div>
-                  <div class="mini-label">Care & clarity</div>
-                </div>
-                <div class="mini-metric">
-                  <div class="mini-num">Easy</div>
-                  <div class="mini-label">Next steps</div>
-                </div>
-                <div class="mini-metric">
-                  <div class="mini-num">Safe</div>
-                  <div class="mini-label">Handling</div>
-                </div>
-              </div>
+      <!-- Wave bottom separator -->
+      <div class="wave wave--bottom" aria-hidden="true">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,60 C150,120 350,0 600,60 C850,120 1050,20 1200,60 L1200,120 L0,120 Z"></path>
+        </svg>
+      </div>
+    </section>
 
-              <a class="btn btn-ghost" href="#" id="aboutUsBtn">Meet the team vibe →</a>
-            </div>
+    <!-- ===== VIDEO COLLECTION STRIP (Kadence rowlayout w/ veteos collection script) ===== -->
+    <section class="section-soft">
+      <div class="container">
+        <div class="card" style="padding: 26px;">
+          <!-- This is exactly what WP had: a script-injected collection -->
+          <script type="text/javascript" src="https://on-demand.veteos.com/collections/s/8196643567274865/D3IsACy9dTJULt"></script>
+
+          <div style="margin-top: 18px; text-align: center;">
+            <a class="btn btn-primary" href="#" id="watchMoreVideosBtn">Watch more videos</a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== “DISCOVER EVENTS” CTA (Kadence wave-top strip) ===== -->
+    <section class="section-events-cta">
+      <div class="wave wave--top" aria-hidden="true">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,60 C150,0 350,120 600,60 C850,0 1050,100 1200,60 L1200,0 L0,0 Z"></path>
+        </svg>
+      </div>
+
+      <div class="container" style="text-align: center; padding: 80px 0 40px;">
+        <h2 class="section-title" style="margin-bottom: 14px;">
+          Discover events happening <br /> at the museum
+        </h2>
+        <a class="btn btn-primary" href="#" id="exploreEventsBtn">Explore All Events</a>
+      </div>
+    </section>
+
+    <!-- ===== EVENTS GRID (3 cards) ===== -->
+    <section class="section-events-grid">
+      <div class="container">
+        <div class="events-grid">
+
+          <article class="card event-card">
+            <h3 class="event-card-title">Space Exploration</h3>
+
+            <div class="event-media">
+              <script type="text/javascript" src="https://on-demand.veteos.com/embed-video/50929768076919256/qHQgensh30cADn"></script>
+            </div>
+
+            <p class="event-card-text">
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+            </p>
+
+            <a class="btn btn-secondary" href="https://bellbrookvet.com/event/space-exploration/" target="_self" rel="noopener">
+              More Details...
+            </a>
+          </article>
+
+          <article class="card event-card">
+            <h3 class="event-card-title">Scout the Wilderness</h3>
+
+            <div class="event-media">
+              <img
+                src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/09/discovery-4-min-1024x683.jpeg"
+                alt="Scout the Wilderness"
+                loading="lazy"
+              />
+            </div>
+
+            <p class="event-card-text">
+              Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
+            </p>
+
+            <a class="btn btn-secondary" href="https://bellbrookvet.com/event/scout-out-the-wilderness/" target="_self" rel="noopener">
+              More Details...
+            </a>
+          </article>
+
+          <article class="card event-card">
+            <h3 class="event-card-title">Science for the Ages</h3>
+
+            <div class="event-media">
+              <img
+                src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/09/kid-science-8-min-1024x683.jpeg"
+                alt="Science for the Ages"
+                loading="lazy"
+              />
+            </div>
+
+            <p class="event-card-text">
+              Dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam.
+            </p>
+
+            <a class="btn btn-secondary" href="https://bellbrookvet.com/event/science-for-the-ages/" target="_self" rel="noopener">
+              More Details...
+            </a>
+          </article>
+
         </div>
       </div>
 
@@ -140,171 +231,159 @@
       </div>
     </section>
 
-    <!-- FEATURED VIDEO SECTION -->
-    <section class="section section-alt">
-      <div class="container">
-        <div class="section-head">
-          <h2>Start here</h2>
-          <p>Short, practical videos made for pet parents.</p>
-        </div>
+    <!-- ===== “A FEW MOMENTS WITH US” (2-col: embed + photo grid + text/buttons) ===== -->
+    <section class="section-soft">
+      <div class="container moments-grid">
 
-        <div class="card embed-card">
-          <!-- Replace with your Veteos embed whenever you want -->
-          <div class="embed-note">
-            <div class="embed-icon">▶</div>
-            <div>
-              <div class="embed-title">Featured video placeholder</div>
-              <div class="embed-sub">
-                Want the real embed here? Paste your Veteos script tag into this card and it will inherit styling.
-              </div>
+        <div class="moments-left">
+          <div class="card" style="padding: 18px;">
+            <div class="event-media">
+              <script type="text/javascript" src="https://on-demand.veteos.com/embed-video/8196643567274865/e1YBgEUBhOF6TQ"></script>
+            </div>
+
+            <div class="moments-photos">
+              <img class="rounded" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/09/kids-stretching-min-1024x683.jpeg" alt="" loading="lazy">
+              <img class="rounded" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/09/banner-2-min-1024x683.jpeg" alt="" loading="lazy">
             </div>
           </div>
         </div>
 
-        <div class="center-actions">
-          <a class="btn btn-primary" href="#" id="watchMoreVideosBtn">Watch more videos</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- RESOURCES CTA -->
-    <section class="section section-resources">
-      <div class="container">
-        <div class="card resources-cta">
-          <div class="resources-cta-left">
-            <h2>Helpful tips & resources<br><span class="muted">for pet parents</span></h2>
-            <p>
-              Puppy & kitten guides, dental health, giving medications, and other simple ways to support your pet.
-            </p>
-          </div>
-          <div class="resources-cta-right">
-            <a class="btn btn-primary" href="#" id="resourcesMainBtn">Explore resources</a>
-          </div>
-        </div>
-
-        <div class="cards-3">
-          <a class="card topic-card" href="#" id="topicPuppy">
-            <div class="topic-icon">🍼</div>
-            <h3>Puppy & kitten tips</h3>
-            <p>First-year roadmap for vaccines, nutrition, and early habits.</p>
-            <span class="topic-cta">More details →</span>
-          </a>
-
-          <a class="card topic-card" href="#" id="topicDental">
-            <div class="topic-icon">🦷</div>
-            <h3>Dental health</h3>
-            <p>What to watch for, how cleanings work, and easy at-home steps.</p>
-            <span class="topic-cta">More details →</span>
-          </a>
-
-          <a class="card topic-card" href="#" id="topicMeds">
-            <div class="topic-icon">💊</div>
-            <h3>Giving medications</h3>
-            <p>Tricks for pills, liquids, and stress-free dosing routines.</p>
-            <span class="topic-cta">More details →</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- MOMENTS / VIBE -->
-    <section class="section section-moments">
-      <div class="container moments-grid">
-        <div class="card moments-media">
-          <div class="moments-placeholder">
-            <div class="moments-emoji">🐶</div>
-            <div class="moments-emoji">🐱</div>
-            <div class="moments-emoji">🐰</div>
-          </div>
-          <p class="moments-caption">A few moments with us — calm visits, kind voices, gentle hands.</p>
-        </div>
-
-        <div class="moments-copy">
-          <h2>A few moments with us</h2>
-          <p>
-            Kind people, gentle handling, and clear communication — all so you and your pet feel comfortable
-            every step of the way.
+        <div class="moments-right">
+          <h2 class="section-title" style="color:#f2bb6b; margin-bottom: 10px;">A few moments with us</h2>
+          <p class="section-text">
+            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
+            sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam.
           </p>
-          <div class="moments-actions">
-            <a class="btn btn-primary" href="#" id="momentsResourcesBtn">Explore resources</a>
-            <a class="btn btn-secondary" href="#" id="momentsStoriesBtn">Read stories</a>
+
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#" id="momentsExploreBtn">Explore Events</a>
+            <a class="btn btn-secondary btn-icon" href="#" id="momentsStoryBtn">
+              <span class="btn-icon__glyph" aria-hidden="true">▶</span>
+              Watch Our Story
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== STAFF SECTION ===== -->
+    <section class="section-soft">
+      <div class="container" style="text-align:center; padding-top: 30px;">
+        <h2 class="section-title">We love our staff and <br /> we think you will too</h2>
+        <p class="section-text" style="max-width: 760px; margin: 12px auto 0;">
+          Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
+          sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam.
+        </p>
+      </div>
+
+      <div class="container staff-grid">
+        <!-- Row 1 -->
+        <article class="card staff-card">
+          <img class="staff-photo" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/09/teaacher-6-683x1024.jpg" alt="Toby Flennigan" loading="lazy">
+          <h4 class="staff-name">Toby Flennigan</h4>
+          <p class="staff-role">Scouts Leader</p>
+        </article>
+
+        <article class="card staff-card">
+          <img class="staff-photo" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/09/teacher-4-683x1024.jpg" alt="Melanie Smith" loading="lazy">
+          <h4 class="staff-name">Melanie Smith</h4>
+          <p class="staff-role">Director</p>
+        </article>
+
+        <article class="card staff-card">
+          <img class="staff-photo" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/09/teacher-3-678x1024.jpg" alt="Josh Lennon" loading="lazy">
+          <h4 class="staff-name">Josh Lennon</h4>
+          <p class="staff-role">Program Coordinator</p>
+        </article>
+
+        <article class="card staff-card">
+          <img class="staff-photo" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/10/teacher-6-683x1024.jpeg" alt="Josephine Lewis" loading="lazy">
+          <h4 class="staff-name">Josephine Lewis</h4>
+          <p class="staff-role">Research Expert</p>
+        </article>
+
+        <!-- Row 2 -->
+        <article class="card staff-card">
+          <img class="staff-photo" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/10/teacher-10-683x1024.jpeg" alt="Sarah Beth" loading="lazy">
+          <h4 class="staff-name">Sarah Beth</h4>
+          <p class="staff-role">Event Coordinator</p>
+        </article>
+
+        <article class="card staff-card">
+          <img class="staff-photo" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/10/teacher-7-683x1024.jpeg" alt="Ezekiel Legend" loading="lazy">
+          <h4 class="staff-name">Ezekiel Legend</h4>
+          <p class="staff-role">Exhibit Curator</p>
+        </article>
+
+        <article class="card staff-card">
+          <img class="staff-photo" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/10/teacher-8-683x1024.jpeg" alt="Ashley Clementine" loading="lazy">
+          <h4 class="staff-name">Ashley Clementine</h4>
+          <p class="staff-role">Event Coordinator</p>
+        </article>
+
+        <article class="card staff-card">
+          <img class="staff-photo" src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/09/teacher-2-683x1024.jpg" alt="Melanie Smith" loading="lazy">
+          <h4 class="staff-name">Melanie Smith</h4>
+          <p class="staff-role">Exhibit Curator</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="section-testimonials">
+      <div class="container" style="text-align:center;">
+        <h2 class="section-title" style="color:#fff;">What parents are saying...</h2>
+      </div>
+
+      <div class="container testimonials-grid">
+        <div class="testimonial-bubble">
+          <div class="stars" aria-label="5 stars">★★★★★</div>
+          <p>
+            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
+          </p>
+          <div class="who">
+            <img src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/10/parent-f3-min-150x150.jpg" alt="Laura Bolden" loading="lazy">
+            <strong>Laura Bolden</strong>
+          </div>
+        </div>
+
+        <div class="testimonial-bubble">
+          <div class="stars" aria-label="5 stars">★★★★★</div>
+          <p>
+            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
+          </p>
+          <div class="who">
+            <img src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/10/parent-f1-min-150x150.jpg" alt="Sophie Riley" loading="lazy">
+            <strong>Sophie Riley</strong>
+          </div>
+        </div>
+
+        <div class="testimonial-bubble">
+          <div class="stars" aria-label="5 stars">★★★★★</div>
+          <p>
+            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
+          </p>
+          <div class="who">
+            <img src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/10/parent-f2-min-150x150.jpg" alt="Leslie Martin" loading="lazy">
+            <strong>Leslie Martin</strong>
+          </div>
+        </div>
+
+        <div class="testimonial-bubble">
+          <div class="stars" aria-label="5 stars">★★★★★</div>
+          <p>
+            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
+          </p>
+          <div class="who">
+            <img src="https://startertemplatecloud.com/g17/wp-content/uploads/sites/37/2021/10/parent-m1-min-150x150.jpg" alt="Greg Smith" loading="lazy">
+            <strong>Greg Smith</strong>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- STAFF TEASER -->
-    <section class="section section-alt">
-      <div class="container">
-        <div class="section-head center">
-          <h2>We love our staff and think<br>you will too.</h2>
-          <p>Friendly faces, calm visits, and clear answers.</p>
-        </div>
-
-        <div class="team-grid">
-          <div class="card team-card">
-            <div class="avatar">👩‍⚕️</div>
-            <div class="team-name">Dr. Jordan Bell</div>
-            <div class="team-role">Veterinarian</div>
-          </div>
-          <div class="card team-card">
-            <div class="avatar">🐕</div>
-            <div class="team-name">Sam “Good Boy” Rivera</div>
-            <div class="team-role">Office Manager</div>
-          </div>
-          <div class="card team-card">
-            <div class="avatar">🧑‍⚕️</div>
-            <div class="team-name">Dr. Ryan Fredricks</div>
-            <div class="team-role">Client Care</div>
-          </div>
-          <div class="card team-card">
-            <div class="avatar">👩‍🔬</div>
-            <div class="team-name">Alexis Grant</div>
-            <div class="team-role">Veterinary Assistant</div>
-          </div>
-        </div>
-
-        <div class="center-actions">
-          <a class="btn btn-primary" href="#" id="aboutTeamBtn">Meet the full team vibe</a>
-          <a class="btn btn-secondary" href="#" id="recruitingBtn">We’re hiring</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- QUOTES -->
-    <section class="section section-quotes">
-      <div class="container">
-        <div class="section-head center">
-          <h2>Comments from our clients and staff ♡</h2>
-          <p>Real talk, gentle energy.</p>
-        </div>
-
-        <div class="quotes-grid">
-          <div class="card quote-card">
-            <div class="quote-mark">“</div>
-            <p>I’ll always explain the ‘why’—you deserve to feel confident about every decision.</p>
-            <div class="quote-by">— Dr. Priya (Staff)</div>
-          </div>
-          <div class="card quote-card">
-            <div class="quote-mark">“</div>
-            <p>My dog’s breath was rough and I thought it was ‘normal.’ Turns out it wasn’t. So glad we came in.</p>
-            <div class="quote-by">— Josh B. (Client)</div>
-          </div>
-          <div class="card quote-card">
-            <div class="quote-mark">“</div>
-            <p>I’ll never rush your questions. If you’re worried, it matters.</p>
-            <div class="quote-by">— Riley J. (Staff)</div>
-          </div>
-        </div>
-
-        <div class="center-actions">
-          <a class="btn btn-primary" href="#" id="contactCtaBtn">Contact us</a>
-          <a class="btn btn-secondary" href="#" id="faqsCtaBtn">Read FAQs</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- DISCLAIMER -->
+    <!-- Disclaimer -->
     <section class="quotes" style="padding: 40px 0 24px;">
       <div class="container">
         <p class="disclaimer">
@@ -327,294 +406,247 @@
     </div>
   </footer>
 
+  <!-- Page-specific styles for the WP-ish sections -->
   <style>
-    /* Home styles (scoped) */
-    .hero-home{
-      padding: 78px 0 46px;
+    .hero--home{
       position: relative;
+      padding: 110px 0 0;
+      background: #3c97f1;
       overflow: hidden;
     }
+    .hero--home .hero-overlay{
+      position:absolute;
+      inset:0;
+      background: linear-gradient(298deg, rgba(242,187,107,.49) 39%, rgba(227,143,20,.49) 64%);
+      pointer-events:none;
+    }
     .hero-grid{
+      position: relative;
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 28px;
-      align-items: center;
-    }
-    .hero-kicker{
-      margin: 0 0 10px;
-      display:inline-flex;
-      gap: 10px;
+      grid-template-columns: 44% 56%;
+      gap: 18px;
       align-items:center;
-      padding: 8px 12px;
-      border-radius: 999px;
+      padding-bottom: 85px;
+    }
+    .home-hero-title{
+      margin:0;
+      font-size: clamp(44px, 6vw, 82px);
+      line-height: .9;
+      letter-spacing: 1px;
+      color:#fff;
+      font-weight: 900;
+    }
+    .home-hero-subtitle{
+      margin: 8px 0 0;
+      font-size: clamp(34px, 4.6vw, 64px);
+      line-height: 1.05;
+      letter-spacing: 1px;
+      color:#fff;
+      font-weight: 300;
+    }
+    .hero-right{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height: 420px;
+    }
+    .hero-image{
+      width: 100%;
+      max-width: 620px;
+      height: auto;
+      object-fit: contain;
+      transform: translateY(10px);
+    }
+
+    .section-soft{
+      background: var(--global-palette8, #f6f8fb);
+      padding: 70px 0;
+    }
+
+    .section-events-cta{
+      background:#8ecae6;
+      position: relative;
+    }
+
+    .section-events-grid{
+      background:#8ecae6;
+      position: relative;
+      padding: 10px 0 90px;
+    }
+
+    .section-title{
+      font-size: clamp(26px, 3.4vw, 44px);
       font-weight: 950;
-      letter-spacing: .04em;
-      color: rgba(30,42,58,.78);
-      background: rgba(255,255,255,.55);
-      border: 1px solid rgba(255,255,255,.6);
-      backdrop-filter: blur(10px);
-    }
-    .hero-title{
-      margin: 0 0 10px;
-      font-weight: 950;
-      font-size: clamp(40px, 5vw, 74px);
-      line-height: 1.02;
-      letter-spacing: -.02em;
-    }
-    .hero-highlight{
-      background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(43,108,176,1) 110%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .hero-subtitle{
       margin: 0;
-      font-size: clamp(16px, 2.2vw, 22px);
-      color: rgba(30,42,58,.78);
+    }
+    .section-text{
+      color: rgba(30,42,58,.74);
       font-weight: 750;
       line-height: 1.7;
-      max-width: 52ch;
+      margin: 0;
     }
-    .hero-actions{
+
+    .events-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .event-card{
+      padding: 22px;
+      border-radius: 24px;
+    }
+    .event-card-title{
+      margin: 0 0 12px;
+      font-weight: 950;
+    }
+    .event-media{
+      overflow:hidden;
+      border-radius: 18px;
+      background:#fff;
+      border: 1px solid rgba(30,42,58,.10);
+      margin-bottom: 12px;
+    }
+    .event-media img{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+    .event-card-text{
+      margin: 0 0 14px;
+      color: rgba(30,42,58,.72);
+      font-weight: 750;
+      line-height: 1.7;
+    }
+
+    .moments-grid{
+      display:grid;
+      grid-template-columns: 60% 40%;
+      gap: 22px;
+      align-items:center;
+    }
+    .moments-photos{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .rounded{
+      border-radius: 24px;
+      width:100%;
+      height:auto;
+      display:block;
+    }
+    .btn-row{
       display:flex;
       gap: 12px;
       flex-wrap: wrap;
       margin-top: 18px;
     }
-    .trust-row{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-    .trust-pill{
+    .btn-icon{ display:inline-flex; align-items:center; gap: 10px; }
+    .btn-icon__glyph{
       display:inline-flex;
-      padding: 8px 12px;
+      width: 32px;
+      height: 32px;
+      align-items:center;
+      justify-content:center;
       border-radius: 999px;
-      font-weight: 900;
-      border: 1px solid rgba(30,42,58,.12);
-      background: rgba(255,255,255,.55);
-      backdrop-filter: blur(10px);
-      color: rgba(30,42,58,.82);
-    }
-
-    .hero-art{ display:grid; place-items:center; }
-    .hero-card{
-      width: min(440px, 100%);
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,.55);
-      background: rgba(255,255,255,.55);
-      box-shadow: 0 22px 60px rgba(16, 24, 40, .16);
-      overflow: hidden;
-      backdrop-filter: blur(14px);
-    }
-    .hero-card-top{
-      display:flex;
-      gap: 8px;
-      padding: 12px 14px;
-      border-bottom: 1px solid rgba(30,42,58,.08);
-      background: rgba(255,255,255,.55);
-    }
-    .dot{
-      width: 10px; height: 10px; border-radius: 999px;
-      background: rgba(30,42,58,.18);
-    }
-    .hero-card-body{ padding: 16px; display:grid; gap: 12px; }
-    .hero-photo{
-      height: 210px;
-      border-radius: 18px;
-      border: 1px solid rgba(30,42,58,.10);
-      background: linear-gradient(135deg, rgba(43,108,176,.12), rgba(223,86,64,.12));
-      overflow: hidden;
-      display:grid;
-      place-items:center;
-      position: relative;
-    }
-    .hero-photo-fallback{
-      display:flex;
-      gap: 12px;
-      align-items:center;
-      padding: 12px 14px;
-    }
-    .paw{ font-size: 34px; }
-    .hero-photo-title{ font-weight: 950; font-size: 18px; }
-    .hero-photo-sub{ font-weight: 800; color: rgba(30,42,58,.70); }
-
-    .hero-mini{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-    .mini-metric{
-      border-radius: 16px;
-      border: 1px solid rgba(30,42,58,.10);
-      background: rgba(255,255,255,.70);
-      padding: 10px;
-      text-align:center;
-    }
-    .mini-num{ font-weight: 950; }
-    .mini-label{ font-weight: 850; font-size: 12px; color: rgba(30,42,58,.70); }
-
-    .btn-ghost{
-      display:inline-flex;
-      justify-content:center;
-      padding: 12px 14px;
-      border-radius: 999px;
+      background: rgba(255,255,255,.85);
+      color: #234d69;
       font-weight: 950;
-      text-decoration:none;
-      border: 1px solid rgba(30,42,58,.14);
-      background: rgba(255,255,255,.65);
-      color: rgba(30,42,58,.88);
+      line-height: 1;
     }
 
-    .section{ padding: 70px 0; }
-    .section-alt{ background: rgba(30,42,58,.03); }
-    .section-head{
-      display:flex;
-      justify-content: space-between;
-      align-items:flex-end;
-      gap: 16px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-    .section-head h2{ margin: 0; font-weight: 950; }
-    .section-head p{ margin: 0; font-weight: 800; color: rgba(30,42,58,.72); line-height: 1.6; max-width: 62ch; }
-    .section-head.center{ text-align:center; justify-content:center; }
-    .section-head.center p{ max-width: 70ch; }
-
-    .embed-card{ padding: 18px; }
-    .embed-note{
-      display:flex;
-      gap: 14px;
-      align-items:center;
-      padding: 20px;
-      border-radius: 18px;
-      border: 1px dashed rgba(30,42,58,.18);
-      background: rgba(255,255,255,.6);
-    }
-    .embed-icon{
-      width: 44px; height: 44px; border-radius: 14px;
-      display:grid; place-items:center;
-      background: rgba(43,108,176,.14);
-      border: 1px solid rgba(43,108,176,.22);
-      font-weight: 950;
-      color: rgba(30,42,58,.85);
-    }
-    .embed-title{ font-weight: 950; }
-    .embed-sub{ font-weight: 800; color: rgba(30,42,58,.70); line-height: 1.6; }
-
-    .center-actions{
-      display:flex;
-      justify-content:center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-
-    .resources-cta{
-      padding: 22px;
-      display:flex;
-      justify-content: space-between;
-      align-items:center;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-    .resources-cta h2{
-      margin: 0 0 6px;
-      font-weight: 950;
-    }
-    .resources-cta p{
-      margin: 0;
-      font-weight: 800;
-      color: rgba(30,42,58,.72);
-      line-height: 1.7;
-      max-width: 66ch;
-    }
-    .muted{ color: rgba(30,42,58,.62); }
-
-    .cards-3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    .topic-card{
-      padding: 18px;
-      text-decoration:none;
-      color: inherit;
-      display:grid;
-      gap: 8px;
-      transition: transform .12s ease;
-    }
-    .topic-card:hover{ transform: translateY(-2px); }
-    .topic-icon{ font-size: 26px; }
-    .topic-card h3{ margin: 0; font-weight: 950; }
-    .topic-card p{ margin: 0; font-weight: 800; color: rgba(30,42,58,.72); line-height: 1.6; }
-    .topic-cta{ margin-top: 4px; font-weight: 950; color: rgba(43,108,176,.95); }
-
-    .moments-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      align-items:center;
-    }
-    .moments-media{ padding: 18px; }
-    .moments-placeholder{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap: 18px;
-      height: 220px;
-      border-radius: 18px;
-      border: 1px solid rgba(30,42,58,.10);
-      background: linear-gradient(135deg, rgba(54,161,211,.14), rgba(142,202,230,.14));
-    }
-    .moments-emoji{ font-size: 44px; }
-    .moments-caption{
-      margin: 12px 0 0;
-      font-weight: 800;
-      color: rgba(30,42,58,.72);
-      text-align:center;
-    }
-    .moments-copy h2{ margin: 0 0 8px; font-weight: 950; }
-    .moments-copy p{ margin: 0; font-weight: 800; color: rgba(30,42,58,.72); line-height: 1.7; }
-    .moments-actions{ display:flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
-
-    .team-grid{
+    .staff-grid{
       display:grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-top: 16px;
+      gap: 18px;
+      padding: 26px 0 0;
     }
-    .team-card{ padding: 18px; text-align:center; }
-    .avatar{
-      width: 56px; height: 56px; border-radius: 18px;
-      display:grid; place-items:center;
-      margin: 0 auto 10px;
-      background: rgba(43,108,176,.12);
-      border: 1px solid rgba(43,108,176,.22);
-      font-size: 26px;
+    .staff-card{
+      padding: 18px;
+      border-radius: 26px;
+      text-align:center;
     }
-    .team-name{ font-weight: 950; }
-    .team-role{ font-weight: 850; color: rgba(30,42,58,.68); }
+    .staff-photo{
+      width:100%;
+      height: auto;
+      border-radius: 22px;
+      display:block;
+      margin-bottom: 10px;
+    }
+    .staff-name{
+      margin: 6px 0 0;
+      font-weight: 950;
+    }
+    .staff-role{
+      margin: 4px 0 0;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: rgba(30,42,58,.68);
+      letter-spacing: .6px;
+    }
 
-    .quotes-grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 16px;
+    .section-testimonials{
+      background:#f28482;
+      padding: 90px 0;
+      position: relative;
     }
-    .quote-card{ padding: 18px; }
-    .quote-mark{ font-size: 34px; font-weight: 950; color: rgba(43,108,176,.85); line-height: 1; }
-    .quote-card p{ margin: 8px 0 10px; font-weight: 800; color: rgba(30,42,58,.74); line-height: 1.7; }
-    .quote-by{ font-weight: 950; color: rgba(30,42,58,.82); }
+    .testimonials-grid{
+      margin-top: 24px;
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+    .testimonial-bubble{
+      background:#fff;
+      border-radius: 26px;
+      padding: 18px;
+      border: 10px solid rgba(246,248,251,1);
+      box-shadow: 0 12px 30px rgba(0,0,0,.12);
+    }
+    .testimonial-bubble p{
+      margin: 10px 0 0;
+      color: rgba(30,42,58,.72);
+      font-weight: 750;
+      line-height: 1.7;
+    }
+    .stars{
+      color: #f6bd60;
+      font-weight: 950;
+      letter-spacing: 1px;
+    }
+    .who{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .who img{
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      object-fit: cover;
+    }
+
+    .wave--top svg,
+    .wave--bottom svg{
+      width: 100%;
+      height: 90px;
+      display:block;
+      fill: var(--global-palette8, #f6f8fb);
+    }
 
     @media (max-width: 980px){
-      .hero-grid{ grid-template-columns: 1fr; }
-      .cards-3{ grid-template-columns: 1fr; }
+      .hero-grid{ grid-template-columns: 1fr; padding-bottom: 55px; }
+      .events-grid{ grid-template-columns: 1fr; }
       .moments-grid{ grid-template-columns: 1fr; }
-      .team-grid{ grid-template-columns: 1fr 1fr; }
-      .quotes-grid{ grid-template-columns: 1fr; }
-      .resources-cta{ flex-direction: column; align-items:flex-start; }
+      .staff-grid{ grid-template-columns: 1fr 1fr; }
+      .testimonials-grid{ grid-template-columns: 1fr; }
+      .hero-right{ min-height: 240px; }
+    }
+    @media (max-width: 520px){
+      .staff-grid{ grid-template-columns: 1fr; }
     }
   </style>
 
@@ -629,11 +661,10 @@
       };
     }
 
-    // Nav links
+    // Global nav/internal links
     setHref("homeLink", "/index.html");
     setHref("homeNavLink", "/index.html");
     setHref("aboutLink", "/about/index.html");
-    setHref("resourcesLink", "/resources/index.html");
     setHref("videosLink", "/videos/index.html");
     setHref("storiesLink", "/stories/index.html");
     setHref("faqsLink", "/faqs/index.html");
@@ -641,33 +672,57 @@
     setHref("recruitingLink", "/recruiting/index.html");
     setHref("privacyLink", "/privacy-policy/index.html");
 
-    // Hero CTAs
-    setHref("watchVideoBtn", "/videos/index.html");
-    setHref("exploreResourcesBtn", "/resources/index.html");
-    setHref("aboutUsBtn", "/about-us/index.html");
+    // Resources dropdown
+    setHref("resourcesLink", "/resources/index.html");
+    setHref("resourcesPuppy", "/resources/puppy-kitten-tips/index.html");
+    setHref("resourcesDental", "/resources/dental-health/index.html");
+    setHref("resourcesMeds", "/resources/giving-medications/index.html");
+    setHref("resourcesEdu", "/resources/educational-videos/index.html");
 
-    // Section CTAs
+    // Services dropdown
+    setHref("servicesPreventive", "/resources/index.html");
+    setHref("servicesDental", "/resources/dental-health/index.html");
+    setHref("servicesMeds", "/resources/giving-medications/index.html");
+
+    // Buttons
     setHref("watchMoreVideosBtn", "/videos/index.html");
-    setHref("resourcesMainBtn", "/resources/index.html");
-
-    setHref("topicPuppy", "/resources/puppy-kitten-tips/index.html");
-    setHref("topicDental", "/resources/dental-health/index.html");
-    setHref("topicMeds", "/resources/giving-medications/index.html");
-
-    setHref("momentsResourcesBtn", "/resources/index.html");
-    setHref("momentsStoriesBtn", "/stories/index.html");
-
-    setHref("aboutTeamBtn", "/about-us/index.html");
-    setHref("recruitingBtn", "/recruiting/index.html");
-
-    setHref("contactCtaBtn", "/contact/index.html");
-    setHref("faqsCtaBtn", "/faqs/index.html");
+    setHref("exploreEventsBtn", "/stories/index.html");
+    setHref("momentsExploreBtn", "/stories/index.html");
+    setHref("momentsStoryBtn", "/stories/index.html");
 
     setText("year", new Date().getFullYear());
 
-    // OPTIONAL: If you later add a real hero image to assets/images/hero.jpg:
-    // document.getElementById("heroPhoto").style.background =
-    //   "url('" + href("/assets/images/hero.jpg") + "') center/cover no-repeat";
+    // Dropdown toggles
+    document.querySelectorAll(".nav-dropdown").forEach(function (dd) {
+      var btn = dd.querySelector("button");
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var open = dd.classList.toggle("open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    });
+
+    // Close dropdowns on outside click
+    document.addEventListener("click", function (e) {
+      document.querySelectorAll(".nav-dropdown.open").forEach(function (dd) {
+        if (!dd.contains(e.target)) {
+          dd.classList.remove("open");
+          var btn = dd.querySelector("button");
+          if (btn) btn.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+
+    // Close on escape
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        document.querySelectorAll(".nav-dropdown.open").forEach(function (dd) {
+          dd.classList.remove("open");
+          var btn = dd.querySelector("button");
+          if (btn) btn.setAttribute("aria-expanded", "false");
+        });
+      }
+    });
   </script>
 </body>
 </html>
