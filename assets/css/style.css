@@ -1,128 +1,216 @@
 /* =========================================================
-   NEW CSS (Kadence / WordPress-export markup friendly)
-   Goal: STOP broken/distorted images + keep clean sizing
-   Works well when you paste WP/Kadence HTML into GitHub Pages
+   GLOBAL RESET (safe for GitHub Pages)
+   ========================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+figure {
+  margin: 0;
+}
+
+.wp-block-image,
+.wp-block-kadence-image {
+  margin: 0 auto;
+}
+
+/* If any theme CSS ever set img height/width weirdly, this restores it */
+.wp-block-image img,
+.wp-block-kadence-image img,
+.kb-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* =========================================================
+   IMAGE DIMENSIONS / CONSISTENT CROPPING
+   (Fixes “broken” looking stretched/squished images)
    ========================================================= */
 
-/* ---------- Base reset ---------- */
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-img{display:block;max-width:100%;height:auto}
-
-/* ---------- IMPORTANT: Don’t let any theme/inline rules stretch images ---------- */
-.wp-block-image img,
-.wp-block-kadence-image img,
-.kb-image img,
-figure img,
-img.kb-img,
-img.wp-image-12,
-img.wp-image-798,
-img.wp-image-830,
-img.wp-image-831,
-img.wp-image-834,
-img.wp-image-835,
-img.wp-image-836,
-img.wp-image-837,
-img.wp-image-838,
-img.wp-image-839,
-img.wp-image-841,
-img.wp-image-842,
-img.wp-image-858{
-  width:100% !important;
-  height:auto !important;
-  max-width:100% !important;
-  object-fit:contain;      /* prevents cropping */
-  object-position:center;
-}
-
-/* ---------- If a figure is “is-resized” with inline width/height, don’t distort ---------- */
-figure.is-resized img,
-.wp-block-image.is-resized img{
-  width:100% !important;
-  height:auto !important;
-}
-
-/* ---------- Rounded corners: apply to the image without forcing a weird ratio ---------- */
+/* Rounded card images (staff + gallery) */
 .rounded-corners img,
-.is-style-rounded img{
-  border-radius:70px;
-  overflow:hidden;
+.is-style-rounded img,
+.event-img img {
+  width: 100%;
+  height: auto;
+  border-radius: 70px;
 }
 
-/* ---------- “event-img” images: keep them from going huge, keep natural ratio ---------- */
-.event-img img,
-img.event-img{
-  width:min(520px, 100%) !important;
-  height:auto !important;
-  margin-inline:auto;
-  object-fit:contain;
+/* Staff grid portraits: make them consistent */
+.kadence-column812_3ce0c2-b2 img,
+.kadence-column812_104b73-46 img,
+.kadence-column812_7109d8-9e img,
+.kadence-column812_9eda68-77 img,
+.kadence-column812_149ee9-31 img,
+.kadence-column812_aba07c-62 img,
+.kadence-column812_357a92-af img,
+.kadence-column812_1cd85b-74 img {
+  /* consistent card image behavior */
+  width: 100%;
+  max-width: 320px;   /* keeps them from getting gigantic on desktop */
+  aspect-ratio: 4 / 5; /* consistent portrait ratio */
+  height: auto;
+  object-fit: cover;   /* fills the portrait box nicely */
+  margin: 0 auto;
+  border-radius: 70px;
 }
 
-/* ---------- Staff grid images (your vet/team photos): consistent but NOT stretched ---------- */
-/* This makes them uniform height while preserving aspect ratio (no distortion). */
-.wp-block-kadence-column .rounded-corners.is-style-rounded img,
-.wp-block-kadence-column .rounded-corners img{
-  max-height:420px;
-  width:100% !important;
-  height:auto !important;
-  object-fit:cover;        /* fills the frame nicely */
-  object-position:center top;
+/* Smaller “icon” image near “Helpful Tips & Resources” */
+.kb-image812_7e2a96-28 img {
+  max-width: 220px;
+  width: 100%;
+  margin: 0 auto;
 }
 
-/* On smaller screens, reduce that max height */
-@media (max-width: 768px){
-  .wp-block-kadence-column .rounded-corners.is-style-rounded img,
-  .wp-block-kadence-column .rounded-corners img{
-    max-height:320px;
+/* =========================================================
+   BACKGROUND IMAGES (IMPORTANT for GitHub Pages)
+   ---------------------------------------------------------
+   Your pasted code contains WordPress/Kadence block comments
+   like: backgroundImg:[{...}]
+   On GitHub Pages those comments do NOTHING.
+   So the “background images” will appear missing/broken
+   unless we recreate them in CSS like below.
+   ========================================================= */
+
+/* HERO right column dog vector background */
+.kadence-column812_1723c2-92 {
+  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/Cute-Dog-vector-4.png");
+  background-size: contain;
+  background-position: 19% 70%;
+  background-repeat: no-repeat;
+  min-height: 520px; /* matches your row minHeight vibe */
+}
+
+/* Staff card decorative backgrounds (4-up row) */
+.kadence-column812_3ce0c2-b2 {
+  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/9.png");
+  background-size: 104% 70%;
+  background-position: 21% 12%;
+  background-repeat: no-repeat;
+}
+
+.kadence-column812_104b73-46 {
+  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/2.png");
+  background-size: 93% 56%;
+  background-position: 54% 14%;
+  background-repeat: no-repeat;
+}
+
+.kadence-column812_7109d8-9e {
+  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/6-e1768502291792.png");
+  background-size: 135% 60%;
+  background-position: 50% 23%;
+  background-repeat: no-repeat;
+}
+
+.kadence-column812_9eda68-77 {
+  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/5-e1768502391237.png");
+  background-size: 110% 60%;
+  background-position: 50% 11%;
+  background-repeat: no-repeat;
+}
+
+/* Staff card decorative backgrounds (second 4-up row) */
+.kadence-column812_149ee9-31 {
+  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/4.png");
+  background-size: 96% 74%;
+  background-position: 48% 0%;
+  background-repeat: no-repeat;
+}
+
+.kadence-column812_aba07c-62 {
+  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/10.png");
+  background-size: 93% 74%;
+  background-position: 46% 0%;
+  background-repeat: no-repeat;
+}
+
+.kadence-column812_357a92-af {
+  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/8.png");
+  background-size: 98% 76%;
+  background-position: 0% 0%;
+  background-repeat: no-repeat;
+}
+
+.kadence-column812_1cd85b-74 {
+  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/3.png");
+  background-size: 125% 69%;
+  background-position: 50% 14%;
+  background-repeat: no-repeat;
+}
+
+/* Testimonials columns decorative backgrounds */
+.kadence-column812_e66d12-be {
+  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/6-e1768503325619.png");
+  background-size: 129% 61%;
+  background-position: 52% 34%;
+  background-repeat: no-repeat;
+}
+
+.kadence-column812_abeec7-8a {
+  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/5-e1768502391237.png");
+  background-size: 117% 79%;
+  background-position: 54% 44%;
+  background-repeat: no-repeat;
+}
+
+.kadence-column812_0ab75c-14 {
+  background-image: url("https://bellbrookvet.com/wp-content/uploads/2026/01/9.png");
+  background-size: 103% 74%;
+  background-position: 61% 45%;
+  background-repeat: no-repeat;
+}
+
+/* Make sure backgrounds don’t “hide” behind content */
+.wp-block-kadence-column {
+  background-color: transparent;
+}
+
+/* Give background columns some breathing room so you can actually see them */
+.kadence-column812_3ce0c2-b2,
+.kadence-column812_104b73-46,
+.kadence-column812_7109d8-9e,
+.kadence-column812_9eda68-77,
+.kadence-column812_149ee9-31,
+.kadence-column812_aba07c-62,
+.kadence-column812_357a92-af,
+.kadence-column812_1cd85b-74,
+.kadence-column812_e66d12-be,
+.kadence-column812_abeec7-8a,
+.kadence-column812_0ab75c-14 {
+  padding: 30px;
+}
+
+/* =========================================================
+   MOBILE SAFETY (keeps images from overflowing)
+   ========================================================= */
+@media (max-width: 768px) {
+  .kadence-column812_1723c2-92 {
+    min-height: 360px;
+    background-position: 50% 80%;
   }
-}
 
-/* ---------- The HERO “dog vector” background (2nd column) ---------- */
-/* Your HTML uses a Kadence column with a background image inline in WP.
-   On GitHub Pages, that background only shows if the element has height.
-*/
-.kadence-column812_1723c2-92,
-.inner-column-2.kadence-column812_1723c2-92,
-.wp-block-kadence-column.inner-column-2{
-  min-height: 420px;
-  background-repeat:no-repeat !important;
-  background-size:contain !important;
-  background-position: 19% 70% !important;
-}
-
-/* Smaller screens */
-@media (max-width: 900px){
-  .kadence-column812_1723c2-92,
-  .inner-column-2.kadence-column812_1723c2-92,
-  .wp-block-kadence-column.inner-column-2{
-    min-height: 280px;
-    background-position: center !important;
+  .kadence-column812_3ce0c2-b2 img,
+  .kadence-column812_104b73-46 img,
+  .kadence-column812_7109d8-9e img,
+  .kadence-column812_9eda68-77 img,
+  .kadence-column812_149ee9-31 img,
+  .kadence-column812_aba07c-62 img,
+  .kadence-column812_357a92-af img,
+  .kadence-column812_1cd85b-74 img {
+    max-width: 260px;
+    aspect-ratio: 4 / 5;
   }
-}
-
-/* ---------- Prevent any containers from clipping images ---------- */
-.wp-block-image,
-.wp-block-kadence-image,
-figure{
-  overflow:visible;
-}
-
-/* ---------- Optional: keep giant images from breaking layout ---------- */
-.wp-block-image img,
-.wp-block-kadence-image img,
-figure img{
-  max-height: 900px;
-}
-
-/* ---------- Optional: center figures by default (safe for this page) ---------- */
-.wp-block-image,
-.wp-block-kadence-image{
-  margin-inline:auto;
-}
-
-/* ---------- If something still looks “squished”, remove any forced line-height weirdness ---------- */
-.wp-block-image,
-.wp-block-kadence-image,
-figure{
-  line-height:0;
 }
